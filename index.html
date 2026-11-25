@@ -354,7 +354,17 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
   backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(0,0,0,.45);}
 .hero-reel-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem;flex-wrap:wrap;}
 .hero-reel-label{font-family:var(--font-num);font-size:.7rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:.45rem;}
+.hero-reel-tools{display:flex;align-items:center;gap:.5rem;}
 .hero-reel-chips{display:flex;gap:.35rem;}
+.reel-min{width:28px;height:28px;flex-shrink:0;border-radius:7px;border:1px solid rgba(197,160,89,.3);background:rgba(5,12,26,.5);color:var(--text-gray);
+  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;transition:color .2s,border-color .2s,background .2s;}
+.reel-min:hover{color:var(--gold);border-color:var(--gold);background:rgba(197,160,89,.12);}
+.reel-min i{pointer-events:none;}
+/* minimized: only the header pill stays */
+.hero-reel.minimized{width:auto;max-width:none;justify-self:end;align-self:center;padding:.5rem .6rem .5rem .9rem;}
+.hero-reel.minimized .hero-reel-head{margin-bottom:0;}
+.hero-reel.minimized .hero-reel-chips,.hero-reel.minimized .yt-facade,.hero-reel.minimized .hero-reel-cap{display:none;}
+.hero-reel.minimized .hero-reel-label{cursor:pointer;}
 .reel-chip{background:none;border:1px solid rgba(197,160,89,.3);color:var(--text-gray);font-family:var(--font-ko);font-size:.72rem;padding:.25rem .75rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
 .reel-chip:hover{color:var(--text-white);border-color:rgba(197,160,89,.6);}
 .reel-chip.active{background:rgba(197,160,89,.18);color:var(--gold);border-color:var(--gold);}
@@ -376,6 +386,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
 
   .hero-inner{grid-template-columns:1fr;padding:3rem 1.25rem 1.5rem;}
   .hero-reel{justify-self:stretch;max-width:none;}
+  .hero-reel.minimized{justify-self:start;}
   .hero-caption-box{top:64px;right:.8rem;}
   .hero-stats{grid-template-columns:1fr;}
   .stat-item{border-right:none;border-bottom:1px solid rgba(197,160,89,.1);padding:1rem;}
@@ -466,10 +477,13 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     <div class="hero-reel fade-in" style="transition-delay:.2s;">
       <div class="hero-reel-head">
-        <span class="hero-reel-label"><i class="fa fa-play-circle"></i> <span data-i18n="reel_label">플레이 영상</span></span>
+        <span class="hero-reel-label" id="reelLabel"><i class="fa fa-play-circle"></i> <span data-i18n="reel_label">플레이 영상</span></span>
+        <div class="hero-reel-tools">
         <div class="hero-reel-chips">
           <button class="reel-chip active" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt" data-i18n="chip_gt">골든투스</button>
           <button class="reel-chip" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh" data-i18n="chip_hh">하렌홀</button>
+        </div>
+        <button class="reel-min" id="reelMinBtn" data-i18n-title="reel_min" title="최소화" aria-label="Minimize" aria-expanded="true"><i class="fa fa-minus"></i></button>
         </div>
       </div>
       <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
@@ -1752,7 +1766,9 @@ const I18N = {
     reel_hh:"하렌홀 · 4인 코옵 레이드 동선 (1:58)",
     k_vid_gt:"플레이 영상 · 골든투스 &amp; 카스타미어 퀘스트 동선",
     k_vid_hh:"플레이 영상 · 하렌홀 4인 코옵 레이드 동선",
-    yt_open:"YouTube에서 보기"
+    yt_open:"YouTube에서 보기",
+    reel_min:"최소화",
+    reel_restore:"영상 펼치기"
   },
   en:{
     page_title:"Lee Jin-yong | Level Designer · Unreal Open World",
@@ -1974,7 +1990,9 @@ const I18N = {
     reel_hh:"Harrenhal · 4-Player Co-op Raid Route (1:58)",
     k_vid_gt:"Gameplay · Golden Tooth &amp; Castamere Quest Route",
     k_vid_hh:"Gameplay · Harrenhal 4-Player Co-op Raid Route",
-    yt_open:"Watch on YouTube"
+    yt_open:"Watch on YouTube",
+    reel_min:"Minimize",
+    reel_restore:"Expand video"
   },
   ja:{
     page_title:"イ・ジニョン | Level Designer · Unreal Open World",
@@ -2196,7 +2214,9 @@ const I18N = {
     reel_hh:"ハレンの巨城 · 4人Co-opレイド動線 (1:58)",
     k_vid_gt:"プレイ映像 · ゴールデン・トゥース &amp; キャスタミアのクエスト動線",
     k_vid_hh:"プレイ映像 · ハレンの巨城 4人Co-opレイド動線",
-    yt_open:"YouTubeで見る"
+    yt_open:"YouTubeで見る",
+    reel_min:"最小化",
+    reel_restore:"動画を開く"
   },
   zh:{
     page_title:"李珍勇 | Level Designer · Unreal Open World",
@@ -2418,7 +2438,9 @@ const I18N = {
     reel_hh:"赫伦堡 · 4人协作突袭动线 (1:58)",
     k_vid_gt:"实机视频 · 金牙城 &amp; 卡斯特梅任务动线",
     k_vid_hh:"实机视频 · 赫伦堡4人协作突袭动线",
-    yt_open:"在YouTube观看"
+    yt_open:"在YouTube观看",
+    reel_min:"最小化",
+    reel_restore:"展开视频"
   }
 };
 
@@ -2660,6 +2682,22 @@ document.querySelectorAll('.yt-facade').forEach(el => {
   el.addEventListener('click', () => playVideo(el));
   el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); playVideo(el); } });
 });
+// Hero card: minimize / restore
+(function(){
+  const card = document.querySelector('.hero-reel');
+  const btn = document.getElementById('reelMinBtn');
+  const icon = btn.querySelector('i');
+  function setMin(min){
+    card.classList.toggle('minimized', min);
+    if(min) stopVideos(card);
+    icon.className = min ? 'fa fa-expand-alt' : 'fa fa-minus';
+    btn.dataset.i18nTitle = min ? 'reel_restore' : 'reel_min';
+    btn.title = t(btn.dataset.i18nTitle);
+    btn.setAttribute('aria-expanded', String(!min));
+  }
+  btn.addEventListener('click', () => setMin(!card.classList.contains('minimized')));
+  document.getElementById('reelLabel').addEventListener('click', () => { if(card.classList.contains('minimized')) setMin(false); });
+})();
 // Hero card: switch between the two route videos
 (function(){
   const reel = document.getElementById('heroReel');
