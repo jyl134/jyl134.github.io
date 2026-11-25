@@ -196,10 +196,6 @@ nav a:hover::after,nav a.active::after{width:100%;}
 .hc-panel-sub{font-size:.72rem;font-weight:400;color:var(--text-dim);letter-spacing:.08em;}
 .hc-game-thumb{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;margin-bottom:.85rem;}
 .hc-game-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:10px;}
-.yt-link-btn{display:flex;align-items:center;gap:.6rem;background:rgba(197,160,89,.1);border:1px solid rgba(197,160,89,.35);border-radius:8px;padding:.65rem 1.1rem;
-  color:var(--gold);font-family:var(--font-ko);font-size:.82rem;font-weight:600;text-decoration:none;margin-bottom:.9rem;transition:background .2s,box-shadow .2s;cursor:pointer;}
-.yt-link-btn:hover{background:rgba(197,160,89,.2);box-shadow:0 0 18px rgba(197,160,89,.2);}
-.yt-link-btn i{font-size:1.1rem;flex-shrink:0;pointer-events:none;}
 .hc-desc{font-size:.82rem;color:var(--text-gray);line-height:1.72;font-weight:300;padding:.5rem .7rem;background:rgba(197,160,89,.04);
   border-left:2px solid rgba(197,160,89,.28);border-radius:0 6px 6px 0;margin-bottom:.75rem;font-style:italic;}
 .hc-work-title{font-family:var(--font-ko);font-size:.68rem;font-weight:600;letter-spacing:.14em;color:var(--gold);display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem;}
@@ -337,6 +333,33 @@ nav a:hover::after,nav a.active::after{width:100%;}
 @keyframes bounceY{from{transform:translateY(0);}to{transform:translateY(5px);}}
 footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67rem;letter-spacing:.1em;color:var(--text-dim);border-top:1px solid rgba(197,160,89,.1);}
 
+/* ==================== VIDEO PLAYERS (click to play) ==================== */
+.yt-facade{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;cursor:pointer;background:#000;}
+.yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s,filter .3s;}
+.yt-facade:hover img{transform:scale(1.03);filter:brightness(.8);}
+.yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;
+  background:rgba(5,12,26,.78);border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;padding-left:4px;transition:transform .2s,background .2s,color .2s;pointer-events:none;box-shadow:0 0 24px rgba(0,0,0,.5);}
+.yt-facade:hover .yt-play,.yt-facade:focus-visible .yt-play{transform:translate(-50%,-50%) scale(1.08);background:var(--gold);color:#0a0f1a;}
+.yt-label{position:absolute;left:.7rem;bottom:.7rem;display:inline-flex;align-items:center;gap:.45rem;background:rgba(5,12,26,.82);
+  border:1px solid rgba(197,160,89,.35);color:var(--gold);font-family:var(--font-ko);font-size:.74rem;font-weight:600;padding:.28rem .65rem;border-radius:6px;pointer-events:none;}
+.yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+.yt-facade.playing{cursor:default;}
+.yt-open{align-self:flex-start;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-ko);font-size:.75rem;color:var(--gold-dim);text-decoration:none;transition:color .2s;}
+.yt-open:hover{color:var(--gold);}
+.wf-step-num .fa-play{font-size:.6rem;padding-left:2px;}
+
+/* Hero video card */
+.hero-reel{justify-self:end;width:100%;max-width:620px;background:rgba(5,12,26,.72);border:1px solid rgba(197,160,89,.3);border-radius:14px;padding:.9rem;
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(0,0,0,.45);}
+.hero-reel-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem;flex-wrap:wrap;}
+.hero-reel-label{font-family:var(--font-num);font-size:.7rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:.45rem;}
+.hero-reel-chips{display:flex;gap:.35rem;}
+.reel-chip{background:none;border:1px solid rgba(197,160,89,.3);color:var(--text-gray);font-family:var(--font-ko);font-size:.72rem;padding:.25rem .75rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
+.reel-chip:hover{color:var(--text-white);border-color:rgba(197,160,89,.6);}
+.reel-chip.active{background:rgba(197,160,89,.18);color:var(--gold);border-color:var(--gold);}
+.hero-reel-cap{margin-top:.65rem;font-family:var(--font-ko);font-size:.8rem;color:var(--text-gray);}
+
 /* ==================== RESPONSIVE ==================== */
 @media(max-width:1100px){
   .exp-dynamic.shifted .exp-timeline-col{flex:0 0 38%;max-width:38%;}
@@ -352,7 +375,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
   .lang-wrap{position:static;transform:none;}
 
   .hero-inner{grid-template-columns:1fr;padding:3rem 1.25rem 1.5rem;}
-  .hero-inner > div:empty{display:none;}
+  .hero-reel{justify-self:stretch;max-width:none;}
   .hero-caption-box{top:64px;right:.8rem;}
   .hero-stats{grid-template-columns:1fr;}
   .stat-item{border-right:none;border-bottom:1px solid rgba(197,160,89,.1);padding:1rem;}
@@ -441,7 +464,17 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
         <a href="#contact" class="btn-outline" data-i18n="btn_contact">연락하기</a>
       </div>
     </div>
-    <div></div>
+    <div class="hero-reel fade-in" style="transition-delay:.2s;">
+      <div class="hero-reel-head">
+        <span class="hero-reel-label"><i class="fa fa-play-circle"></i> <span data-i18n="reel_label">플레이 영상</span></span>
+        <div class="hero-reel-chips">
+          <button class="reel-chip active" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt" data-i18n="chip_gt">골든투스</button>
+          <button class="reel-chip" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh" data-i18n="chip_hh">하렌홀</button>
+        </div>
+      </div>
+      <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
+      <div class="hero-reel-cap" id="heroReelCap" data-i18n="reel_gt">골든투스 &amp; 카스타미어 · 오픈월드 퀘스트 동선 (3:20)</div>
+    </div>
   </div>
 
   <div class="hero-stats fade-in" style="transition-delay:.35s;">
@@ -612,10 +645,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
           <h3 class="hc-panel-title"><span data-i18n="exp1_game">왕좌의 게임: 킹스로드</span><br>
             <span class="hc-panel-sub">NETMARBLE NEO &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
-          <div class="hc-game-thumb"><img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" /></div>
-          <a class="yt-link-btn" href="https://youtu.be/-BfavVhJvFw" target="_blank" rel="noopener">
-            <i class="fab fa-youtube"></i><span data-i18n="hc0_yt">왕좌의 게임: 킹스로드 트레일러 보기</span>
-          </a>
+          <div class="hc-game-thumb yt-facade" data-yt="-BfavVhJvFw" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드 trailer"><img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc0_yt">트레일러 재생</span></span></div>
           <div class="hc-desc" data-i18n="hc0_desc">전 세계적인 인기 IP '왕좌의 게임'을 기반으로 한 심리스 오픈월드 액션 RPG입니다. 방대한 웨스테로스 대륙을 탐험하며 몰입감 있는 전투와 내러티브를 경험할 수 있습니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
@@ -639,10 +669,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
           <h3 class="hc-panel-title"><span data-i18n="exp2_game">RE:MEMENTO (리메멘토)</span><br>
             <span class="hc-panel-sub">BLACKSTORM &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
-          <div class="hc-game-thumb"><img src="./리메멘토.webp" alt="RE:MEMENTO" loading="lazy" /></div>
-          <a class="yt-link-btn" href="https://youtu.be/zndhcVYvBfQ" target="_blank" rel="noopener">
-            <i class="fab fa-youtube"></i><span data-i18n="hc1_yt">RE:MEMENTO (리메멘토) 트레일러 보기</span>
-          </a>
+          <div class="hc-game-thumb yt-facade" data-yt="zndhcVYvBfQ" role="button" tabindex="0" aria-label="RE:MEMENTO trailer"><img src="./리메멘토.webp" alt="RE:MEMENTO" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc1_yt">트레일러 재생</span></span></div>
           <div class="hc-desc" data-i18n="hc1_desc">언리얼 엔진 5 기반의 고퀄리티 애니메이션풍 오픈월드 RPG입니다. 개성 있는 캐릭터들과 함께 넓은 세계를 탐험하며 턴제 전투의 전략적 재미를 제공합니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
@@ -666,10 +693,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
           <h3 class="hc-panel-title"><span data-i18n="hc2_title">CLOSERS PC Live (클로저스)</span><br>
             <span class="hc-panel-sub" data-i18n="hc2_sub">Naddic Games &nbsp;|&nbsp; 자체 엔진</span>
           </h3>
-          <div class="hc-game-thumb"><img src="./클로저스.webp" alt="CLOSERS PC Live" loading="lazy" /></div>
-          <a class="yt-link-btn" href="https://youtu.be/ghq0_UrSxkE" target="_blank" rel="noopener">
-            <i class="fab fa-youtube"></i><span data-i18n="hc2_yt">CLOSERS PC Live 트레일러 보기</span>
-          </a>
+          <div class="hc-game-thumb yt-facade" data-yt="ghq0_UrSxkE" role="button" tabindex="0" aria-label="CLOSERS PC Live trailer"><img src="./클로저스.webp" alt="CLOSERS PC Live" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc2_yt">트레일러 재생</span></span></div>
           <div class="hc-desc" data-i18n="hc2_desc">근미래를 배경으로 한 이능 액션 MORPG로, 개성 있는 캐릭터들과 속도감 넘치는 화려한 전투 액션이 특징인 PC 온라인 게임입니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
@@ -693,10 +717,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
           <h3 class="hc-panel-title"><span data-i18n="hc3_title">CLOSERS RT: 뉴 오더</span><br>
             <span class="hc-panel-sub">Naddic Games &nbsp;|&nbsp; Unreal Engine 4</span>
           </h3>
-          <div class="hc-game-thumb"><img src="./클로저스RT.webp" alt="CLOSERS RT" loading="lazy" /></div>
-          <a class="yt-link-btn" href="https://youtu.be/-eVzUCq3tTA" target="_blank" rel="noopener">
-            <i class="fab fa-youtube"></i><span data-i18n="hc3_yt">CLOSERS RT 트레일러 보기</span>
-          </a>
+          <div class="hc-game-thumb yt-facade" data-yt="-eVzUCq3tTA" role="button" tabindex="0" aria-label="CLOSERS RT trailer"><img src="./클로저스RT.webp" alt="CLOSERS RT" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc3_yt">트레일러 재생</span></span></div>
           <div class="hc-desc" data-i18n="hc3_desc">클로저스 IP의 매력적인 세계관과 캐릭터들을 확장하여, 모바일 환경에 맞춰 새롭게 해석한 실시간 전략 RPG입니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
@@ -1117,6 +1138,15 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
       </div>
       <div class="modal-content" id="content-kings">
             <div class="modal-panel active" id="kings-openworld">
+              <div class="wf-step wf-video">
+                <div class="wf-step-header">
+                  <div class="wf-step-num"><i class="fa fa-play"></i></div>
+                  <div class="wf-step-title" data-i18n="k_vid_gt">플레이 영상 · 골든투스 &amp; 카스타미어 퀘스트 동선</div>
+                </div>
+                <div class="yt-facade" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
+                <a class="yt-open" href="https://youtu.be/9Pt5qVRoYHk" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> <span data-i18n="yt_open">YouTube에서 보기</span></a>
+              </div>
+              <div class="wf-divider"></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1199,6 +1229,15 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="kings-raid">
+              <div class="wf-step wf-video">
+                <div class="wf-step-header">
+                  <div class="wf-step-num"><i class="fa fa-play"></i></div>
+                  <div class="wf-step-title" data-i18n="k_vid_hh">플레이 영상 · 하렌홀 4인 코옵 레이드 동선</div>
+                </div>
+                <div class="yt-facade" data-yt="YCWRx8Iqezo" role="button" tabindex="0" aria-label="Play video"><img src="./하렌홀동선_썸네일.webp" alt="" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
+                <a class="yt-open" href="https://youtu.be/YCWRx8Iqezo" target="_blank" rel="noopener"><i class="fab fa-youtube"></i> <span data-i18n="yt_open">YouTube에서 보기</span></a>
+              </div>
+              <div class="wf-divider"></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1642,7 +1681,7 @@ const I18N = {
     tag_bp:"BP 연결",
     tag_qa:"QA 전담",
     tag_raid_policy:"레이드 정책",
-    hc0_yt:"왕좌의 게임: 킹스로드 트레일러 보기",
+    hc0_yt:"트레일러 재생",
     hc0_desc:"전 세계적인 인기 IP '왕좌의 게임'을 기반으로 한 심리스 오픈월드 액션 RPG입니다. 방대한 웨스테로스 대륙을 탐험하며 몰입감 있는 전투와 내러티브를 경험할 수 있습니다.",
     hc_work_title:"주요 업무 및 성과",
     hc0_w1:"<strong>오픈월드 레벨 디자인 및 월드 빌딩:</strong> 서부 지역 핵심 거점인 '골든 투스(Golden Tooth)' 및 '카스타미어(Castamere)' 지역 심층 기획. 드라마 원작 레퍼런스 분석을 통해 시대적 배경에 맞는 현실적인 지형 및 식생 생태계 고증.",
@@ -1653,7 +1692,7 @@ const I18N = {
     hc0_t3:"원작 고증",
     hc0_t4:"레이드 기획",
     hc0_t5:"동적 환경 변화",
-    hc1_yt:"RE:MEMENTO (리메멘토) 트레일러 보기",
+    hc1_yt:"트레일러 재생",
     hc1_desc:"언리얼 엔진 5 기반의 고퀄리티 애니메이션풍 오픈월드 RPG입니다. 개성 있는 캐릭터들과 함께 넓은 세계를 탐험하며 턴제 전투의 전략적 재미를 제공합니다.",
     hc1_w1:"<strong>오픈월드 레벨 배치 정책 수립 및 AI 생태계 구현:</strong> 필드 배치 가이드라인을 수립하고, AI Behavior Tree 기반의 몬스터·NPC·야생동물 생태계 및 상호작용 기획.",
     hc1_w2:"<strong>인스턴스 던전 레벨 설계:</strong> 턴제 전투와 탐험의 템포를 조율하는 선형적 던전 레벨 설계 및 더미 레벨 검증 파이프라인 확립을 통한 개발 효율성 증대.",
@@ -1663,7 +1702,7 @@ const I18N = {
     hc1_t5:"파이프라인 구축",
     hc2_title:"CLOSERS PC Live (클로저스)",
     hc2_sub:"Naddic Games &nbsp;|&nbsp; 자체 엔진",
-    hc2_yt:"CLOSERS PC Live 트레일러 보기",
+    hc2_yt:"트레일러 재생",
     hc2_desc:"근미래를 배경으로 한 이능 액션 MORPG로, 개성 있는 캐릭터들과 속도감 넘치는 화려한 전투 액션이 특징인 PC 온라인 게임입니다.",
     hc2_w1:"<strong>신규 전투 콘텐츠 기획 및 레벨 디자인:</strong> 플레이어의 전투 동선과 액션 스킬 활용을 극대화할 수 있는 던전 환경 및 몬스터/보스 배치 설계.",
     hc2_w2:"<strong>기존 레벨 및 패턴 밸런싱:</strong> 라이브 서비스 데이터를 바탕으로 몬스터 패턴 및 기믹 밸런스 조정, 유저 플레이 경험(UX) 최적화.",
@@ -1673,7 +1712,7 @@ const I18N = {
     hc2_t4:"밸런싱",
     hc2_t5:"던전 기믹",
     hc3_title:"CLOSERS RT: 뉴 오더",
-    hc3_yt:"CLOSERS RT 트레일러 보기",
+    hc3_yt:"트레일러 재생",
     hc3_desc:"클로저스 IP의 매력적인 세계관과 캐릭터들을 확장하여, 모바일 환경에 맞춰 새롭게 해석한 실시간 전략 RPG입니다.",
     hc3_w1:"<strong>모바일 최적화 레벨 기획:</strong> 모바일 환경과 실시간 전략 RPG 장르 특성에 맞춘 스테이지 맵 구조 및 전투 동선 설계.",
     hc3_w2:"<strong>전투 환경 및 전술 오브젝트 배치:</strong> 플레이어가 전략적인 전투를 경험할 수 있도록 엄폐물, 지형지물 등 전술적 환경 오브젝트 기획 및 배치.",
@@ -1705,7 +1744,15 @@ const I18N = {
     hc_dp_w2:"<strong>데이터레이어 기반 내러티브 레벨:</strong> 언리얼 엔진 5 Data Layer를 활용해 서사 전개에 따라 변화하는 내러티브 레벨 1종 완성.",
     hc_dp_w3:"<strong>범용 AI 레벨 제작 툴 구축:</strong> Claude Code와 MCP를 로컬 환경에 연동해 기획 문서 작성부터 더미 레벨 목업까지 이어지는 자체 툴을 개발. 최신 레벨 디자인 트렌드와 표준화된 문서 양식을 지속적으로 학습시켜 장르에 관계없이 빠르게 프로토타이핑할 수 있도록 고도화했으며, 이 툴로 위 사냥터·던전·내러티브 레벨을 단기간에 산출하고 아트 파트와의 발주·협업 속도를 크게 단축. 팀 내 AI 활용 레벨 디자인 프로세스 확장에 기여.",
     hc_dp_t1:"사냥터·던전 기획",
-    hc_dp_t5:"아트 발주"
+    hc_dp_t5:"아트 발주",
+    reel_label:"플레이 영상",
+    chip_gt:"골든투스",
+    chip_hh:"하렌홀",
+    reel_gt:"골든투스 &amp; 카스타미어 · 오픈월드 퀘스트 동선 (3:20)",
+    reel_hh:"하렌홀 · 4인 코옵 레이드 동선 (1:58)",
+    k_vid_gt:"플레이 영상 · 골든투스 &amp; 카스타미어 퀘스트 동선",
+    k_vid_hh:"플레이 영상 · 하렌홀 4인 코옵 레이드 동선",
+    yt_open:"YouTube에서 보기"
   },
   en:{
     page_title:"Lee Jin-yong | Level Designer · Unreal Open World",
@@ -1856,7 +1903,7 @@ const I18N = {
     tag_bp:"BP Integration",
     tag_qa:"QA Owner",
     tag_raid_policy:"Raid Policy",
-    hc0_yt:"Watch the Game of Thrones: King's Road trailer",
+    hc0_yt:"Play trailer",
     hc0_desc:"A seamless open-world action RPG based on the globally beloved 'Game of Thrones' IP. Players explore the vast continent of Westeros and experience immersive combat and narrative.",
     hc_work_title:"Key Responsibilities & Results",
     hc0_w1:"<strong>Open World Level Design & World Building:</strong> In-depth design of 'Golden Tooth' and 'Castamere', key hubs of the western region. Researched the drama's references to build realistic terrain and vegetation ecosystems true to the setting.",
@@ -1867,7 +1914,7 @@ const I18N = {
     hc0_t3:"Source Accuracy",
     hc0_t4:"Raid Design",
     hc0_t5:"Dynamic Environment",
-    hc1_yt:"Watch the RE:MEMENTO trailer",
+    hc1_yt:"Play trailer",
     hc1_desc:"A high-quality anime-style open-world RPG built on Unreal Engine 5. Players explore a wide world with distinctive characters and enjoy strategic turn-based combat.",
     hc1_w1:"<strong>Open World Placement Policy & AI Ecosystem:</strong> Established field placement guidelines and designed monster/NPC/wildlife ecosystems and interactions based on AI Behavior Trees.",
     hc1_w2:"<strong>Instance Dungeon Level Design:</strong> Designed linear dungeon levels that pace turn-based combat and exploration, and set up a dummy-level validation pipeline to improve development efficiency.",
@@ -1877,7 +1924,7 @@ const I18N = {
     hc1_t5:"Pipeline Building",
     hc2_title:"CLOSERS PC Live",
     hc2_sub:"Naddic Games &nbsp;|&nbsp; In-house Engine",
-    hc2_yt:"Watch the CLOSERS PC Live trailer",
+    hc2_yt:"Play trailer",
     hc2_desc:"A near-future superpower action MORPG for PC, known for its distinctive characters and fast, flashy combat.",
     hc2_w1:"<strong>New Combat Content & Level Design:</strong> Designed dungeon environments and monster/boss placement that maximize players' combat routes and skill usage.",
     hc2_w2:"<strong>Level & Pattern Balancing:</strong> Tuned monster patterns and gimmick balance using live-service data to optimize the player experience (UX).",
@@ -1887,7 +1934,7 @@ const I18N = {
     hc2_t4:"Balancing",
     hc2_t5:"Dungeon Gimmicks",
     hc3_title:"CLOSERS RT: New Order",
-    hc3_yt:"Watch the CLOSERS RT trailer",
+    hc3_yt:"Play trailer",
     hc3_desc:"A real-time strategy RPG that expands the CLOSERS universe and characters, reimagined for mobile.",
     hc3_w1:"<strong>Mobile-optimized Level Design:</strong> Designed stage map structures and combat routes tailored to mobile and the real-time strategy RPG genre.",
     hc3_w2:"<strong>Combat Environment & Tactical Objects:</strong> Planned and placed tactical environment objects such as cover and terrain features for strategic combat.",
@@ -1919,7 +1966,15 @@ const I18N = {
     hc_dp_w2:"<strong>Data Layer Narrative Level:</strong> Completed a narrative level that changes as the story unfolds, using Unreal Engine 5 Data Layers.",
     hc_dp_w3:"<strong>General-purpose AI Level Tool:</strong> Developed an in-house tool that connects Claude Code and MCP to the local environment, covering everything from design documents to dummy-level mock-ups. Continuously trained it on current level design trends and standardized document formats so it can prototype quickly in any genre. This tool produced the hunting grounds, dungeons and narrative level above in a short time and greatly shortened art requests and collaboration, helping expand AI-driven level design across the team.",
     hc_dp_t1:"Hunting Ground & Dungeon Design",
-    hc_dp_t5:"Art Requests"
+    hc_dp_t5:"Art Requests",
+    reel_label:"Gameplay",
+    chip_gt:"Golden Tooth",
+    chip_hh:"Harrenhal",
+    reel_gt:"Golden Tooth &amp; Castamere · Open World Quest Route (3:20)",
+    reel_hh:"Harrenhal · 4-Player Co-op Raid Route (1:58)",
+    k_vid_gt:"Gameplay · Golden Tooth &amp; Castamere Quest Route",
+    k_vid_hh:"Gameplay · Harrenhal 4-Player Co-op Raid Route",
+    yt_open:"Watch on YouTube"
   },
   ja:{
     page_title:"イ・ジニョン | Level Designer · Unreal Open World",
@@ -2070,7 +2125,7 @@ const I18N = {
     tag_bp:"BP連携",
     tag_qa:"QA担当",
     tag_raid_policy:"レイドポリシー",
-    hc0_yt:"ゲーム・オブ・スローンズ: King's Road トレーラーを見る",
+    hc0_yt:"トレーラー再生",
     hc0_desc:"世界的な人気IP『ゲーム・オブ・スローンズ』をベースにしたシームレスオープンワールドアクションRPG。広大なウェスタロス大陸を探索し、没入感のある戦闘とナラティブを体験できます。",
     hc_work_title:"主な業務と成果",
     hc0_w1:"<strong>オープンワールドのレベルデザインとワールドビルディング:</strong> 西部の主要拠点『ゴールデン・トゥース』『キャスタミア』地域を深く企画。ドラマ原作のリファレンス分析により、時代背景に合った現実的な地形と植生を考証。",
@@ -2081,7 +2136,7 @@ const I18N = {
     hc0_t3:"原作考証",
     hc0_t4:"レイド企画",
     hc0_t5:"動的環境変化",
-    hc1_yt:"RE:MEMENTO トレーラーを見る",
+    hc1_yt:"トレーラー再生",
     hc1_desc:"Unreal Engine 5ベースの高品質アニメ調オープンワールドRPG。個性的なキャラクターと広い世界を探索し、ターン制バトルの戦略的な面白さを提供します。",
     hc1_w1:"<strong>OW配置ポリシー策定とAIエコシステム:</strong> フィールド配置ガイドラインを策定し、AI Behavior Treeベースのモンスター・NPC・野生動物の生態系とインタラクションを企画。",
     hc1_w2:"<strong>インスタンスダンジョンのレベル設計:</strong> ターン制バトルと探索のテンポを調整する線形ダンジョンを設計し、ダミーレベル検証パイプラインを確立して開発効率を向上。",
@@ -2091,7 +2146,7 @@ const I18N = {
     hc1_t5:"パイプライン構築",
     hc2_title:"CLOSERS PC Live (クローザーズ)",
     hc2_sub:"Naddic Games &nbsp;|&nbsp; 自社エンジン",
-    hc2_yt:"CLOSERS PC Live トレーラーを見る",
+    hc2_yt:"トレーラー再生",
     hc2_desc:"近未来を舞台にした異能アクションMORPG。個性的なキャラクターとスピード感あふれる華やかな戦闘が特徴のPCオンラインゲームです。",
     hc2_w1:"<strong>新規戦闘コンテンツ企画とレベルデザイン:</strong> プレイヤーの戦闘動線とスキル活用を最大化するダンジョン環境とモンスター/ボス配置を設計。",
     hc2_w2:"<strong>既存レベルとパターンのバランス調整:</strong> ライブサービスのデータをもとにモンスターパターンとギミックのバランスを調整し、プレイ体験(UX)を最適化。",
@@ -2101,7 +2156,7 @@ const I18N = {
     hc2_t4:"バランス調整",
     hc2_t5:"ダンジョンギミック",
     hc3_title:"CLOSERS RT: ニューオーダー",
-    hc3_yt:"CLOSERS RT トレーラーを見る",
+    hc3_yt:"トレーラー再生",
     hc3_desc:"クローザーズIPの魅力的な世界観とキャラクターを拡張し、モバイル向けに新たに解釈したリアルタイムストラテジーRPGです。",
     hc3_w1:"<strong>モバイル最適化レベル企画:</strong> モバイル環境とリアルタイムストラテジーRPGの特性に合わせたステージマップ構造と戦闘動線を設計。",
     hc3_w2:"<strong>戦闘環境と戦術オブジェクト配置:</strong> 戦略的な戦闘を体験できるよう、遮蔽物や地形などの戦術的環境オブジェクトを企画・配置。",
@@ -2133,7 +2188,15 @@ const I18N = {
     hc_dp_w2:"<strong>データレイヤーによるナラティブレベル:</strong> Unreal Engine 5のData Layerを活用し、物語の展開に応じて変化するナラティブレベルを1種完成。",
     hc_dp_w3:"<strong>汎用AIレベル制作ツール:</strong> Claude CodeとMCPをローカル環境に連携し、企画書作成からダミーレベルのモックアップまでをつなぐ自社ツールを開発。最新のレベルデザイントレンドと標準化された資料フォーマットを継続的に学習させ、ジャンルを問わず素早くプロトタイピングできるよう改良。このツールで上記の狩場・ダンジョン・ナラティブレベルを短期間で制作し、アートパートとの発注・協業スピードを大幅に短縮。チーム内のAI活用レベルデザインプロセスの拡大に貢献。",
     hc_dp_t1:"狩場・ダンジョン企画",
-    hc_dp_t5:"アート発注"
+    hc_dp_t5:"アート発注",
+    reel_label:"プレイ映像",
+    chip_gt:"ゴールデン・トゥース",
+    chip_hh:"ハレンの巨城",
+    reel_gt:"ゴールデン・トゥース &amp; キャスタミア · オープンワールドのクエスト動線 (3:20)",
+    reel_hh:"ハレンの巨城 · 4人Co-opレイド動線 (1:58)",
+    k_vid_gt:"プレイ映像 · ゴールデン・トゥース &amp; キャスタミアのクエスト動線",
+    k_vid_hh:"プレイ映像 · ハレンの巨城 4人Co-opレイド動線",
+    yt_open:"YouTubeで見る"
   },
   zh:{
     page_title:"李珍勇 | Level Designer · Unreal Open World",
@@ -2284,7 +2347,7 @@ const I18N = {
     tag_bp:"蓝图对接",
     tag_qa:"QA负责",
     tag_raid_policy:"突袭策略",
-    hc0_yt:"观看《权力的游戏：王者之路》预告片",
+    hc0_yt:"播放预告片",
     hc0_desc:"基于全球人气IP《权力的游戏》打造的无缝开放世界动作RPG。玩家可探索广阔的维斯特洛大陆，体验沉浸式的战斗与叙事。",
     hc_work_title:"主要工作与成果",
     hc0_w1:"<strong>开放世界关卡设计与世界构建:</strong> 深入策划西部核心据点“金牙城”和“卡斯特梅”区域。通过分析剧集原作参考，考证符合时代背景的真实地形与植被生态。",
@@ -2295,7 +2358,7 @@ const I18N = {
     hc0_t3:"原作考证",
     hc0_t4:"突袭策划",
     hc0_t5:"动态环境变化",
-    hc1_yt:"观看《RE:MEMENTO》预告片",
+    hc1_yt:"播放预告片",
     hc1_desc:"基于虚幻引擎5的高品质动画风开放世界RPG。与个性鲜明的角色一起探索广阔世界，享受回合制战斗的策略乐趣。",
     hc1_w1:"<strong>开放世界布置策略与AI生态:</strong> 制定野外布置规范，并基于AI行为树策划怪物、NPC、野生动物的生态与交互。",
     hc1_w2:"<strong>副本关卡设计:</strong> 设计调节回合制战斗与探索节奏的线性副本，并建立Dummy关卡验证流程，提高开发效率。",
@@ -2305,7 +2368,7 @@ const I18N = {
     hc1_t5:"流程搭建",
     hc2_title:"CLOSERS PC Live (封印者)",
     hc2_sub:"Naddic Games &nbsp;|&nbsp; 自研引擎",
-    hc2_yt:"观看《CLOSERS PC Live》预告片",
+    hc2_yt:"播放预告片",
     hc2_desc:"以近未来为背景的异能动作MORPG，以个性鲜明的角色和速度感十足的华丽战斗为特色的PC网络游戏。",
     hc2_w1:"<strong>新战斗内容策划与关卡设计:</strong> 设计能最大化玩家战斗动线与技能运用的地下城环境及怪物/Boss布置。",
     hc2_w2:"<strong>现有关卡与模式平衡:</strong> 基于线上运营数据调整怪物模式与机关平衡，优化玩家体验(UX)。",
@@ -2315,7 +2378,7 @@ const I18N = {
     hc2_t4:"平衡调整",
     hc2_t5:"地下城机关",
     hc3_title:"CLOSERS RT: 新秩序",
-    hc3_yt:"观看《CLOSERS RT》预告片",
+    hc3_yt:"播放预告片",
     hc3_desc:"扩展封印者IP的世界观与角色，为移动端重新诠释的即时战略RPG。",
     hc3_w1:"<strong>移动端优化关卡策划:</strong> 针对移动端与即时战略RPG特性设计关卡地图结构与战斗动线。",
     hc3_w2:"<strong>战斗环境与战术物件布置:</strong> 策划并布置掩体、地形等战术环境物件，让玩家体验策略性战斗。",
@@ -2347,7 +2410,15 @@ const I18N = {
     hc_dp_w2:"<strong>基于数据层的叙事关卡:</strong> 利用虚幻引擎5 Data Layer，完成1个随剧情推进而变化的叙事关卡。",
     hc_dp_w3:"<strong>通用AI关卡制作工具:</strong> 将Claude Code与MCP接入本地环境，开发从策划文档编写到Dummy关卡原型全流程的自研工具。持续学习最新关卡设计趋势与标准化文档格式，使其可不限类型快速制作原型。借助该工具在短期内产出上述狩猎场、地下城与叙事关卡，并大幅缩短与美术的需求对接与协作时间，推动团队内AI关卡设计流程的推广。",
     hc_dp_t1:"狩猎场·地下城策划",
-    hc_dp_t5:"美术需求"
+    hc_dp_t5:"美术需求",
+    reel_label:"实机视频",
+    chip_gt:"金牙城",
+    chip_hh:"赫伦堡",
+    reel_gt:"金牙城 &amp; 卡斯特梅 · 开放世界任务动线 (3:20)",
+    reel_hh:"赫伦堡 · 4人协作突袭动线 (1:58)",
+    k_vid_gt:"实机视频 · 金牙城 &amp; 卡斯特梅任务动线",
+    k_vid_hh:"实机视频 · 赫伦堡4人协作突袭动线",
+    yt_open:"在YouTube观看"
   }
 };
 
@@ -2476,7 +2547,7 @@ const Hero = (function(){
   const dots = document.querySelectorAll('.hc-dot');
 
   function showPanel(idx){
-    panels.forEach((p, i) => p.classList.toggle('hc-visible', i === idx));
+    panels.forEach((p, i) => { p.classList.toggle('hc-visible', i === idx); if(i !== idx) stopVideos(p); });
     dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     items.forEach((it, i) => it.classList.toggle('active', i === idx));
   }
@@ -2489,6 +2560,7 @@ const Hero = (function(){
   }
   function collapse(){
     expDynamic.classList.remove('shifted');
+    stopVideos(expDynamic);
     items.forEach(it => it.classList.remove('active'));
   }
 
@@ -2517,11 +2589,12 @@ function closeModal(id){
   const m = document.getElementById('modal-' + id);
   if(!m) return;
   m.classList.remove('open');
+  stopVideos(m);
   document.body.style.overflow = '';
 }
 function switchModalTab(modalId, panelId, tabEl){
   document.querySelectorAll('#tabs-' + modalId + ' .modal-tab').forEach(tb => tb.classList.toggle('active', tb === tabEl));
-  document.querySelectorAll('#content-' + modalId + ' .modal-panel').forEach(p => p.classList.toggle('active', p.id === panelId));
+  document.querySelectorAll('#content-' + modalId + ' .modal-panel').forEach(p => { p.classList.toggle('active', p.id === panelId); if(p.id !== panelId) stopVideos(p); });
   const content = document.getElementById('content-' + modalId);
   if(content) content.scrollTop = 0;
 }
@@ -2565,6 +2638,41 @@ document.addEventListener('keydown', e => {
     });
   }, {threshold:.15});
   videos.forEach(v => io.observe(v));
+})();
+
+/* ==================== VIDEO PLAYERS ==================== */
+// The YouTube player is only created on click, so the page stays light until someone actually wants to watch.
+function playVideo(el){
+  if(el.classList.contains('playing')) return;
+  el._facade = el.innerHTML;
+  el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + el.dataset.yt +
+    '?autoplay=1&rel=0&playsinline=1" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  el.classList.add('playing');
+}
+function stopVideos(root){
+  (root || document).querySelectorAll('.yt-facade.playing').forEach(el => {
+    el.innerHTML = el._facade;
+    el.classList.remove('playing');
+    el.querySelectorAll('[data-i18n]').forEach(x => { const v = t(x.dataset.i18n); if(v !== undefined) x.innerHTML = v; });
+  });
+}
+document.querySelectorAll('.yt-facade').forEach(el => {
+  el.addEventListener('click', () => playVideo(el));
+  el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); playVideo(el); } });
+});
+// Hero card: switch between the two route videos
+(function(){
+  const reel = document.getElementById('heroReel');
+  const cap = document.getElementById('heroReelCap');
+  document.querySelectorAll('.reel-chip').forEach(chip => chip.addEventListener('click', () => {
+    if(chip.classList.contains('active')) return;
+    document.querySelectorAll('.reel-chip').forEach(c => c.classList.toggle('active', c === chip));
+    stopVideos(reel.parentElement);
+    reel.dataset.yt = chip.dataset.yt;
+    reel.querySelector('img').src = chip.dataset.thumb;
+    cap.dataset.i18n = chip.dataset.cap;
+    cap.innerHTML = t(chip.dataset.cap);
+  }));
 })();
 
 /* ==================== CONTACT: COPY TO CLIPBOARD ==================== */
