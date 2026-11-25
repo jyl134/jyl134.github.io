@@ -27,14 +27,14 @@ REM 2. Check if Documents\GitHub\jyl134.github.io exists (GitHub Desktop default
 set "GHD_REPO=%USERPROFILE%\Documents\GitHub\jyl134.github.io"
 if exist "%GHD_REPO%\.git" (
     echo [진행] GitHub Desktop 저장소 폴더(%GHD_REPO%)를 찾았습니다!
-    echo 최신 index.html 및 이미지/GIF 파일을 저장소로 복사합니다...
+    echo 최신 index.html 및 이미지/영상 파일을 저장소로 복사합니다...
     copy /Y "%~dp0index.html" "%GHD_REPO%\index.html" >nul
-    for %%F in ("%~dp0*.png" "%~dp0*.jpg" "%~dp0*.gif" "%~dp0*.srt") do (
+    for %%F in ("%~dp0*.png" "%~dp0*.jpg" "%~dp0*.gif" "%~dp0*.webp" "%~dp0*.mp4" "%~dp0*.srt") do (
         if exist "%%~fF" copy /Y "%%~fF" "%GHD_REPO%\" >nul
     )
     cd /d "%GHD_REPO%"
     git add . >nul 2>&1
-    git commit -m "Update portfolio v2: move videos to final step & complete 4-language i18n" >nul 2>&1
+    git commit -m "Update portfolio %date%" >nul 2>&1
     git push >nul 2>&1
     if !errorlevel! equ 0 (
         echo.
@@ -64,7 +64,7 @@ git rev-parse --is-inside-work-tree >nul 2>&1
 if %errorlevel% equ 0 (
     echo [진행] 현재 Git 저장소에서 바로 업로드합니다...
     git add .
-    git commit -m "Update portfolio v2: move videos to final step & complete 4-language i18n"
+    git commit -m "Update portfolio %date%"
     git push
     echo.
     echo ========================================================
