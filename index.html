@@ -431,8 +431,8 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
   <div class="nav-inner">
     <a href="#hero"       class="active" data-i18n="nav_home">홈</a>
     <a href="#experience" data-i18n="nav_exp">경력</a>
-    <a href="#philosophy" data-i18n="nav_phil">철학</a>
     <a href="#deepdive"   data-i18n="nav_proj">프로젝트</a>
+    <a href="#philosophy" data-i18n="nav_phil">철학</a>
     <a href="#contact"    data-i18n="nav_contact">연락처</a>
     <div class="lang-wrap">
       <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-label="Language">
@@ -761,6 +761,90 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
   </div>
 </div>
 </section>
+<section id="deepdive">
+<div class="deepdive-inner">
+  <div class="section-title fade-in">
+    <span class="en">PROJECT &amp; SKILL DEEP-DIVE</span>
+    <h2 data-i18n="dd_title">프로젝트 상세 포트폴리오 (작업 내용)</h2>
+  </div>
+  <p class="dd-hint fade-in" style="transition-delay:.1s;" data-i18n="dd_hint">카드를 클릭하면 작업 내용, 이미지, 결과를 슬라이드로 탐색할 수 있습니다.</p>
+
+  <div class="deepdive-grid fade-in" style="transition-delay:.15s">
+
+    <!-- CARD 1: 킹스로드 -->
+    <div class="glass proj-card" data-modal="kings" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드 상세보기">
+      <div class="proj-img">
+        <img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" />
+        <div class="proj-img-overlay"></div>
+        <div class="proj-badge" data-i18n="proj1_badge">NETMARBLE NEO · 2025~26</div>
+        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint1">클릭하여 심층 탐색</span></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-eyebrow" data-i18n="proj1_eye">PROJECT 01 · OPEN WORLD ARPG · UE5</div>
+        <div class="proj-title" data-i18n="proj1_title">왕좌의 게임: 킹스로드<br><span>오픈월드 레벨 디자인 및 데이터 레이어 연출</span></div>
+        <div class="proj-skills">
+          <div class="proj-skill-tag" data-i18n="proj1_s1">🗺️ 원작 IP 기반 심리스 오픈월드 필드 지형 및 식생 설계</div>
+          <div class="proj-skill-tag" data-i18n="proj1_s2">🎬 시나리오 기반 지형 변화와 데이터 레이어(Data Layer) 연출</div>
+          <div class="proj-skill-tag" data-i18n="proj1_s3">⚔️ 코옵 레이드 동선 설계 및 지형 변화를 통한 동적 아레나 구축</div>
+        </div>
+      </div>
+      <div class="proj-btn-wrap">
+        <span class="btn-gold">
+          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn1">기획 상세 탐색</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- CARD 2: 리메멘토 -->
+    <div class="glass proj-card" data-modal="memento" role="button" tabindex="0" aria-label="리메멘토 상세보기">
+      <div class="proj-img">
+        <img src="./리메멘토.webp" alt="RE:MEMENTO (리메멘토)" loading="lazy" />
+        <div class="proj-img-overlay"></div>
+        <div class="proj-badge" data-i18n="proj2_badge">BLACKSTORM · 2024~25</div>
+        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint2">클릭하여 심층 탐색</span></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-eyebrow" data-i18n="proj2_eye">PROJECT 02 · OPEN WORLD RPG · UE5</div>
+        <div class="proj-title" data-i18n="proj2_title">RE:MEMENTO (리메멘토)<br><span>오픈월드 필드 기획 및 시스템 구조 설계</span></div>
+        <div class="proj-skills">
+          <div class="proj-skill-tag" data-i18n="proj2_s1">🌍 심리스 오픈월드 환경의 구역별 테마에 맞춘 레벨 배치 정책 수립</div>
+          <div class="proj-skill-tag" data-i18n="proj2_s2">🦌 AI Behavior Tree 기반 식생물 배회 생태계 및 상호작용 기획</div>
+          <div class="proj-skill-tag" data-i18n="proj2_s3">🗝️ 내러티브 중심의 선형 인스턴스 던전 및 기믹 설계</div>
+        </div>
+      </div>
+      <div class="proj-btn-wrap">
+        <span class="btn-gold">
+          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn2">기획 상세 탐색</span>
+        </span>
+      </div>
+    </div>
+
+    <!-- CARD 3: 클로저스 RT -->
+    <div class="glass proj-card" data-modal="closers" role="button" tabindex="0" aria-label="클로저스 RT 상세보기">
+      <div class="proj-img">
+        <img src="./클로저스RT.webp" alt="CLOSERS RT (클로저스 RT)" loading="lazy" />
+        <div class="proj-img-overlay"></div>
+        <div class="proj-badge" data-i18n="proj3_badge">NADDIC GAMES · 2022~23</div>
+        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint3">클릭하여 심층 탐색</span></div>
+      </div>
+      <div class="proj-body">
+        <div class="proj-eyebrow" data-i18n="proj3_eye">PROJECT 03 · STAGE DESIGN · UE4</div>
+        <div class="proj-title" data-i18n="proj3_title">CLOSERS RT (클로저스 RT)<br><span>맵 기믹을 활용한 전략 스테이지 기획</span></div>
+        <div class="proj-skills">
+          <div class="proj-skill-tag" data-i18n="proj3_s1">🏙️ 실제 배경(부산) 기반 선형 구조 맵 및 이동 동선 설계</div>
+          <div class="proj-skill-tag" data-i18n="proj3_s2">⚖️ 기믹 조합을 통한 고효율 전략 스테이지 산출</div>
+        </div>
+      </div>
+      <div class="proj-btn-wrap">
+        <span class="btn-gold">
+          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn3">기획 상세 탐색</span>
+        </span>
+      </div>
+    </div>
+
+  </div>
+</div>
+</section>
 <section id="philosophy">
   <div class="phil-inner">
     <div class="section-title fade-in">
@@ -1048,90 +1132,6 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     </div>
   </div>
-</section>
-<section id="deepdive">
-<div class="deepdive-inner">
-  <div class="section-title fade-in">
-    <span class="en">PROJECT &amp; SKILL DEEP-DIVE</span>
-    <h2 data-i18n="dd_title">프로젝트 상세 포트폴리오 (작업 내용)</h2>
-  </div>
-  <p class="dd-hint fade-in" style="transition-delay:.1s;" data-i18n="dd_hint">카드를 클릭하면 작업 내용, 이미지, 결과를 슬라이드로 탐색할 수 있습니다.</p>
-
-  <div class="deepdive-grid fade-in" style="transition-delay:.15s">
-
-    <!-- CARD 1: 킹스로드 -->
-    <div class="glass proj-card" data-modal="kings" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드 상세보기">
-      <div class="proj-img">
-        <img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj1_badge">NETMARBLE NEO · 2025~26</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint1">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj1_eye">PROJECT 01 · OPEN WORLD ARPG · UE5</div>
-        <div class="proj-title" data-i18n="proj1_title">왕좌의 게임: 킹스로드<br><span>오픈월드 레벨 디자인 및 데이터 레이어 연출</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj1_s1">🗺️ 원작 IP 기반 심리스 오픈월드 필드 지형 및 식생 설계</div>
-          <div class="proj-skill-tag" data-i18n="proj1_s2">🎬 시나리오 기반 지형 변화와 데이터 레이어(Data Layer) 연출</div>
-          <div class="proj-skill-tag" data-i18n="proj1_s3">⚔️ 코옵 레이드 동선 설계 및 지형 변화를 통한 동적 아레나 구축</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn1">기획 상세 탐색</span>
-        </span>
-      </div>
-    </div>
-
-    <!-- CARD 2: 리메멘토 -->
-    <div class="glass proj-card" data-modal="memento" role="button" tabindex="0" aria-label="리메멘토 상세보기">
-      <div class="proj-img">
-        <img src="./리메멘토.webp" alt="RE:MEMENTO (리메멘토)" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj2_badge">BLACKSTORM · 2024~25</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint2">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj2_eye">PROJECT 02 · OPEN WORLD RPG · UE5</div>
-        <div class="proj-title" data-i18n="proj2_title">RE:MEMENTO (리메멘토)<br><span>오픈월드 필드 기획 및 시스템 구조 설계</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj2_s1">🌍 심리스 오픈월드 환경의 구역별 테마에 맞춘 레벨 배치 정책 수립</div>
-          <div class="proj-skill-tag" data-i18n="proj2_s2">🦌 AI Behavior Tree 기반 식생물 배회 생태계 및 상호작용 기획</div>
-          <div class="proj-skill-tag" data-i18n="proj2_s3">🗝️ 내러티브 중심의 선형 인스턴스 던전 및 기믹 설계</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn2">기획 상세 탐색</span>
-        </span>
-      </div>
-    </div>
-
-    <!-- CARD 3: 클로저스 RT -->
-    <div class="glass proj-card" data-modal="closers" role="button" tabindex="0" aria-label="클로저스 RT 상세보기">
-      <div class="proj-img">
-        <img src="./클로저스RT.webp" alt="CLOSERS RT (클로저스 RT)" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj3_badge">NADDIC GAMES · 2022~23</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint3">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj3_eye">PROJECT 03 · STAGE DESIGN · UE4</div>
-        <div class="proj-title" data-i18n="proj3_title">CLOSERS RT (클로저스 RT)<br><span>맵 기믹을 활용한 전략 스테이지 기획</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj3_s1">🏙️ 실제 배경(부산) 기반 선형 구조 맵 및 이동 동선 설계</div>
-          <div class="proj-skill-tag" data-i18n="proj3_s2">⚖️ 기믹 조합을 통한 고효율 전략 스테이지 산출</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn3">기획 상세 탐색</span>
-        </span>
-      </div>
-    </div>
-
-  </div>
-</div>
 </section>
 
 <!-- ===== PROJECT MODALS ===== -->
