@@ -11,610 +11,515 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 아이콘 (Font Awesome 5) / 폰트 (Pretendard, Montserrat) -->
+<!-- 아이콘 (Font Awesome 5) / 폰트 (Pretendard, Inter, JetBrains Mono) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <!-- 검색 엔진 노출 차단 코드 추가 -->
 <meta name="robots" content="noindex, nofollow">
 <style>
-/* ==================== ROOT ==================== */
+/* =====================================================================
+   LEE JINYONG — LEVEL DESIGN · v3
+   Matte dark minimal. No gradients, no glass, no glow, no emoji.
+   One restrained accent for indices, active states and the slider.
+   ===================================================================== */
 :root{
-  --gold:#C5A059;--gold-light:#D4AF37;--gold-dim:#8a6f35;
-  --navy-deep:#050c1a;--navy:#080f20;--navy-mid:#0d1829;
-  --glass-bg:rgba(12,22,44,.82);--glass-border:rgba(197,160,89,.28);
-  --text-white:#ede9dc;--text-gray:#9ca8b8;--text-dim:#5a6a7e;
-  --radius:12px;--radius-lg:18px;
-  --font-ko:"Pretendard Variable","Pretendard",sans-serif;
-  --font-num:"Montserrat",sans-serif;
+  --bg-base:#121316;
+  --bg-surface:#181a1f;
+  --bg-elevated:#20232a;
+  --border-hairline:#282c34;
+  --border-strong:#383e4a;
+
+  --ink-primary:#edeff2;
+  --ink-secondary:#9ba2b0;
+  --ink-muted:#6b7280;
+
+  --accent:#c49b66;
+  --accent-dim:rgba(196,155,102,.22);
+
+  --radius-sm:4px;
+  --radius-md:6px;
+
+  --font-ko:"Pretendard Variable","Pretendard",-apple-system,sans-serif;
+  --font-en:"Inter","Pretendard Variable",sans-serif;
+  --font-mono:"JetBrains Mono","Pretendard Variable","Pretendard",monospace;
+
+  --nav-h:60px;
+  --gutter:32px;
   --ease-shift:cubic-bezier(.4,0,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html{scroll-behavior:smooth;}
-body{background:var(--navy-deep);color:var(--text-white);font-family:var(--font-ko);
-  font-size:16px;line-height:1.7;overflow-x:hidden;word-break:keep-all;}
-::-webkit-scrollbar{width:5px;}
-::-webkit-scrollbar-track{background:var(--navy-deep);}
-::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:3px;}
-body::before{content:'';position:fixed;inset:0;
-  background:radial-gradient(ellipse 80% 60% at 70% 20%,rgba(30,70,140,.45) 0%,transparent 60%),
-    radial-gradient(ellipse 60% 80% at 10% 80%,rgba(20,50,100,.3) 0%,transparent 55%),
-    radial-gradient(ellipse 40% 40% at 85% 70%,rgba(197,160,89,.06) 0%,transparent 50%);
-  pointer-events:none;z-index:0;}
-section{position:relative;z-index:1;}
+html{scroll-behavior:smooth;scroll-padding-top:var(--nav-h);}
+body{background:var(--bg-base);color:var(--ink-primary);font-family:var(--font-ko);font-size:16px;line-height:1.7;
+  word-break:keep-all;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+::selection{background:var(--accent-dim);}
+::-webkit-scrollbar{width:8px;height:8px;}
+::-webkit-scrollbar-track{background:var(--bg-base);}
+::-webkit-scrollbar-thumb{background:#2a2e36;border-radius:4px;}
+img{max-width:100%;}
+button{font:inherit;}
+.mono{font-family:var(--font-mono);}
+section{position:relative;}
 
-/* Twinkling stars */
-.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
-.stars span{position:absolute;border-radius:50%;background:#fff;
-  animation:twinkle var(--d,4s) ease-in-out infinite var(--delay,0s);opacity:0;}
-@keyframes twinkle{0%,100%{opacity:0;transform:scale(1);}50%{opacity:var(--op,.6);transform:scale(1.4);}}
+.fade-in{opacity:0;transform:translateY(12px);transition:opacity .5s ease,transform .5s ease;}
+.fade-in.visible{opacity:1;transform:none;}
 
-/* Scroll fade-in */
-.fade-in{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease;}
-.fade-in.visible{opacity:1;transform:translateY(0);}
-
-/* Shimmer background (contact card) */
-@keyframes shimmer{0%{background-position:-700px 0;}100%{background-position:700px 0;}}
-@keyframes glowBreath{0%,100%{box-shadow:0 0 22px rgba(197,160,89,.07),inset 0 0 22px rgba(197,160,89,.04);}
-  50%{box-shadow:0 0 50px rgba(197,160,89,.18),inset 0 0 38px rgba(197,160,89,.10);}}
-.sk-hero{position:absolute;inset:0;background:linear-gradient(135deg,#0d1e3a 0%,#152840 45%,#1a2e50 70%,#0c1624 100%);animation:glowBreath 4s ease-in-out infinite;}
-.sk-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(197,160,89,.07) 45%,rgba(197,160,89,.13) 50%,rgba(197,160,89,.07) 55%,transparent 70%);background-size:700px 100%;animation:shimmer 3.5s infinite linear;}
-
-/* ==================== COMMON ==================== */
-.glass{background:var(--glass-bg);border:1px solid var(--glass-border);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-radius:var(--radius-lg);transition:border-color .3s,box-shadow .3s,transform .3s;}
-.glass:hover{border-color:rgba(197,160,89,.55);box-shadow:0 0 32px rgba(197,160,89,.14),0 8px 40px rgba(0,0,0,.5);}
-
-.btn-gold{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#b8922a,#d4af37,#c5a059);color:#0a0f1a;font-family:var(--font-ko);font-weight:700;font-size:.78rem;letter-spacing:.06em;padding:.62rem 1.5rem;border:none;border-radius:6px;cursor:pointer;transition:filter .25s,transform .25s,box-shadow .25s;text-decoration:none;}
-.btn-gold:hover{filter:brightness(1.15);transform:translateY(-2px);box-shadow:0 6px 24px rgba(197,160,89,.42);}
-.btn-outline{display:inline-flex;align-items:center;gap:.5rem;background:transparent;color:var(--text-white);font-family:var(--font-ko);font-weight:500;font-size:.78rem;letter-spacing:.06em;padding:.62rem 1.5rem;border:1px solid rgba(197,160,89,.5);border-radius:6px;cursor:pointer;transition:border-color .25s,background .25s,transform .25s;text-decoration:none;}
-.btn-outline:hover{border-color:var(--gold);background:rgba(197,160,89,.08);transform:translateY(-2px);}
-
-.section-title{text-align:center;margin-bottom:3rem;}
-.section-title .en{font-family:var(--font-num);font-size:.68rem;letter-spacing:.28em;color:var(--gold-dim);display:block;margin-bottom:.28rem;}
-.section-title h2{font-family:var(--font-ko);font-size:clamp(1.3rem,2.7vw,2rem);font-weight:700;letter-spacing:.08em;line-height:1.3;}
-.section-title::after{content:'';display:block;width:50px;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:.7rem auto 0;}
+/* Shared meta label (roles, tags, badges) */
+.meta-label,.exp-role-badge,.exp-tag,.hl-tag,.tech-badge{
+  display:inline-flex;align-items:center;font-family:var(--font-en);font-size:.7rem;font-weight:500;letter-spacing:0;line-height:1.5;
+  color:var(--ink-secondary);border:1px solid var(--border-hairline);border-radius:3px;padding:2px 8px;white-space:nowrap;}
 
 /* ==================== NAV ==================== */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:center;align-items:center;padding:1.1rem 2rem;background:linear-gradient(180deg,rgba(5,12,26,.96) 0%,transparent 100%);backdrop-filter:blur(8px);}
-.nav-inner{display:flex;align-items:center;gap:2.2rem;width:100%;max-width:1300px;justify-content:center;position:relative;}
-nav a{font-family:var(--font-ko);font-weight:500;font-size:.82rem;letter-spacing:.1em;color:var(--text-gray);text-decoration:none;transition:color .2s;position:relative;padding-bottom:4px;}
-nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--gold);transition:width .3s;}
-nav a:hover,nav a.active{color:var(--gold);}
-nav a:hover::after,nav a.active::after{width:100%;}
-.lang-wrap{position:absolute;right:0;top:50%;transform:translateY(-50%);}
-.lang-btn{display:flex;align-items:center;gap:.4rem;background:rgba(197,160,89,.08);border:1px solid rgba(197,160,89,.3);color:var(--gold);font-family:var(--font-num);font-size:.68rem;letter-spacing:.12em;padding:.3rem .7rem;border-radius:5px;cursor:pointer;transition:background .2s;}
-.lang-btn:hover{background:rgba(197,160,89,.16);}
-.lang-btn i{pointer-events:none;}
-.lang-btn .fa-chevron-down{font-size:.55rem;}
-.lang-dropdown{position:absolute;right:0;top:calc(100% + .5rem);background:rgba(8,15,28,.97);border:1px solid rgba(197,160,89,.3);border-radius:8px;overflow:hidden;min-width:90px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .2s,transform .2s,visibility .2s;z-index:500;}
-.lang-dropdown.open{opacity:1;visibility:visible;transform:translateY(0);}
-.lang-dropdown button{display:block;width:100%;padding:.5rem .9rem;background:none;border:none;color:var(--text-gray);font-family:var(--font-num);font-size:.7rem;letter-spacing:.1em;cursor:pointer;text-align:left;transition:background .15s,color .15s;}
-.lang-dropdown button:hover,.lang-dropdown button.active-lang{background:rgba(197,160,89,.12);color:var(--gold);}
+nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;background:var(--bg-base);border-bottom:1px solid var(--border-hairline);}
+.nav-inner{max-width:1360px;height:100%;margin:0 auto;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.brand{font-family:var(--font-en);font-weight:700;font-size:.82rem;letter-spacing:.08em;color:var(--ink-primary);text-decoration:none;white-space:nowrap;}
+.brand span{color:var(--ink-muted);font-weight:500;}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{font-family:var(--font-en);font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--ink-secondary);text-decoration:none;
+  padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
+.nav-links a:hover{color:var(--ink-primary);}
+.nav-links a.active{color:var(--ink-primary);border-bottom-color:var(--accent);}
+.lang-switch{display:flex;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);overflow:hidden;margin-left:4px;}
+.lang-switch button{background:none;border:0;border-right:1px solid var(--border-hairline);color:var(--ink-muted);font-family:var(--font-mono);
+  font-size:.66rem;padding:4px 8px;cursor:pointer;transition:color .15s,background .15s;}
+.lang-switch button:last-child{border-right:0;}
+.lang-switch button:hover{color:var(--ink-primary);}
+.lang-switch button.active-lang{background:var(--ink-primary);color:var(--bg-base);}
+
+/* ==================== LAYOUT ==================== */
+.wrap,.exp-outer,.phil-inner,.contact-inner{max-width:1360px;margin:0 auto;padding:0 var(--gutter);}
+#experience,#deepdive,#philosophy,#contact{padding:96px 0;border-top:1px solid var(--border-hairline);}
+.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--border-hairline);}
+.sec-idx{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);}
+.sec-en{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;color:var(--ink-muted);}
+.sec-head h2{flex-basis:100%;font-size:clamp(1.5rem,2.4vw,2rem);font-weight:700;letter-spacing:-.01em;line-height:1.3;margin-top:6px;}
 
 /* ==================== HERO ==================== */
-#hero{min-height:100vh;display:grid;grid-template-rows:1fr auto;padding-top:70px;position:relative;overflow:hidden;}
-.hero-inner{display:grid;grid-template-columns:1fr 1fr;align-items:center;max-width:1300px;margin:0 auto;width:100%;padding:4rem 2rem 2rem;gap:2rem;position:relative;z-index:3;}
-.hero-eyebrow{font-family:var(--font-num);font-size:.72rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:1.2rem;}
-.hero-headline{font-family:var(--font-ko);font-size:clamp(1.7rem,3.5vw,3rem);line-height:1.28;font-weight:900;margin-bottom:1.4rem;}
-.hero-headline .gold{color:var(--gold);}
-.hero-sub{font-family:var(--font-ko);font-size:.95rem;line-height:1.82;color:var(--text-gray);max-width:480px;margin-bottom:2rem;font-weight:400;}
-.hero-sub strong{color:var(--gold);font-weight:600;}
-.hero-buttons{display:flex;gap:.8rem;flex-wrap:wrap;}
+#hero{padding:calc(var(--nav-h) + 56px) 0 72px;}
+.hero-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;padding-bottom:32px;margin-bottom:28px;border-bottom:1px solid var(--border-hairline);}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;color:var(--accent);margin-bottom:14px;}
+.hero-name{font-family:var(--font-en);font-weight:800;font-size:clamp(2.4rem,5.2vw,4.2rem);letter-spacing:-.02em;line-height:1;margin-bottom:20px;}
+.hero-name .ko{font-family:var(--font-ko);font-weight:500;font-size:.36em;letter-spacing:0;color:var(--ink-secondary);margin-left:14px;vertical-align:middle;}
+.hero-sub{max-width:680px;font-size:.98rem;line-height:1.8;color:var(--ink-secondary);}
+.hero-sub strong{color:var(--ink-primary);font-weight:600;}
+.hero-line{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-muted);margin-top:16px;letter-spacing:.02em;}
+.hero-meta{display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--border-hairline);border-radius:var(--radius-md);}
+.hero-meta > div{padding:14px 20px;border-right:1px solid var(--border-hairline);}
+.hero-meta > div:last-child{border-right:0;}
+.hero-meta dt{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--ink-muted);margin-bottom:6px;white-space:nowrap;}
+.hero-meta dd{font-family:var(--font-en);font-weight:700;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;}
 
-/* Background slideshow */
-.hero-bg-slider{position:absolute;inset:0;z-index:0;overflow:hidden;cursor:pointer;}
-.hero-bg-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.4s ease;}
-.hero-bg-slide.active{opacity:1;}
-.hero-bg-overlay{position:absolute;inset:0;z-index:1;background:rgba(5,12,26,.60);pointer-events:none;}
-.hero-caption-box{position:absolute;top:80px;right:1.4rem;z-index:5;
-  background:rgba(5,12,26,.72);border:1px solid rgba(197,160,89,.3);border-radius:7px;padding:.3rem .75rem;
-  font-family:var(--font-ko);font-size:.64rem;color:rgba(197,160,89,.88);letter-spacing:.06em;
-  backdrop-filter:blur(6px);pointer-events:none;transition:opacity .5s;max-width:280px;text-align:right;}
+/* Showcase: before/after slider + gameplay videos */
+.showcase-tabs{display:flex;width:max-content;max-width:100%;overflow-x:auto;border:1px solid var(--border-hairline);border-bottom:0;border-radius:var(--radius-md) var(--radius-md) 0 0;}
+.sc-tab{display:inline-flex;align-items:center;gap:8px;background:var(--bg-surface);border:0;border-right:1px solid var(--border-hairline);color:var(--ink-secondary);
+  font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:color .15s,background .15s;}
+.sc-tab:last-child{border-right:0;}
+.sc-tab:hover{color:var(--ink-primary);}
+.sc-tab.active{background:var(--bg-elevated);color:var(--ink-primary);box-shadow:inset 0 -2px 0 var(--accent);}
+.sc-tab .fa{font-size:.6rem;}
+.showcase-frame{position:relative;border:1px solid var(--border-hairline);border-radius:0 var(--radius-md) var(--radius-md) var(--radius-md);overflow:hidden;background:#000;}
+.showcase-frame .yt-facade{border-radius:0;}
+.ba{position:relative;aspect-ratio:21/9;--pos:50%;user-select:none;-webkit-user-select:none;touch-action:pan-y;}
+.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
+.ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0);}
+.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--ink-primary);pointer-events:none;}
+.ba-handle span{position:absolute;top:50%;left:50%;width:38px;height:38px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;
+  background:rgba(18,19,22,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:.8rem;}
+.ba-label{position:absolute;bottom:14px;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;color:var(--ink-primary);
+  background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:5px 9px;pointer-events:none;}
+.ba-label.left{left:14px;}
+.ba-label.right{right:14px;}
+.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;}
+.ba-range:focus-visible ~ .ba-handle span{outline:2px solid var(--accent);outline-offset:2px;}
+.showcase-cap{padding:12px 2px 0;font-size:.82rem;color:var(--ink-secondary);}
 
-/* Stats bar */
-.hero-stats{background:rgba(8,15,32,.94);border-top:1px solid rgba(197,160,89,.18);display:grid;grid-template-columns:repeat(3,1fr);position:relative;z-index:3;}
-.stat-item{display:flex;flex-direction:column;align-items:center;gap:.25rem;padding:1.4rem 1rem;border-right:1px solid rgba(197,160,89,.1);}
-.stat-item:last-child{border-right:none;}
-.stat-num{font-family:var(--font-num);font-size:clamp(1.1rem,2vw,1.75rem);color:var(--gold);font-weight:800;text-align:center;line-height:1.2;}
-.stat-num.stat-num-sm{font-size:clamp(.85rem,1.5vw,1.15rem);line-height:1.3;}
-.stat-label{font-size:.76rem;letter-spacing:.08em;color:var(--text-gray);font-weight:500;text-align:center;}
-.stat-sub{font-size:.6rem;color:var(--text-dim);text-align:center;line-height:1.4;}
-
-/* Lightbox */
-.lightbox-overlay{position:fixed;inset:0;z-index:19000;background:rgba(0,0,0,.92);
-  display:flex;align-items:center;justify-content:center;
-  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .3s,visibility .3s;}
-.lightbox-overlay.open{opacity:1;visibility:visible;pointer-events:auto;}
-.lightbox-img{max-width:92vw;max-height:90vh;border-radius:10px;object-fit:contain;display:block;}
-.lightbox-close{position:absolute;top:1.2rem;right:1.5rem;width:40px;height:40px;border-radius:50%;
-  background:rgba(197,160,89,.15);border:2px solid rgba(197,160,89,.4);color:var(--gold);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;font-size:1.1rem;z-index:19001;transition:background .2s,transform .2s;}
-.lightbox-close:hover{background:rgba(197,160,89,.3);transform:rotate(90deg);}
-.lightbox-close *{pointer-events:none;}
-.lightbox-caption{position:absolute;bottom:1.5rem;left:50%;transform:translateX(-50%);
-  background:rgba(5,12,26,.8);border:1px solid rgba(197,160,89,.3);border-radius:6px;padding:.35rem .9rem;
-  font-family:var(--font-ko);font-size:.72rem;color:rgba(197,160,89,.9);white-space:nowrap;}
+.quick-jump{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border:1px solid var(--border-hairline);border-radius:var(--radius-md);overflow:hidden;}
+.quick-jump button{position:relative;display:grid;gap:2px;text-align:left;background:none;border:0;border-right:1px solid var(--border-hairline);
+  color:var(--ink-primary);padding:16px 44px 16px 18px;cursor:pointer;transition:background .15s;}
+.quick-jump button:last-child{border-right:0;}
+.quick-jump button:hover,.quick-jump button:focus-visible{background:var(--bg-surface);}
+.qj-idx{font-family:var(--font-mono);font-size:.68rem;color:var(--accent);}
+.qj-t{font-family:var(--font-en);font-weight:700;font-size:.95rem;letter-spacing:.04em;}
+.qj-s{font-family:var(--font-mono);font-size:.64rem;color:var(--ink-muted);}
+.quick-jump .fa{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--ink-muted);transition:color .15s,transform .15s;}
+.quick-jump button:hover .fa{color:var(--ink-primary);transform:translate(3px,-50%);}
 
 /* ==================== EXPERIENCE ==================== */
-#experience{padding:5rem 2rem;}
-.exp-outer{max-width:1300px;margin:0 auto;}
+.exp-dynamic{display:flex;align-items:flex-start;width:100%;}
+.exp-timeline-col{flex:1 1 100%;max-width:100%;min-width:0;transition:flex .45s var(--ease-shift),max-width .45s var(--ease-shift);}
+.exp-highlights-col{flex:0 0 0%;max-width:0%;min-width:0;overflow:hidden;opacity:0;visibility:hidden;transform:translateX(24px);
+  transition:flex .45s var(--ease-shift),max-width .45s var(--ease-shift),opacity .35s ease .1s,transform .35s ease .1s,visibility 0s linear .5s;}
+.exp-dynamic.shifted .exp-timeline-col{flex:0 0 36%;max-width:36%;min-width:260px;}
+.exp-dynamic.shifted .exp-highlights-col{flex:0 0 64%;max-width:64%;overflow:visible;opacity:1;visibility:visible;transform:none;padding-left:28px;
+  transition:flex .45s var(--ease-shift),max-width .45s var(--ease-shift),opacity .35s ease .1s,transform .35s ease .1s,visibility 0s;}
 
-/* Timeline (left) + highlights panel (right): click a card to split 35/65 */
-.exp-dynamic{display:flex;gap:0;align-items:flex-start;width:100%;}
-.exp-timeline-col{flex:1 1 100%;max-width:100%;min-width:0;transition:flex .5s var(--ease-shift),max-width .5s var(--ease-shift);}
-.exp-highlights-col{flex:0 0 0%;max-width:0%;min-width:0;overflow:hidden;opacity:0;visibility:hidden;transform:translateX(32px);
-  transition:flex .5s var(--ease-shift),max-width .5s var(--ease-shift),opacity .4s ease .1s,transform .4s ease .1s,visibility 0s linear .55s;}
-.exp-dynamic.shifted .exp-timeline-col{flex:0 0 35%;max-width:35%;min-width:260px;}
-.exp-dynamic.shifted .exp-highlights-col{flex:0 0 65%;max-width:65%;overflow:visible;opacity:1;visibility:visible;transform:translateX(0);padding-left:1.8rem;
-  transition:flex .5s var(--ease-shift),max-width .5s var(--ease-shift),opacity .4s ease .1s,transform .4s ease .1s,visibility 0s linear 0s;}
-
-.timeline{position:relative;padding-left:0;}
-.timeline::before{content:'';position:absolute;left:22px;top:0;bottom:0;width:1px;background:linear-gradient(180deg,transparent,var(--gold-dim),var(--gold-dim),transparent);transition:opacity .3s;}
-.exp-dynamic.shifted .timeline::before{opacity:.5;}
-.timeline-item{position:relative;margin-bottom:1rem;cursor:pointer;padding-left:52px;}
-.timeline-dot{position:absolute;left:14px;top:1.4rem;width:18px;height:18px;border-radius:50%;background:var(--navy-mid);border:2px solid var(--gold-dim);transition:all .25s;z-index:1;flex-shrink:0;}
-.timeline-item.active .timeline-dot,.timeline-item:hover .timeline-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 16px rgba(197,160,89,.65);}
-
-.exp-card{padding:1.1rem 1.3rem;transition:border-color .3s,background .3s;display:flex;gap:1rem;align-items:flex-start;}
-.timeline-item.active .exp-card{border-color:rgba(197,160,89,.52);background:rgba(12,22,44,.95);}
-.company-logo-box{width:62px;height:62px;flex-shrink:0;border-radius:9px;overflow:hidden;background:#fff;border:1px solid rgba(197,160,89,.22);
-  display:flex;align-items:center;justify-content:center;transition:width .4s,height .4s;position:relative;}
-.company-logo-box img{display:block;width:100%;height:100%;object-fit:contain;padding:5px;mix-blend-mode:multiply;}
-.exp-dynamic.shifted .company-logo-box{width:44px;height:44px;border-radius:8px;}
-
-.exp-info{flex:1;min-width:0;}
-.exp-year{font-family:var(--font-num);font-size:.68rem;letter-spacing:.18em;color:var(--gold);margin-bottom:.1rem;}
-.exp-company{font-family:var(--font-ko);font-size:.88rem;font-weight:700;margin-bottom:.1rem;color:var(--text-white);}
-.exp-game-title{font-family:var(--font-ko);font-size:clamp(1rem,2.2vw,1.45rem);font-weight:900;color:var(--gold);line-height:1.2;margin-bottom:.25rem;transition:font-size .4s,color .4s;}
-.exp-role-badge{display:inline-block;font-size:.6rem;letter-spacing:.08em;color:var(--gold);background:rgba(197,160,89,.1);border:1px solid rgba(197,160,89,.25);border-radius:4px;padding:.12rem .45rem;margin-bottom:.25rem;transition:font-size .45s,padding .45s;}
-.exp-desc{font-size:.8rem;color:var(--text-gray);line-height:1.68;font-weight:300;transition:opacity .3s,max-height .4s;}
-.exp-tags{display:flex;flex-wrap:wrap;gap:.25rem;margin-top:.35rem;transition:opacity .3s;}
-.exp-tag{font-size:.58rem;color:var(--gold-dim);background:rgba(197,160,89,.07);border:1px solid rgba(197,160,89,.18);border-radius:3px;padding:.12rem .4rem;}
-/* Compact cards while the panel is open */
-.exp-dynamic.shifted .exp-year{font-size:.6rem;}
-.exp-dynamic.shifted .exp-company{font-size:.75rem;}
-.exp-dynamic.shifted .exp-game-title{font-size:.85rem;color:var(--gold-dim);}
-.exp-dynamic.shifted .exp-role-badge{font-size:.55rem;padding:.1rem .35rem;}
-.exp-dynamic.shifted .exp-desc{opacity:0;max-height:0;overflow:hidden;margin:0;padding:0;}
-.exp-dynamic.shifted .exp-tags{opacity:0;max-height:0;overflow:hidden;margin:0;}
+.timeline-item{cursor:pointer;outline:none;}
+.exp-row{display:grid;grid-template-columns:220px 1fr;gap:28px;padding:24px 20px;border-top:1px solid var(--border-hairline);transition:background .15s;}
+.timeline-item:last-child .exp-row{border-bottom:1px solid var(--border-hairline);}
+.timeline-item:hover .exp-row,.timeline-item:focus-visible .exp-row{background:var(--bg-surface);}
+.timeline-item.active .exp-row{background:var(--bg-surface);box-shadow:inset 2px 0 0 var(--accent);}
+.exp-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
+.company-logo-box{width:48px;height:48px;flex-shrink:0;border-radius:var(--radius-sm);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;transition:width .3s,height .3s;}
+.company-logo-box img{display:block;width:100%;height:100%;object-fit:contain;padding:4px;mix-blend-mode:multiply;}
+.exp-year{font-family:var(--font-en);font-size:.76rem;font-weight:500;color:var(--ink-secondary);}
+.exp-company{font-family:var(--font-en);font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--ink-muted);text-transform:uppercase;}
+.exp-game-title{font-size:1.2rem;font-weight:700;line-height:1.35;margin-bottom:8px;transition:font-size .3s;}
+.exp-role-badge{margin-bottom:10px;}
+.exp-desc{font-size:.88rem;color:var(--ink-secondary);line-height:1.75;transition:opacity .25s,max-height .3s;}
+.exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;transition:opacity .25s;}
+.exp-tag{color:var(--ink-muted);}
+/* compact rows while the panel is open */
+.exp-dynamic.shifted .exp-row{grid-template-columns:1fr;gap:8px;padding:16px;}
+.exp-dynamic.shifted .exp-meta{flex-direction:row;align-items:center;gap:10px;}
+.exp-dynamic.shifted .company-logo-box{width:32px;height:32px;}
+.exp-dynamic.shifted .exp-company{display:none;}
+.exp-dynamic.shifted .exp-game-title{font-size:.95rem;margin-bottom:4px;}
+.exp-dynamic.shifted .exp-role-badge{margin-bottom:0;}
+.exp-dynamic.shifted .exp-desc,.exp-dynamic.shifted .exp-tags{opacity:0;max-height:0;overflow:hidden;margin:0;}
 
 /* Highlights panel */
-.highlights-panel{position:sticky;top:88px;max-height:calc(100vh - 110px);overflow-y:auto;overflow-x:hidden;}
-.highlights-panel::-webkit-scrollbar{width:3px;}
-.highlights-panel::-webkit-scrollbar-thumb{background:var(--gold-dim);}
-.panel-close-btn{display:none;align-items:center;gap:.4rem;margin-bottom:1rem;font-family:var(--font-ko);font-size:.72rem;color:var(--text-dim);background:none;border:1px solid rgba(197,160,89,.18);border-radius:6px;padding:.35rem .85rem;cursor:pointer;transition:color .2s,border-color .2s;}
-.panel-close-btn:hover{color:var(--gold);border-color:var(--gold);}
-.panel-close-btn i{pointer-events:none;}
+.highlights-panel{position:sticky;top:calc(var(--nav-h) + 16px);max-height:calc(100vh - var(--nav-h) - 32px);overflow-y:auto;
+  background:var(--bg-surface);border:1px solid var(--border-hairline);border-radius:var(--radius-md);padding:22px;}
+.panel-close-btn{display:none;align-items:center;gap:8px;margin-bottom:18px;background:none;border:1px solid var(--border-hairline);border-radius:3px;
+  color:var(--ink-secondary);font-family:var(--font-en);font-size:.74rem;padding:5px 10px;cursor:pointer;}
+.panel-close-btn:hover{color:var(--ink-primary);border-color:var(--border-strong);}
+.panel-close-btn i{pointer-events:none;font-size:.6rem;}
 .exp-dynamic.shifted .panel-close-btn{display:inline-flex;}
-
 .hc-panel{display:none;}
 .hc-panel.hc-visible{display:block;}
-.hc-panel-year{font-family:var(--font-num);font-size:.72rem;letter-spacing:.18em;color:var(--gold);margin-bottom:.35rem;font-weight:600;}
-.hc-panel-title{font-family:var(--font-ko);font-size:clamp(.95rem,1.8vw,1.3rem);font-weight:900;color:var(--text-white);line-height:1.3;margin-bottom:.8rem;}
-.hc-panel-sub{font-size:.72rem;font-weight:400;color:var(--text-dim);letter-spacing:.08em;}
-.hc-game-thumb{width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;margin-bottom:.85rem;}
-.hc-game-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;border-radius:10px;}
-.hc-desc{font-size:.82rem;color:var(--text-gray);line-height:1.72;font-weight:300;padding:.5rem .7rem;background:rgba(197,160,89,.04);
-  border-left:2px solid rgba(197,160,89,.28);border-radius:0 6px 6px 0;margin-bottom:.75rem;font-style:italic;}
-.hc-work-title{font-family:var(--font-ko);font-size:.68rem;font-weight:600;letter-spacing:.14em;color:var(--gold);display:flex;align-items:center;gap:.4rem;margin-bottom:.45rem;}
-.hc-work-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(197,160,89,.3),transparent);}
-.hc-work-text{font-size:.8rem;color:var(--text-gray);line-height:1.72;font-weight:300;margin-bottom:.65rem;}
-.hc-work-text ul{list-style:disc;color:var(--text-gray);padding-left:1.1rem;margin:0;display:flex;flex-direction:column;gap:.55rem;}
-.hc-work-text li{font-size:.8rem;line-height:1.7;font-weight:300;}
-.hc-work-text li strong{color:var(--text-white);font-weight:600;}
-.hc-tags-new{display:flex;flex-wrap:wrap;gap:.3rem;}
-.hl-tag{font-size:.65rem;color:var(--gold-dim);background:rgba(197,160,89,.07);border:1px solid rgba(197,160,89,.18);border-radius:3px;padding:.14rem .42rem;}
-.hc-dots{display:flex;gap:.4rem;justify-content:center;margin-top:.7rem;}
-.hc-dot{width:8px;height:8px;border-radius:50%;background:var(--text-dim);cursor:pointer;transition:background .2s,transform .2s;}
-.hc-dot.active{background:var(--gold);transform:scale(1.2);}
-
-/* ==================== PHILOSOPHY ==================== */
-#philosophy{padding:6rem 2rem;background:linear-gradient(180deg,var(--navy-deep) 0%,rgba(5,10,22,.98) 100%);}
-.phil-inner{max-width:1300px;margin:0 auto;padding:6rem 2rem;}
-.phil-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;width:100%;}
-.phil-card{border-radius:16px;display:flex;flex-direction:column;overflow:hidden;min-width:0;}
-.phil-icon-area{height:195px;position:relative;overflow:hidden;flex-shrink:0;background:#060d1e;}
-.phil-body{padding:1.4rem 1.4rem 1.6rem;flex:1;display:flex;flex-direction:column;gap:.4rem;}
-.phil-num{font-size:.68rem;letter-spacing:.15em;color:rgba(197,160,89,.6);font-family:var(--font-num);}
-.phil-title{font-family:var(--font-ko);font-size:1.05rem;font-weight:700;color:#fff;line-height:1.35;margin-bottom:.25rem;}
-.phil-desc{font-size:.83rem;color:rgba(180,190,210,.75);line-height:1.75;font-weight:300;}
-
-/* Tech stack badges */
-.tech-stack-wrap{margin-top:3rem;}
-.tech-stack-section{padding:2.5rem 0 3.5rem;border-top:1px solid rgba(197,160,89,.1);}
-.tech-stack-title{font-family:var(--font-ko);font-size:.72rem;font-weight:600;letter-spacing:.22em;color:var(--gold-dim);text-align:center;margin-bottom:1.4rem;text-transform:uppercase;}
-.tech-badge-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;max-width:900px;margin:0 auto;padding:0 1rem;}
-.tech-badge{display:inline-flex;align-items:center;gap:.45rem;background:rgba(12,22,44,.82);border:1px solid rgba(197,160,89,.25);border-radius:8px;padding:.42rem .9rem;
-  font-family:var(--font-ko);font-size:.76rem;font-weight:500;color:var(--text-gray);letter-spacing:.04em;white-space:nowrap;transition:border-color .2s,color .2s,box-shadow .2s;cursor:default;}
-.tech-badge:hover{border-color:var(--gold);color:var(--text-white);box-shadow:0 0 14px rgba(197,160,89,.15);}
-.tech-badge .tb-icon{font-size:.82rem;color:var(--gold);}
-.tech-badge.primary{border-color:rgba(197,160,89,.45);background:rgba(197,160,89,.08);color:var(--gold);font-weight:600;}
-.tech-badge.primary:hover{background:rgba(197,160,89,.16);}
-
-/* ==================== PROJECTS (DEEP-DIVE) ==================== */
-#deepdive{padding:6rem 2rem;background:linear-gradient(180deg,var(--navy-deep) 0%,rgba(8,18,38,.97) 100%);}
-.deepdive-inner{max-width:1300px;margin:0 auto;}
-.dd-hint{text-align:center;font-size:.85rem;color:var(--text-dim);margin-bottom:2.5rem;}
-.deepdive-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;}
-.proj-card{display:flex;flex-direction:column;overflow:hidden;cursor:pointer;transition:transform .35s,box-shadow .35s,border-color .35s;}
-.proj-card:hover{transform:translateY(-7px);box-shadow:0 22px 65px rgba(0,0,0,.65),0 0 35px rgba(197,160,89,.14);border-color:rgba(197,160,89,.55);}
-.proj-img{height:220px;position:relative;overflow:hidden;}
-.proj-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
-.proj-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(5,12,26,.97) 100%);}
-.proj-badge{position:absolute;top:.8rem;right:.8rem;z-index:2;font-size:.58rem;letter-spacing:.1em;color:var(--gold);background:rgba(197,160,89,.1);border:1px solid rgba(197,160,89,.3);border-radius:3px;padding:.2rem .5rem;}
-.proj-click-hint{position:absolute;bottom:.8rem;right:.8rem;z-index:2;display:flex;align-items:center;gap:.3rem;font-size:.6rem;color:rgba(197,160,89,.6);background:rgba(0,0,0,.5);border-radius:4px;padding:.2rem .5rem;opacity:0;transition:opacity .25s;}
-.proj-card:hover .proj-click-hint{opacity:1;}
-.proj-body{flex:1;padding:1.3rem 1.4rem 1rem;}
-.proj-eyebrow{font-family:var(--font-num);font-size:.6rem;letter-spacing:.18em;color:var(--gold-dim);margin-bottom:.3rem;}
-.proj-title{font-family:var(--font-ko);font-size:1rem;font-weight:700;line-height:1.35;margin-bottom:.7rem;}
-.proj-title span{font-size:.75em;color:var(--text-gray);font-weight:400;}
-.proj-skills{display:flex;flex-direction:column;gap:.35rem;margin-bottom:.8rem;}
-.proj-skill-tag{font-size:.74rem;color:var(--text-gray);line-height:1.55;background:rgba(197,160,89,.05);border:1px solid rgba(197,160,89,.14);border-radius:5px;padding:.3rem .6rem;transition:border-color .2s,background .2s;}
-.proj-card:hover .proj-skill-tag{border-color:rgba(197,160,89,.25);background:rgba(197,160,89,.08);}
-.proj-btn-wrap{padding:0 1.4rem 1.4rem;}
-.proj-btn-wrap .btn-gold{font-size:.72rem;pointer-events:none;}
-
-/* ==================== PROJECT MODAL ==================== */
-.modal-dimmer{position:fixed;inset:0;z-index:9000;background:rgba(3,8,18,.88);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-  opacity:0;visibility:hidden;pointer-events:none;display:flex;align-items:center;justify-content:center;padding:1.5rem;transition:opacity .3s,visibility .3s;}
-.modal-dimmer.open{opacity:1;visibility:visible;pointer-events:auto;}
-.modal-box{width:100%;max-width:1100px;max-height:92vh;background:rgba(8,14,28,.98);border:1px solid rgba(197,160,89,.3);border-radius:20px;
-  overflow:hidden;display:flex;flex-direction:column;transform:scale(.95) translateY(20px);transition:transform .3s cubic-bezier(.34,1.26,.64,1);
-  box-shadow:0 40px 120px rgba(0,0,0,.8),0 0 60px rgba(197,160,89,.06);z-index:9001;}
-.modal-dimmer.open .modal-box{transform:scale(1) translateY(0);}
-.modal-header{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.4rem;border-bottom:1px solid rgba(197,160,89,.15);flex-shrink:0;}
-.modal-header-eyebrow{font-family:var(--font-num);font-size:.58rem;letter-spacing:.2em;color:var(--gold-dim);margin-bottom:.18rem;}
-.modal-header-title{font-family:var(--font-ko);font-size:.95rem;font-weight:700;color:var(--text-white);}
-.modal-close{width:36px;height:36px;border-radius:50%;background:rgba(197,160,89,.08);border:1px solid rgba(197,160,89,.28);
-  color:var(--gold);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;transition:background .2s;}
-.modal-close:hover{background:rgba(197,160,89,.2);}
-.modal-close *{pointer-events:none;}
-.modal-close i{display:block;}
-.modal-body{display:flex;flex:1;overflow:hidden;min-height:0;}
-.modal-tabs{width:260px;flex-shrink:0;border-right:1px solid rgba(197,160,89,.12);overflow-y:auto;padding:.6rem 0;background:rgba(5,10,22,.6);}
-.modal-tabs::-webkit-scrollbar{width:3px;}
-.modal-tabs::-webkit-scrollbar-thumb{background:var(--gold-dim);}
-.modal-tab{display:block;width:100%;text-align:left;background:none;border:none;border-left:3px solid transparent;padding:.65rem 1rem .65rem 1.2rem;
-  font-family:var(--font-ko);font-size:.75rem;line-height:1.5;color:var(--text-dim);cursor:pointer;transition:background .18s,color .18s;}
-.modal-tab:hover{background:rgba(197,160,89,.06);color:var(--text-gray);}
-.modal-tab.active{background:rgba(197,160,89,.1);color:var(--gold);border-left-color:var(--gold);font-weight:600;}
-.modal-content{flex:1;overflow-y:auto;padding:1.5rem 1.8rem;display:flex;flex-direction:column;gap:0;}
-.modal-content::-webkit-scrollbar{width:4px;}
-.modal-content::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
-.modal-panel{display:none;flex-direction:column;gap:1.6rem;}
-.modal-panel.active{display:flex;}
-
-/* Workflow steps inside a modal panel */
-.wf-step{display:flex;flex-direction:column;gap:.8rem;}
-.wf-step-header{display:flex;align-items:center;gap:.6rem;}
-.wf-step-num{width:28px;height:28px;border-radius:50%;flex-shrink:0;background:rgba(197,160,89,.15);border:1px solid rgba(197,160,89,.4);
-  display:flex;align-items:center;justify-content:center;font-family:var(--font-num);font-size:.7rem;color:var(--gold);font-weight:600;}
-.wf-step-title{font-family:var(--font-ko);font-size:.88rem;font-weight:700;color:var(--text-white);}
-.wf-img-wrap{position:relative;width:100%;margin-bottom:.2rem;}
-.wf-img-wrap img,.wf-img-wrap video{width:100%;object-fit:contain;border-radius:8px;display:block;}
-.wf-desc{font-size:.82rem;color:var(--text-gray);line-height:1.78;font-weight:300;padding:.6rem .8rem;background:rgba(197,160,89,.04);border-left:2px solid rgba(197,160,89,.28);border-radius:0 6px 6px 0;}
-.wf-divider{width:1px;height:1.8rem;background:linear-gradient(180deg,rgba(197,160,89,.3),transparent);margin:0 auto;}
-
-/* ==================== CONTACT ==================== */
-#contact{padding:6rem 2rem 4rem;position:relative;background:var(--navy-deep);overflow:hidden;}
-#contact::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:600px;height:600px;background:radial-gradient(circle,rgba(30,70,140,.22) 0%,transparent 70%);pointer-events:none;}
-.contact-inner{max-width:1100px;margin:0 auto;position:relative;z-index:1;}
-.contact-card{padding:3rem 3.2rem;position:relative;overflow:hidden;}
-.contact-bg{position:absolute;inset:0;z-index:0;border-radius:var(--radius-lg);overflow:hidden;opacity:.3;}
-.contact-bg .sk-hero{border-radius:var(--radius-lg);}
-.contact-fg{position:relative;z-index:1;}
-.contact-split{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:center;}
-.contact-left{display:flex;flex-direction:column;justify-content:center;gap:1rem;}
-.contact-label{font-family:var(--font-num);font-size:.68rem;letter-spacing:.22em;color:var(--gold-dim);margin-bottom:.2rem;}
-.contact-tagline{font-family:var(--font-ko);font-size:clamp(1.3rem,2.5vw,2rem);font-weight:800;color:var(--text-white);line-height:1.45;}
-.contact-tagline span{color:var(--gold);}
-.contact-divider{width:48px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin-top:.5rem;}
-.contact-right{display:flex;flex-direction:column;gap:.5rem;}
-.ci-row{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border-radius:8px;text-decoration:none;transition:background .2s,transform .2s,box-shadow .2s;cursor:default;position:relative;}
-.ci-row.ci-link{cursor:pointer;}
-.ci-row:hover{background:rgba(197,160,89,.08);transform:translateX(4px);box-shadow:inset 3px 0 0 rgba(197,160,89,.45);}
-.ci-icon{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:rgba(197,160,89,.1);border:1px solid rgba(197,160,89,.2);
-  border-radius:8px;color:var(--gold-dim);font-size:.95rem;transition:color .2s,text-shadow .2s,background .2s;}
-.ci-row:hover .ci-icon{color:var(--gold);text-shadow:0 0 12px rgba(197,160,89,.6);background:rgba(197,160,89,.18);}
-.ci-detail{display:flex;flex-direction:column;}
-.ci-label{font-family:var(--font-num);font-size:.58rem;letter-spacing:.14em;color:var(--text-dim);margin-bottom:.08rem;text-transform:uppercase;}
-.ci-text{font-family:var(--font-ko);font-size:.88rem;color:var(--text-gray);letter-spacing:.02em;transition:color .2s;}
-.ci-row:hover .ci-text{color:var(--text-white);}
-/* "Copied" feedback chip */
-.ci-copied{margin-left:auto;font-family:var(--font-ko);font-size:.66rem;color:var(--gold);background:rgba(197,160,89,.12);border:1px solid rgba(197,160,89,.35);
-  border-radius:4px;padding:.12rem .5rem;opacity:0;transform:translateX(-4px);transition:opacity .2s,transform .2s;pointer-events:none;}
-.ci-row.copied .ci-copied{opacity:1;transform:translateX(0);}
-
-.scroll-chevron{display:flex;align-items:center;justify-content:center;margin-top:2.4rem;}
-.chevron-circle{width:42px;height:42px;border-radius:50%;border:1px solid rgba(197,160,89,.3);display:flex;align-items:center;justify-content:center;color:var(--gold);cursor:pointer;animation:bounceY .85s ease-in-out infinite alternate;transition:border-color .25s;background:none;}
-.chevron-circle:hover{border-color:var(--gold);}
-@keyframes bounceY{from{transform:translateY(0);}to{transform:translateY(5px);}}
-footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67rem;letter-spacing:.1em;color:var(--text-dim);border-top:1px solid rgba(197,160,89,.1);}
+.hc-panel-year{font-family:var(--font-en);font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:6px;}
+.hc-panel-title{font-size:1.3rem;font-weight:700;line-height:1.35;margin-bottom:16px;}
+.hc-panel-sub{font-family:var(--font-mono);font-size:.66rem;font-weight:400;letter-spacing:.04em;color:var(--ink-muted);}
+.hc-game-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-sm);margin-bottom:16px;}
+.hc-game-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.hc-desc{font-size:.86rem;color:var(--ink-secondary);line-height:1.75;padding-left:12px;border-left:1px solid var(--border-strong);margin-bottom:20px;}
+.hc-work-title{display:flex;align-items:center;gap:10px;font-family:var(--font-en);font-size:.74rem;font-weight:600;letter-spacing:0;color:var(--ink-muted);margin-bottom:10px;}
+.hc-work-title::after{content:'';flex:1;height:1px;background:var(--border-hairline);}
+.hc-work-text{margin-bottom:14px;}
+.hc-work-text ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+.hc-work-text li{position:relative;padding-left:14px;font-size:.86rem;line-height:1.75;color:var(--ink-secondary);}
+.hc-work-text li::before{content:'';position:absolute;left:0;top:.75em;width:5px;height:1px;background:var(--ink-muted);}
+.hc-work-text li strong{color:var(--ink-primary);font-weight:600;}
+.hc-tags-new{display:flex;flex-wrap:wrap;gap:6px;}
+.hc-dots{display:flex;gap:6px;justify-content:center;margin-top:18px;}
+.hc-dot{width:18px;height:3px;background:var(--border-strong);cursor:pointer;transition:background .15s;}
+.hc-dot.active{background:var(--accent);}
 
 /* ==================== VIDEO PLAYERS (click to play) ==================== */
-.yt-facade{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;cursor:pointer;background:#000;}
-.yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s,filter .3s;}
-.yt-facade:hover img{transform:scale(1.03);filter:brightness(.8);}
-.yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:66px;height:66px;border-radius:50%;
-  background:rgba(5,12,26,.78);border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;
-  font-size:1.3rem;padding-left:4px;transition:transform .2s,background .2s,color .2s;pointer-events:none;box-shadow:0 0 24px rgba(0,0,0,.5);}
-.yt-facade:hover .yt-play,.yt-facade:focus-visible .yt-play{transform:translate(-50%,-50%) scale(1.08);background:var(--gold);color:#0a0f1a;}
-.yt-label{position:absolute;left:.7rem;bottom:.7rem;display:inline-flex;align-items:center;gap:.45rem;background:rgba(5,12,26,.82);
-  border:1px solid rgba(197,160,89,.35);color:var(--gold);font-family:var(--font-ko);font-size:.74rem;font-weight:600;padding:.28rem .65rem;border-radius:6px;pointer-events:none;}
+.yt-facade{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#000;}
+.yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .2s;}
+.yt-facade:hover img{filter:brightness(.8);}
+.yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;display:flex;align-items:center;justify-content:center;
+  background:rgba(18,19,22,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:1rem;padding-left:3px;
+  transition:background .15s,color .15s;pointer-events:none;}
+.yt-facade:hover .yt-play,.yt-facade:focus-visible .yt-play{background:var(--ink-primary);color:var(--bg-base);}
+.yt-label{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-en);font-size:.72rem;letter-spacing:0;
+  color:var(--ink-primary);background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:4px 9px;pointer-events:none;}
 .yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 .yt-facade.playing{cursor:default;}
-.yt-open{align-self:flex-start;display:inline-flex;align-items:center;gap:.4rem;font-family:var(--font-ko);font-size:.75rem;color:var(--gold-dim);text-decoration:none;transition:color .2s;}
-.yt-open:hover{color:var(--gold);}
-.wf-step-num .fa-play{font-size:.6rem;padding-left:2px;}
+.yt-facade[hidden]{display:none;}
+.yt-open{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-en);font-size:.74rem;color:var(--ink-muted);text-decoration:none;}
+.yt-open:hover{color:var(--ink-primary);}
 
-/* Hero video card */
-.hero-reel{justify-self:end;width:100%;max-width:620px;background:rgba(5,12,26,.72);border:1px solid rgba(197,160,89,.3);border-radius:14px;padding:.9rem;
-  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:0 20px 60px rgba(0,0,0,.45);}
-.hero-reel-head{display:flex;justify-content:space-between;align-items:center;gap:.6rem;margin-bottom:.7rem;flex-wrap:wrap;}
-.hero-reel-label{font-family:var(--font-num);font-size:.7rem;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;display:inline-flex;align-items:center;gap:.45rem;}
-.hero-reel-tools{display:flex;align-items:center;gap:.5rem;}
-.hero-reel-chips{display:flex;gap:.35rem;}
-.reel-min{width:28px;height:28px;flex-shrink:0;border-radius:7px;border:1px solid rgba(197,160,89,.3);background:rgba(5,12,26,.5);color:var(--text-gray);
-  cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:.72rem;transition:color .2s,border-color .2s,background .2s;}
-.reel-min:hover{color:var(--gold);border-color:var(--gold);background:rgba(197,160,89,.12);}
-.reel-min i{pointer-events:none;}
-/* minimized: only the header pill stays */
-.hero-reel.minimized{width:auto;max-width:none;justify-self:end;align-self:center;padding:.5rem .6rem .5rem .9rem;}
-.hero-reel.minimized .hero-reel-head{margin-bottom:0;}
-.hero-reel.minimized .hero-reel-chips,.hero-reel.minimized .yt-facade,.hero-reel.minimized .hero-reel-cap{display:none;}
-.hero-reel.minimized .hero-reel-label{cursor:pointer;}
-.reel-chip{background:none;border:1px solid rgba(197,160,89,.3);color:var(--text-gray);font-family:var(--font-ko);font-size:.72rem;padding:.25rem .75rem;border-radius:999px;cursor:pointer;transition:background .2s,color .2s,border-color .2s;}
-.reel-chip:hover{color:var(--text-white);border-color:rgba(197,160,89,.6);}
-.reel-chip.active{background:rgba(197,160,89,.18);color:var(--gold);border-color:var(--gold);}
-.hero-reel-cap{margin-top:.65rem;font-family:var(--font-ko);font-size:.8rem;color:var(--text-gray);}
+/* ==================== WORK (projects) ==================== */
+.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.proj-card{cursor:pointer;outline:none;}
+.proj-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);transition:border-color .15s;}
+.proj-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
+.proj-card:hover .proj-thumb,.proj-card:focus-visible .proj-thumb{border-color:var(--ink-secondary);}
+.proj-idx{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-primary);
+  background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:2px 7px;}
+.proj-info{padding-top:12px;}
+.proj-name{font-size:1.02rem;font-weight:700;line-height:1.4;}
+.proj-line{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.04em;color:var(--ink-muted);margin-top:4px;}
+
+/* ==================== PROJECT MODAL ==================== */
+.modal-dimmer{position:fixed;inset:0;z-index:9000;background:rgba(10,11,13,.94);display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s;}
+.modal-dimmer.open{opacity:1;visibility:visible;pointer-events:auto;}
+.modal-box{width:100%;max-width:1180px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg-base);
+  border:1px solid var(--border-strong);border-radius:var(--radius-md);transform:translateY(10px);transition:transform .2s ease;}
+.modal-dimmer.open .modal-box{transform:none;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-hairline);flex-shrink:0;}
+.modal-header-eyebrow{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:2px;}
+.modal-header-title{font-size:1.02rem;font-weight:700;}
+.modal-close{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);
+  border-radius:var(--radius-sm);color:var(--ink-secondary);font-size:.95rem;cursor:pointer;}
+.modal-close:hover{color:var(--ink-primary);border-color:var(--border-strong);}
+.modal-close *{pointer-events:none;}
+.modal-close i{display:block;}
+.modal-body{display:flex;flex:1;min-height:0;overflow:hidden;}
+.modal-tabs{width:270px;flex-shrink:0;overflow-y:auto;background:var(--bg-surface);border-right:1px solid var(--border-hairline);padding:8px 0;}
+.modal-tab{display:flex;align-items:baseline;gap:10px;width:100%;text-align:left;background:none;border:0;border-left:2px solid transparent;
+  padding:12px 18px;color:var(--ink-secondary);font-size:.84rem;line-height:1.45;cursor:pointer;transition:color .15s,background .15s;}
+.modal-tab:hover{color:var(--ink-primary);background:var(--bg-elevated);}
+.modal-tab.active{color:var(--ink-primary);background:var(--bg-elevated);border-left-color:var(--accent);font-weight:600;}
+.tab-idx{font-family:var(--font-mono);font-size:.68rem;font-weight:400;color:var(--ink-muted);}
+.modal-tab.active .tab-idx{color:var(--accent);}
+.modal-content{flex:1;overflow-y:auto;padding:24px 28px;}
+.modal-panel{display:none;flex-direction:column;gap:22px;}
+.modal-panel.active{display:flex;}
+
+/* Blueprint-style spec grid at the top of each tab */
+.spec-grid{display:flex;flex-wrap:wrap;gap:1px;background:var(--border-hairline);
+  border:1px solid var(--border-hairline);border-radius:var(--radius-sm);overflow:hidden;}
+.spec{flex:1 1 180px;display:flex;flex-direction:column;gap:6px;padding:12px 14px;background:var(--bg-base);}
+.spec-k{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;color:var(--ink-muted);}
+.spec-v{font-size:.86rem;font-weight:500;line-height:1.5;}
+
+.wf-step{display:flex;flex-direction:column;gap:12px;}
+.wf-step-header{display:flex;align-items:center;gap:10px;}
+.wf-step-num{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-strong);
+  border-radius:3px;font-family:var(--font-mono);font-size:.7rem;color:var(--accent);}
+.wf-step-num .fa-play{font-size:.55rem;padding-left:2px;}
+.wf-step-title{font-size:.95rem;font-weight:700;}
+.wf-img-wrap{position:relative;width:100%;}
+.wf-img-wrap img,.wf-img-wrap video{display:block;width:100%;object-fit:contain;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);}
+.wf-img-wrap img{cursor:zoom-in;}
+.wf-desc{font-size:.88rem;line-height:1.8;color:var(--ink-secondary);padding-left:14px;border-left:1px solid var(--border-strong);}
+.wf-divider{width:100%;height:1px;background:var(--border-hairline);}
+
+/* Lightbox */
+.lightbox-overlay{position:fixed;inset:0;z-index:19000;background:rgba(10,11,13,.96);display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s;}
+.lightbox-overlay.open{opacity:1;visibility:visible;pointer-events:auto;}
+.lightbox-img{max-width:94vw;max-height:86vh;object-fit:contain;display:block;border:1px solid var(--border-hairline);}
+.lightbox-close{position:absolute;top:16px;right:16px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:none;
+  border:1px solid var(--border-strong);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:1rem;cursor:pointer;}
+.lightbox-close *{pointer-events:none;}
+.lightbox-caption{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);max-width:90vw;font-family:var(--font-en);font-size:.76rem;
+  color:var(--ink-secondary);text-align:center;}
+
+/* ==================== PHILOSOPHY ==================== */
+.phil-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--border-hairline);}
+.phil-card{padding:28px 28px 8px 0;border-right:1px solid var(--border-hairline);min-width:0;}
+.phil-card + .phil-card{padding-left:28px;}
+.phil-card:last-child{border-right:0;padding-right:0;}
+.phil-big{display:block;font-family:var(--font-mono);font-size:3rem;line-height:1;color:var(--accent);margin-bottom:22px;}
+.phil-num{font-family:var(--font-en);font-size:.74rem;font-weight:500;letter-spacing:0;color:var(--ink-muted);margin-bottom:8px;}
+.phil-title{font-size:1.15rem;font-weight:700;line-height:1.4;margin-bottom:12px;}
+.phil-desc{font-size:.88rem;line-height:1.8;color:var(--ink-secondary);}
+.tech-stack-wrap{margin-top:64px;}
+.tech-stack-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:14px;}
+.tech-badge-grid{display:flex;flex-wrap:wrap;gap:8px;}
+.tech-badge{font-size:.74rem;padding:5px 10px;}
+.tech-badge.primary{color:var(--ink-primary);border-color:var(--border-strong);}
+
+/* ==================== CONTACT ==================== */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.contact-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:14px;}
+.contact-tagline{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:700;line-height:1.4;}
+.contact-tagline span{color:var(--accent);}
+.ci-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--border-hairline);}
+.ci-row:last-child{border-bottom:1px solid var(--border-hairline);}
+.ci-label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;color:var(--ink-muted);text-transform:uppercase;}
+.ci-text{font-size:1rem;}
+.ci-copy{background:none;border:1px solid var(--border-strong);border-radius:3px;color:var(--ink-secondary);font-family:var(--font-mono);font-size:.64rem;
+  letter-spacing:.08em;padding:5px 10px;cursor:pointer;transition:color .15s,border-color .15s;}
+.ci-copy:hover{color:var(--ink-primary);border-color:var(--ink-secondary);}
+.to-top{display:flex;justify-content:flex-end;margin-top:48px;}
+.to-top button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);
+  border-radius:var(--radius-sm);color:var(--ink-secondary);cursor:pointer;}
+.to-top button:hover{color:var(--ink-primary);border-color:var(--border-strong);}
+.toast{position:fixed;left:50%;bottom:28px;z-index:20000;transform:translate(-50%,12px);background:var(--ink-primary);color:var(--bg-base);
+  font-size:.82rem;font-weight:600;padding:10px 16px;border-radius:var(--radius-sm);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
+.toast.show{opacity:1;transform:translate(-50%,0);}
+footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);text-align:center;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-muted);}
 
 /* ==================== RESPONSIVE ==================== */
 @media(max-width:1100px){
+  .hero-head{grid-template-columns:1fr;align-items:start;}
+  .hero-meta{justify-self:start;}
+  .work-grid{grid-template-columns:1fr 1fr;}
   .exp-dynamic.shifted .exp-timeline-col{flex:0 0 38%;max-width:38%;}
-  .exp-dynamic.shifted .exp-highlights-col{flex:0 0 62%;max-width:62%;padding-left:1.2rem;}
+  .exp-dynamic.shifted .exp-highlights-col{flex:0 0 62%;max-width:62%;padding-left:20px;}
 }
 @media(max-width:900px){
   .phil-grid{grid-template-columns:1fr;}
-  .deepdive-grid{grid-template-columns:1fr 1fr;}
+  .phil-card,.phil-card + .phil-card{padding:28px 0;border-right:0;border-bottom:1px solid var(--border-hairline);}
+  .phil-card:last-child{border-bottom:0;}
 }
 @media(max-width:768px){
-  nav{gap:1rem;flex-wrap:wrap;padding:.8rem 1rem;}
-  .nav-inner{flex-wrap:wrap;gap:.9rem 1.1rem;justify-content:center;}
-  .lang-wrap{position:static;transform:none;}
-
-  .hero-inner{grid-template-columns:1fr;padding:3rem 1.25rem 1.5rem;}
-  .hero-reel{justify-self:stretch;max-width:none;}
-  .hero-reel.minimized{justify-self:start;}
-  .hero-caption-box{top:64px;right:.8rem;}
-  .hero-stats{grid-template-columns:1fr;}
-  .stat-item{border-right:none;border-bottom:1px solid rgba(197,160,89,.1);padding:1rem;}
-
-  #experience,#deepdive{padding:4rem 1rem;}
-  #philosophy{padding:4rem 1rem;}
-  .phil-inner{padding:0;}
-  .timeline-item{padding-left:40px;}
-  .timeline::before{left:16px;}
-  .timeline-dot{left:8px;}
+  :root{--gutter:16px;--nav-h:92px;}
+  nav{height:auto;}
+  .nav-inner{flex-wrap:wrap;gap:10px;padding:12px var(--gutter);}
+  .brand span{display:none;}
+  /* row 1: name + language, row 2: section links */
+  .nav-links{display:contents;}
+  .brand{order:0;flex:1 0 calc(100% - 170px);}
+  .lang-switch{order:1;margin-left:0;}
+  .nav-links a{order:2;flex:1 1 20%;text-align:center;font-size:.64rem;letter-spacing:.06em;padding:4px 0;}
+  .spec{flex-basis:40%;}
+  #hero{padding:calc(var(--nav-h) + 32px) 0 48px;}
+  .hero-meta{grid-template-columns:1fr 1fr;width:100%;}
+  .hero-meta > div:nth-child(2){border-right:0;}
+  .hero-meta > div:nth-child(-n+2){border-bottom:1px solid var(--border-hairline);}
+  .ba{aspect-ratio:4/3;}
+  .ba-label{font-size:.56rem;padding:3px 6px;bottom:10px;}
+  .ba-label.left{left:10px;}
+  .ba-label.right{right:10px;}
+  .quick-jump{grid-template-columns:1fr;}
+  .quick-jump button{border-right:0;border-bottom:1px solid var(--border-hairline);}
+  .quick-jump button:last-child{border-bottom:0;}
+  #experience,#deepdive,#philosophy,#contact{padding:64px 0;}
+  .exp-row{grid-template-columns:1fr;gap:12px;padding:20px 4px;}
+  .exp-meta{flex-direction:row;align-items:center;gap:10px;}
   .exp-dynamic.shifted{flex-direction:column;}
   .exp-dynamic.shifted .exp-timeline-col{flex:1 1 auto;max-width:100%;min-width:0;}
-  .exp-dynamic.shifted .exp-highlights-col{flex:1 1 auto;max-width:100%;padding-left:0;padding-top:1.2rem;}
-  .exp-dynamic.shifted .exp-game-title{font-size:1rem;color:var(--gold);}
-  .exp-dynamic.shifted .exp-desc{opacity:1;max-height:none;}
-  .exp-dynamic.shifted .exp-tags{opacity:1;max-height:none;}
-  .highlights-panel{position:static;max-height:none;overflow:visible;}
-
-  .deepdive-grid{grid-template-columns:1fr;}
-
-  /* Modal: tabs on top as a horizontal strip */
-  .modal-dimmer{padding:.5rem;}
-  .modal-box{max-height:96vh;border-radius:14px;}
-  .modal-header{padding:.75rem 1rem;}
+  .exp-dynamic.shifted .exp-highlights-col{flex:1 1 auto;max-width:100%;padding-left:0;padding-top:16px;}
+  .exp-dynamic.shifted .exp-desc,.exp-dynamic.shifted .exp-tags{opacity:1;max-height:none;}
+  .exp-dynamic.shifted .exp-game-title{font-size:1.1rem;}
+  .highlights-panel{position:static;max-height:none;overflow:visible;padding:16px;}
+  .work-grid{grid-template-columns:1fr;}
+  .modal-dimmer{padding:8px;}
+  .modal-box{max-height:96vh;}
+  .modal-header{padding:12px 14px;}
   .modal-body{flex-direction:column;}
-  .modal-tabs{width:100%;display:flex;overflow-x:auto;overflow-y:hidden;border-right:none;border-bottom:1px solid rgba(197,160,89,.12);padding:0;}
-  .modal-tab{flex:0 0 auto;width:auto;max-width:78vw;border-left:none;border-bottom:3px solid transparent;padding:.6rem .9rem;}
-  .modal-tab.active{border-bottom-color:var(--gold);}
-  .modal-content{padding:1.1rem 1rem;}
-
-  #contact{padding:4rem 1rem 3rem;}
-  .contact-split{grid-template-columns:1fr;gap:2rem;}
-  .contact-card{padding:2rem 1.5rem;}
+  .modal-tabs{width:100%;display:flex;overflow-x:auto;overflow-y:hidden;border-right:0;border-bottom:1px solid var(--border-hairline);padding:0;}
+  .modal-tab{flex:0 0 auto;width:auto;max-width:78vw;border-left:0;border-bottom:2px solid transparent;padding:10px 14px;}
+  .modal-tab.active{border-bottom-color:var(--accent);}
+  .modal-content{padding:16px 14px;}
+  .contact-grid{grid-template-columns:1fr;gap:28px;}
+  .ci-row{grid-template-columns:80px 1fr auto;gap:10px;}
 }
-@media(max-width:480px){nav a{font-size:.72rem;}}
 </style>
 </head>
 
 <body>
-<div class="stars" id="stars"></div>
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#hero"       class="active" data-i18n="nav_home">홈</a>
-    <a href="#experience" data-i18n="nav_exp">경력</a>
-    <a href="#deepdive"   data-i18n="nav_proj">프로젝트</a>
-    <a href="#philosophy" data-i18n="nav_phil">철학</a>
-    <a href="#contact"    data-i18n="nav_contact">연락처</a>
-    <div class="lang-wrap">
-      <button class="lang-btn" id="langBtn" aria-haspopup="true" aria-label="Language">
-        <i class="fa fa-globe"></i>
-        <span id="langLabel">KOR</span>
-        <i class="fa fa-chevron-down"></i>
-      </button>
-      <div class="lang-dropdown" id="langDropdown">
-        <button data-lang="ko" class="active-lang">한국어 (KOR)</button>
-        <button data-lang="en">English (ENG)</button>
-        <button data-lang="ja">日本語 (JPN)</button>
-        <button data-lang="zh">中文 (CHN)</button>
+    <a href="#hero" class="brand">LEE JINYONG <span>— LEVEL DESIGN</span></a>
+    <div class="nav-links">
+      <a href="#experience" data-i18n="nav_exp">EXPERIENCE</a>
+      <a href="#deepdive" data-i18n="nav_proj">WORK</a>
+      <a href="#philosophy" data-i18n="nav_phil">PHILOSOPHY</a>
+      <a href="#contact" data-i18n="nav_contact">CONTACT</a>
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button data-lang="ko" class="active-lang">KO</button><button data-lang="en">EN</button><button data-lang="ja">JA</button><button data-lang="zh">ZH</button>
       </div>
     </div>
   </div>
 </nav>
+
 <section id="hero">
-
-  <!-- Background slideshow: first slide loads immediately, the rest after page load (data-bg) -->
-  <div class="hero-bg-slider" id="heroBgSlider" data-i18n-title="hero_zoom_hint" title="클릭하면 크게 볼 수 있습니다">
-    <div class="hero-bg-slide active" style="background-image:url('./하렌홀_보스존_인게임.webp');"></div>
-    <div class="hero-bg-slide" data-bg="./하렌홀_통로존_인게임.webp"></div>
-    <div class="hero-bg-slide" data-bg="./하렌홀_보스존2_인게임.webp"></div>
-    <div class="hero-bg-slide" data-bg="./클로저스RT_강남.webp"></div>
-    <div class="hero-bg-slide" data-bg="./리메멘토_아레나.webp"></div>
-    <div class="hero-bg-slide" data-bg="./리메멘토_최종보스전.webp"></div>
-    <div class="hero-bg-slide" data-bg="./리메멘토_홍염성.jpg"></div>
+<div class="wrap">
+  <div class="hero-head">
+    <div class="hero-id">
+      <div class="hero-eyebrow">LEVEL DESIGNER</div>
+      <h1 class="hero-name">LEE JINYONG<span class="ko">이진용</span></h1>
+      <p class="hero-sub" data-i18n="hero_sub">언리얼 엔진 5 기반 심리스 오픈월드 지형 설계, Data Layer 동적 레벨 연출, 4인 코옵 레이드 동선을 기획해 왔습니다. 현재 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.</p>
+      <div class="hero-line">Unreal Engine 5 / Open World &amp; Co-op Raid / 4.5+ Years</div>
+    </div>
+    <dl class="hero-meta">
+      <div><dt>EXPERIENCE</dt><dd>4.5+ YRS</dd></div>
+      <div><dt>MAIN ENGINE</dt><dd>UE5 · UE4</dd></div>
+      <div><dt>SHIPPED STAGES</dt><dd>150+</dd></div>
+      <div><dt>AI LEVEL PIPELINE</dt><dd>6 LV / 1 MO</dd></div>
+    </dl>
   </div>
-  <div class="hero-bg-overlay"></div>
 
-  <div class="hero-caption-box" id="heroCaption">하렌홀 — 최종 보스존</div>
-
-  <div class="hero-inner">
-    <div class="fade-in">
-      <div class="hero-eyebrow">Level Designer · Lee Jin-yong</div>
-      <h1 class="hero-headline"><span data-i18n="hero_headline">내러티브가 살아 숨 쉬는<br><span class="gold">압도적인 오픈월드</span>를<br>설계합니다.</span></h1>
-      <p class="hero-sub" data-i18n="hero_sub">압도적인 스케일의 오픈월드, 논리적인 레벨 레이아웃, 그리고 AAA급 환경 설계에 특화된 레벨 디자이너 이진용입니다. 넷마블네오에서 핵심 IP 프로젝트인 <strong>왕좌의 게임: 킹스로드</strong>의 레벨 디자인을 담당했고, 현재는 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.</p>
-      <div class="hero-buttons">
-        <a href="#deepdive" class="btn-gold" data-i18n="btn_projects">프로젝트 보기</a>
-        <a href="#contact" class="btn-outline" data-i18n="btn_contact">연락하기</a>
+  <div class="showcase">
+    <div class="showcase-tabs" role="tablist">
+      <button class="sc-tab active" data-view="compare" data-cap="sc_compare">MOCKUP → IN-GAME</button>
+      <button class="sc-tab" data-view="video" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt"><i class="fa fa-play"></i>GOLDEN TOOTH ROUTE</button>
+      <button class="sc-tab" data-view="video" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh"><i class="fa fa-play"></i>HARRENHAL RAID</button>
+    </div>
+    <div class="showcase-frame" id="showcaseFrame">
+      <div class="ba" id="baSlider">
+        <img src="./카스타미어지상_인게임.webp" alt="Castamere final in-game" />
+        <div class="ba-before"><img src="./카스타미어지상_목업.webp" alt="Castamere UE5 graybox mockup" /></div>
+        <span class="ba-label left">GRAYBOX / UE5 MOCKUP</span>
+        <span class="ba-label right">FINAL IN-GAME / UE5 LIT</span>
+        <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" step="0.1" aria-label="Compare mockup and final in-game" />
+        <div class="ba-handle"><span><i class="fa fa-arrows-alt-h"></i></span></div>
       </div>
+      <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video" hidden><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
     </div>
-    <div class="hero-reel fade-in" style="transition-delay:.2s;">
-      <div class="hero-reel-head">
-        <span class="hero-reel-label" id="reelLabel"><i class="fa fa-play-circle"></i> <span data-i18n="reel_label">플레이 영상</span></span>
-        <div class="hero-reel-tools">
-        <div class="hero-reel-chips">
-          <button class="reel-chip active" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt" data-i18n="chip_gt">골든투스</button>
-          <button class="reel-chip" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh" data-i18n="chip_hh">하렌홀</button>
-        </div>
-        <button class="reel-min" id="reelMinBtn" data-i18n-title="reel_min" title="최소화" aria-label="Minimize" aria-expanded="true"><i class="fa fa-minus"></i></button>
-        </div>
-      </div>
-      <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
-      <div class="hero-reel-cap" id="heroReelCap" data-i18n="reel_gt">골든투스 &amp; 카스타미어 · 오픈월드 퀘스트 동선 (3:20)</div>
-    </div>
+    <div class="showcase-cap" id="showcaseCap" data-i18n="sc_compare">카스타미어 · 왕좌의 게임: 킹스로드 — 좌우로 드래그해 UE5 목업과 최종 인게임을 비교해 보세요.</div>
   </div>
 
-  <div class="hero-stats fade-in" style="transition-delay:.35s;">
-    <div class="stat-item">
-      <div class="stat-num" data-i18n="stat1_num">4+</div>
-      <div class="stat-label" data-i18n="stat1_label">년 차 레벨 디자이너</div>
-      <div class="stat-sub" data-i18n="stat1_sub">Level Designer</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num stat-num-sm" data-i18n="stat2_num">출시 타이틀 3개</div>
-      <div class="stat-label" data-i18n="stat2_label">킹스로드 · 리메멘토 · 클로저스RT</div>
-      <div class="stat-sub" data-i18n="stat2_sub">글로벌 런칭 2개 (킹스로드 · 리메멘토)</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-num stat-num-sm" data-i18n="stat3_num">AI 레벨 파이프라인</div>
-      <div class="stat-label" data-i18n="stat3_label">1개월 · 레벨 6종 완성</div>
-      <div class="stat-sub" data-i18n="stat3_sub">사냥터 2 · 던전 3 · 내러티브 1 (Claude Code · MCP)</div>
-    </div>
+  <div class="quick-jump">
+    <button data-modal="kings"><span class="qj-idx">01</span><span class="qj-t">KINGSROAD</span><span class="qj-s">NETMARBLE NEO · UE5 · OPEN WORLD / RAID</span><i class="fa fa-arrow-right"></i></button>
+    <button data-modal="memento"><span class="qj-idx">02</span><span class="qj-t">RE:MEMENTO</span><span class="qj-s">BLACKSTORM · UE5 · OPEN WORLD RPG</span><i class="fa fa-arrow-right"></i></button>
+    <button data-modal="closers"><span class="qj-idx">03</span><span class="qj-t">CLOSERS RT</span><span class="qj-s">NADDIC GAMES · UE4 · STAGE RPG</span><i class="fa fa-arrow-right"></i></button>
   </div>
+</div>
 </section>
 
-<!-- Lightbox -->
-<div class="lightbox-overlay" id="heroLightbox">
+<!-- Lightbox (modal images) -->
+<div class="lightbox-overlay" id="lightbox">
   <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fa fa-times"></i></button>
   <img class="lightbox-img" id="lightboxImg" src="" alt="" />
   <div class="lightbox-caption" id="lightboxCaption"></div>
 </div>
 <section id="experience">
 <div class="exp-outer">
-  <div class="section-title fade-in">
-    <span class="en">PROFESSIONAL EXPERIENCE</span>
-    <h2 data-i18n="exp_title">주요 경력</h2>
-  </div>
+  <div class="sec-head"><span class="sec-idx">01</span><span class="sec-en">EXPERIENCE</span><h2 data-i18n="exp_title">주요 경력</h2></div>
 
   <div class="exp-dynamic" id="expDynamic">
 
     <!-- LEFT: timeline (click a card to open its panel) -->
     <div class="exp-timeline-col">
-      <div class="timeline fade-in">
+      <div class="timeline">
 
         <div class="timeline-item" data-idx="0" role="button" tabindex="0">
-          <div class="timeline-dot"></div>
-          <div class="glass exp-card">
-            <div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div>
-            <div class="exp-info">
-              <div class="exp-year" data-i18n="exp0_year">2026.10 — 재직 중</div>
-              <div class="exp-company">NETMARBLE NEO</div>
-              <div class="exp-game-title" data-i18n="exp0_game">다크프리스트 (DP)</div>
+          <div class="exp-row">
+            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp0_year">2026.10 — 재직 중</div><div class="exp-company">NETMARBLE NEO</div></div>
+            <div class="exp-main"><div class="exp-game-title" data-i18n="exp0_game">다크프리스트 (DP)</div>
               <span class="exp-role-badge" data-i18n="exp0_role">콘텐츠 기획 / AI 기반 레벨 디자인</span>
               <div class="exp-desc" data-i18n="exp0_desc">UE5 신규 MMORPG의 필드 사냥터·던전 등 핵심 콘텐츠 및 레벨 기획. Claude Code·MCP 연동 AI 제작 파이프라인으로 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완료.</div>
-              <div class="exp-tags">
-                <span class="exp-tag">MMORPG</span><span class="exp-tag">Claude Code · MCP</span>
-                <span class="exp-tag" data-i18n="tag_ai_pipeline">AI 레벨 파이프라인</span><span class="exp-tag">UE5 Data Layer</span>
-              </div>
+              <div class="exp-tags"><span class="exp-tag">MMORPG</span><span class="exp-tag">Claude Code · MCP</span>
+                <span class="exp-tag" data-i18n="tag_ai_pipeline">AI 레벨 파이프라인</span><span class="exp-tag">UE5 Data Layer</span></div>
             </div>
           </div>
         </div>
 
         <div class="timeline-item" data-idx="1" role="button" tabindex="0">
-          <div class="timeline-dot"></div>
-          <div class="glass exp-card">
-            <div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div>
-            <div class="exp-info">
-              <div class="exp-year" data-i18n="exp1_year">2025.06 — 2026.10</div>
-              <div class="exp-company" data-i18n="exp1_company">NETMARBLE NEO</div>
-              <div class="exp-game-title" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div>
+          <div class="exp-row">
+            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp1_year">2025.06 — 2026.10</div><div class="exp-company" data-i18n="exp1_company">NETMARBLE NEO</div></div>
+            <div class="exp-main"><div class="exp-game-title" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div>
               <span class="exp-role-badge" data-i18n="exp1_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp1_desc">UE5 Data Layer 기반 동적 내러티브 레벨 연출, 4인 코옵 레이드 설계, 환경 파괴 기반 다이나믹 아레나 구현 주도.</div>
-              <div class="exp-tags">
-                <span class="exp-tag">UE5 Data Layer</span><span class="exp-tag">Open World</span>
-                <span class="exp-tag">Co-op Raid</span><span class="exp-tag">Dynamic Arena</span>
-              </div>
+              <div class="exp-tags"><span class="exp-tag">UE5 Data Layer</span><span class="exp-tag">Open World</span>
+                <span class="exp-tag">Co-op Raid</span><span class="exp-tag">Dynamic Arena</span></div>
             </div>
           </div>
         </div>
 
         <div class="timeline-item" data-idx="2" role="button" tabindex="0">
-          <div class="timeline-dot"></div>
-          <div class="glass exp-card">
-            <div class="company-logo-box"><img src="./블랙스톰.png" alt="BLACKSTORM" /></div>
-            <div class="exp-info">
-              <div class="exp-year" data-i18n="exp2_year">2024.04 — 2025.06</div>
-              <div class="exp-company" data-i18n="exp2_company">BLACKSTORM</div>
-              <div class="exp-game-title" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div>
+          <div class="exp-row">
+            <div class="exp-meta"><div class="company-logo-box"><img src="./블랙스톰.png" alt="BLACKSTORM" /></div><div class="exp-year" data-i18n="exp2_year">2024.04 — 2025.06</div><div class="exp-company" data-i18n="exp2_company">BLACKSTORM</div></div>
+            <div class="exp-main"><div class="exp-game-title" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div>
               <span class="exp-role-badge" data-i18n="exp2_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp2_desc">오픈월드 배치 정책 수립, AI BT 설계, 인스턴스 던전 선형 레벨 설계, 인게임 리소스·몬스터 조합 관리 전담.</div>
-              <div class="exp-tags">
-                <span class="exp-tag">AI Behavior Tree</span><span class="exp-tag" data-i18n="tag_ow_policy">오픈월드 정책</span>
-                <span class="exp-tag" data-i18n="tag_instance">인스턴스 던전</span><span class="exp-tag" data-i18n="tag_gimmick">기믹 설계</span>
-              </div>
+              <div class="exp-tags"><span class="exp-tag">AI Behavior Tree</span><span class="exp-tag" data-i18n="tag_ow_policy">오픈월드 정책</span>
+                <span class="exp-tag" data-i18n="tag_instance">인스턴스 던전</span><span class="exp-tag" data-i18n="tag_gimmick">기믹 설계</span></div>
             </div>
           </div>
         </div>
 
         <div class="timeline-item" data-idx="3" role="button" tabindex="0">
-          <div class="timeline-dot"></div>
-          <div class="glass exp-card">
-            <div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div>
-            <div class="exp-info">
-              <div class="exp-year" data-i18n="exp3_year">2023.06 — 2024.04</div>
-              <div class="exp-company" data-i18n="exp3_company">Naddic Games</div>
-              <div class="exp-game-title" data-i18n="exp3_game">CLOSERS PC Live</div>
+          <div class="exp-row">
+            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp3_year">2023.06 — 2024.04</div><div class="exp-company" data-i18n="exp3_company">Naddic Games</div></div>
+            <div class="exp-main"><div class="exp-game-title" data-i18n="exp3_game">CLOSERS PC Live</div>
               <span class="exp-role-badge" data-i18n="exp3_role">Combat Designer</span>
               <div class="exp-desc" data-i18n="exp3_desc">라이브 서비스 스테이지 유지보수, Lua 스크립트 기반 보스·일반 몬스터 디자인 및 인게임 적용.</div>
-              <div class="exp-tags">
-                <span class="exp-tag" data-i18n="tag_live">라이브 서비스</span><span class="exp-tag" data-i18n="tag_monster">몬스터 디자인</span>
-                <span class="exp-tag">Lua Script</span><span class="exp-tag" data-i18n="tag_bp">BP 연결</span>
-              </div>
+              <div class="exp-tags"><span class="exp-tag" data-i18n="tag_live">라이브 서비스</span><span class="exp-tag" data-i18n="tag_monster">몬스터 디자인</span>
+                <span class="exp-tag">Lua Script</span><span class="exp-tag" data-i18n="tag_bp">BP 연결</span></div>
             </div>
           </div>
         </div>
 
         <div class="timeline-item" data-idx="4" role="button" tabindex="0">
-          <div class="timeline-dot"></div>
-          <div class="glass exp-card">
-            <div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div>
-            <div class="exp-info">
-              <div class="exp-year" data-i18n="exp4_year">2022.03 — 2023.06</div>
-              <div class="exp-company" data-i18n="exp4_company">Naddic Games</div>
-              <div class="exp-game-title" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div>
+          <div class="exp-row">
+            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp4_year">2022.03 — 2023.06</div><div class="exp-company" data-i18n="exp4_company">Naddic Games</div></div>
+            <div class="exp-main"><div class="exp-game-title" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div>
               <span class="exp-role-badge" data-i18n="exp4_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp4_desc">75개+ 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.</div>
-              <div class="exp-tags">
-                <span class="exp-tag">Zone Layout ×75+</span><span class="exp-tag">Top-down Blueprint</span>
-                <span class="exp-tag" data-i18n="tag_qa">QA 전담</span><span class="exp-tag" data-i18n="tag_raid_policy">레이드 정책</span>
-              </div>
+              <div class="exp-tags"><span class="exp-tag">Zone Layout ×75+</span><span class="exp-tag">Top-down Blueprint</span>
+                <span class="exp-tag" data-i18n="tag_qa">QA 전담</span><span class="exp-tag" data-i18n="tag_raid_policy">레이드 정책</span></div>
             </div>
           </div>
         </div>
@@ -762,351 +667,42 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
 </div>
 </section>
 <section id="deepdive">
-<div class="deepdive-inner">
-  <div class="section-title fade-in">
-    <span class="en">PROJECT &amp; SKILL DEEP-DIVE</span>
-    <h2 data-i18n="dd_title">프로젝트 상세 포트폴리오 (작업 내용)</h2>
-  </div>
-  <p class="dd-hint fade-in" style="transition-delay:.1s;" data-i18n="dd_hint">카드를 클릭하면 작업 내용, 이미지, 결과를 슬라이드로 탐색할 수 있습니다.</p>
-
-  <div class="deepdive-grid fade-in" style="transition-delay:.15s">
-
-    <!-- CARD 1: 킹스로드 -->
-    <div class="glass proj-card" data-modal="kings" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드 상세보기">
-      <div class="proj-img">
-        <img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj1_badge">NETMARBLE NEO · 2025~26</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint1">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj1_eye">PROJECT 01 · OPEN WORLD ARPG · UE5</div>
-        <div class="proj-title" data-i18n="proj1_title">왕좌의 게임: 킹스로드<br><span>오픈월드 레벨 디자인 및 데이터 레이어 연출</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj1_s1">🗺️ 원작 IP 기반 심리스 오픈월드 필드 지형 및 식생 설계</div>
-          <div class="proj-skill-tag" data-i18n="proj1_s2">🎬 시나리오 기반 지형 변화와 데이터 레이어(Data Layer) 연출</div>
-          <div class="proj-skill-tag" data-i18n="proj1_s3">⚔️ 코옵 레이드 동선 설계 및 지형 변화를 통한 동적 아레나 구축</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn1">기획 상세 탐색</span>
-        </span>
-      </div>
+<div class="wrap">
+  <div class="sec-head"><span class="sec-idx">02</span><span class="sec-en">SELECTED WORK</span><h2 data-i18n="dd_title">대표 프로젝트</h2></div>
+  <div class="work-grid fade-in">
+    <div class="proj-card" data-modal="kings" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드">
+      <div class="proj-thumb"><img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" /><span class="proj-idx">01</span></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div><div class="proj-line">NETMARBLE NEO · LEVEL DESIGNER · UE5 · OPEN WORLD ARPG</div></div>
     </div>
-
-    <!-- CARD 2: 리메멘토 -->
-    <div class="glass proj-card" data-modal="memento" role="button" tabindex="0" aria-label="리메멘토 상세보기">
-      <div class="proj-img">
-        <img src="./리메멘토.webp" alt="RE:MEMENTO (리메멘토)" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj2_badge">BLACKSTORM · 2024~25</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint2">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj2_eye">PROJECT 02 · OPEN WORLD RPG · UE5</div>
-        <div class="proj-title" data-i18n="proj2_title">RE:MEMENTO (리메멘토)<br><span>오픈월드 필드 기획 및 시스템 구조 설계</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj2_s1">🌍 심리스 오픈월드 환경의 구역별 테마에 맞춘 레벨 배치 정책 수립</div>
-          <div class="proj-skill-tag" data-i18n="proj2_s2">🦌 AI Behavior Tree 기반 식생물 배회 생태계 및 상호작용 기획</div>
-          <div class="proj-skill-tag" data-i18n="proj2_s3">🗝️ 내러티브 중심의 선형 인스턴스 던전 및 기믹 설계</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn2">기획 상세 탐색</span>
-        </span>
-      </div>
+    <div class="proj-card" data-modal="memento" role="button" tabindex="0" aria-label="RE:MEMENTO">
+      <div class="proj-thumb"><img src="./리메멘토.webp" alt="RE:MEMENTO" loading="lazy" /><span class="proj-idx">02</span></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div><div class="proj-line">BLACKSTORM · LEVEL DESIGNER · UE5 · OPEN WORLD RPG</div></div>
     </div>
-
-    <!-- CARD 3: 클로저스 RT -->
-    <div class="glass proj-card" data-modal="closers" role="button" tabindex="0" aria-label="클로저스 RT 상세보기">
-      <div class="proj-img">
-        <img src="./클로저스RT.webp" alt="CLOSERS RT (클로저스 RT)" loading="lazy" />
-        <div class="proj-img-overlay"></div>
-        <div class="proj-badge" data-i18n="proj3_badge">NADDIC GAMES · 2022~23</div>
-        <div class="proj-click-hint"><i class="fa fa-expand-alt"></i> <span data-i18n="dd_btn_hint3">클릭하여 심층 탐색</span></div>
-      </div>
-      <div class="proj-body">
-        <div class="proj-eyebrow" data-i18n="proj3_eye">PROJECT 03 · STAGE DESIGN · UE4</div>
-        <div class="proj-title" data-i18n="proj3_title">CLOSERS RT (클로저스 RT)<br><span>맵 기믹을 활용한 전략 스테이지 기획</span></div>
-        <div class="proj-skills">
-          <div class="proj-skill-tag" data-i18n="proj3_s1">🏙️ 실제 배경(부산) 기반 선형 구조 맵 및 이동 동선 설계</div>
-          <div class="proj-skill-tag" data-i18n="proj3_s2">⚖️ 기믹 조합을 통한 고효율 전략 스테이지 산출</div>
-        </div>
-      </div>
-      <div class="proj-btn-wrap">
-        <span class="btn-gold">
-          <i class="fa fa-layer-group"></i> <span data-i18n="dd_btn3">기획 상세 탐색</span>
-        </span>
-      </div>
+    <div class="proj-card" data-modal="closers" role="button" tabindex="0" aria-label="CLOSERS RT">
+      <div class="proj-thumb"><img src="./클로저스RT.webp" alt="CLOSERS RT" loading="lazy" /><span class="proj-idx">03</span></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div><div class="proj-line">NADDIC GAMES · LEVEL DESIGNER · UE4 · STAGE RPG</div></div>
     </div>
-
   </div>
 </div>
 </section>
 <section id="philosophy">
   <div class="phil-inner">
-    <div class="section-title fade-in">
-      <span class="en">DESIGNING PHILOSOPHY</span>
-      <h2 data-i18n="phil_title">레벨 디자인 철학</h2>
-    </div>
+    <div class="sec-head"><span class="sec-idx">03</span><span class="sec-en">PHILOSOPHY</span><h2 data-i18n="phil_title">레벨 디자인 철학</h2></div>
     <div class="phil-grid">
-      <div class="glass phil-card">
-        <div class="phil-icon-area"><svg width="100%" height="100%" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      @keyframes float1{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-      @keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-      @keyframes fadeLoop{0%,100%{opacity:.18}50%{opacity:.42}}
-      .compass-group{transform-origin:200px 88px;animation:float1 4s ease-in-out infinite}
-      .ring-outer{transform-origin:200px 88px;animation:rotateSlow 18s linear infinite}
-      .topo{animation:fadeLoop 5s ease-in-out infinite}
-      .topo2{animation:fadeLoop 5s ease-in-out infinite 1s}
-      .topo3{animation:fadeLoop 5s ease-in-out infinite 2s}
-    </style>
-    <radialGradient id="bg1" cx="50%" cy="55%" r="60%">
-      <stop offset="0%" stop-color="#1a2e55" stop-opacity=".6"/>
-      <stop offset="100%" stop-color="#050c1a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="gGold" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#C5A059" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#C5A059" stop-opacity="0"/>
-    </radialGradient>
-    <filter id="glow1">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <!-- Background -->
-  <rect width="400" height="180" fill="#060d1e"/>
-  <ellipse cx="200" cy="100" rx="180" ry="80" fill="url(#bg1)"/>
-  <!-- Topographic lines -->
-  <g class="topo">
-    <path d="M20,140 Q80,118 140,130 Q200,142 260,128 Q320,114 380,126" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".22"/>
-    <path d="M0,152 Q70,132 140,145 Q210,158 280,142 Q340,128 400,138" fill="none" stroke="#C5A059" stroke-width=".7" stroke-opacity=".15"/>
-  </g>
-  <g class="topo2">
-    <path d="M30,122 Q100,105 170,115 Q240,125 310,110 Q360,100 400,108" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".25"/>
-    <path d="M0,134 Q60,118 130,128 Q200,138 270,122 Q340,108 400,120" fill="none" stroke="#C5A059" stroke-width=".7" stroke-opacity=".16"/>
-  </g>
-  <g class="topo3">
-    <path d="M0,110 Q50,95 120,103 Q200,112 280,98 Q350,86 400,94" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".2"/>
-    <path d="M60,90 Q130,78 200,86 Q270,94 340,80" fill="none" stroke="#C5A059" stroke-width=".7" stroke-opacity=".14"/>
-  </g>
-  <!-- Compass group (floats) -->
-  <g class="compass-group">
-    <!-- Outer rotating ring -->
-    <g class="ring-outer">
-      <circle cx="200" cy="88" r="38" fill="none" stroke="#C5A059" stroke-width=".8" stroke-opacity=".35" stroke-dasharray="4 3"/>
-    </g>
-    <!-- Static circles -->
-    <circle cx="200" cy="88" r="28" fill="none" stroke="#C5A059" stroke-width=".6" stroke-opacity=".22"/>
-    <circle cx="200" cy="88" r="4"  fill="#C5A059" fill-opacity=".75" filter="url(#glow1)"/>
-    <!-- Cardinal marks -->
-    <line x1="200" y1="52" x2="200" y2="60" stroke="#C5A059" stroke-width="1.5" stroke-opacity=".7"/>
-    <line x1="200" y1="116" x2="200" y2="124" stroke="#C5A059" stroke-width="1" stroke-opacity=".4"/>
-    <line x1="164" y1="88" x2="172" y2="88" stroke="#C5A059" stroke-width="1" stroke-opacity=".4"/>
-    <line x1="228" y1="88" x2="236" y2="88" stroke="#C5A059" stroke-width="1" stroke-opacity=".4"/>
-    <!-- North pointer -->
-    <polygon points="200,56 195,78 200,74 205,78" fill="#C5A059" fill-opacity=".85" filter="url(#glow1)"/>
-    <polygon points="200,120 195,98 200,102 205,98" fill="#6a7a9a" fill-opacity=".5"/>
-    <!-- Cardinal labels -->
-    <text x="200" y="48" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="8" fill="#C5A059" fill-opacity=".8">N</text>
-    <text x="200" y="134" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#8898aa" fill-opacity=".55">S</text>
-    <text x="152" y="92" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#8898aa" fill-opacity=".55">W</text>
-    <text x="248" y="92" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#8898aa" fill-opacity=".55">E</text>
-  </g>
-  <!-- Faint grid dots -->
-  <g fill="#C5A059" fill-opacity=".08">
-    <circle cx="60"  cy="50"  r="1.5"/><circle cx="100" cy="38"  r="1"/><circle cx="150" cy="55"  r="1.5"/>
-    <circle cx="250" cy="40"  r="1.5"/><circle cx="300" cy="55"  r="1"/><circle cx="340" cy="42"  r="1.5"/>
-    <circle cx="70"  cy="72"  r="1"/><circle cx="330" cy="68"  r="1"/>
-  </g>
-</svg></div>
-        <div class="phil-body">
-          <div class="phil-num" data-i18n="phil1_num">1. 내러티브 기반 세계 설계</div>
+      <div class="phil-card fade-in"><div class="phil-body"><span class="phil-big">01</span>
+          <div class="phil-num" data-i18n="phil1_num">내러티브 기반 세계 설계</div>
           <div class="phil-title" data-i18n="phil1_title">공간이 이야기를 말하게 한다</div>
           <div class="phil-desc" data-i18n="phil1_desc">폐허가 된 카스타미어에서 참혹한 습격의 흔적을 느끼고, 무너져 내린 하렌할에서 드래곤의 파괴적인 위력을 예상할 수 있듯, 환경 자체가 세계관을 전달하는 '환경적 스토리텔링(Environmental Storytelling)'을 추구합니다.</div>
         </div>
       </div>
-      <div class="glass phil-card">
-        <div class="phil-icon-area"><svg width="100%" height="100%" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      @keyframes ripple{0%{r:10;opacity:.7}100%{r:75;opacity:0}}
-      @keyframes ripple2{0%{r:10;opacity:.55}100%{r:60;opacity:0}}
-      @keyframes ripple3{0%{r:10;opacity:.4}100%{r:48;opacity:0}}
-      @keyframes orbit1{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-      @keyframes orbit2{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
-      @keyframes pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.35);opacity:1}}
-      @keyframes frag{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:1;transform:scale(1.2)}}
-      .r1{animation:ripple  2.8s ease-out infinite}
-      .r2{animation:ripple  2.8s ease-out infinite .9s}
-      .r3{animation:ripple  2.8s ease-out infinite 1.8s}
-      .r4{animation:ripple2 3.5s ease-out infinite .4s}
-      .r5{animation:ripple3 4s   ease-out infinite 1.2s}
-      .orb1{transform-origin:200px 88px;animation:orbit1 7s  linear infinite}
-      .orb2{transform-origin:200px 88px;animation:orbit2 11s linear infinite}
-      .orb3{transform-origin:200px 88px;animation:orbit1 15s linear infinite .5s}
-      .core{transform-origin:200px 88px;animation:pulse 2.8s ease-in-out infinite}
-      .f1{transform-origin:236px 55px;animation:frag 2.8s ease-in-out infinite}
-      .f2{transform-origin:164px 120px;animation:frag 2.8s ease-in-out infinite .9s}
-      .f3{transform-origin:242px 118px;animation:frag 2.8s ease-in-out infinite 1.8s}
-    </style>
-    <radialGradient id="bg2" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="#1a3060" stop-opacity=".5"/>
-      <stop offset="100%" stop-color="#050c1a" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#d4af37" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#C5A059" stop-opacity=".6"/>
-    </radialGradient>
-    <filter id="glow2">
-      <feGaussianBlur stdDeviation="3" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect width="400" height="180" fill="#06101f"/>
-  <ellipse cx="200" cy="90" rx="170" ry="75" fill="url(#bg2)"/>
-  <!-- Ripple waves from center -->
-  <circle class="r1" cx="200" cy="88" r="10" fill="none" stroke="#C5A059" stroke-width="1.2" stroke-opacity=".7"/>
-  <circle class="r2" cx="200" cy="88" r="10" fill="none" stroke="#C5A059" stroke-width="1"   stroke-opacity=".55"/>
-  <circle class="r3" cx="200" cy="88" r="10" fill="none" stroke="#C5A059" stroke-width=".8"  stroke-opacity=".4"/>
-  <circle class="r4" cx="200" cy="88" r="10" fill="none" stroke="#8a6f35" stroke-width=".7"  stroke-opacity=".35"/>
-  <circle class="r5" cx="200" cy="88" r="10" fill="none" stroke="#8a6f35" stroke-width=".6"  stroke-opacity=".28"/>
-  <!-- Orbit tracks -->
-  <circle cx="200" cy="88" r="48" fill="none" stroke="#C5A059" stroke-width=".4" stroke-opacity=".15"/>
-  <circle cx="200" cy="88" r="65" fill="none" stroke="#C5A059" stroke-width=".3" stroke-opacity=".1"/>
-  <!-- Orbiting fragments -->
-  <g class="orb1">
-    <rect class="f1" x="232" y="51" width="8" height="8" rx="2" fill="#C5A059" fill-opacity=".55" transform="rotate(45,236,55)" filter="url(#glow2)"/>
-  </g>
-  <g class="orb2">
-    <polygon class="f2" points="164,115 170,125 158,125" fill="#C5A059" fill-opacity=".45" filter="url(#glow2)"/>
-  </g>
-  <g class="orb3">
-    <circle class="f3" cx="255" cy="60" r="4.5" fill="#d4af37" fill-opacity=".5" filter="url(#glow2)"/>
-  </g>
-  <!-- Core node -->
-  <g class="core">
-    <circle cx="200" cy="88" r="12" fill="url(#coreGrad)" fill-opacity=".2" filter="url(#glow2)"/>
-    <circle cx="200" cy="88" r="6"  fill="url(#coreGrad)" filter="url(#glow2)"/>
-  </g>
-  <!-- Cross hair lines -->
-  <line x1="200" y1="40" x2="200" y2="62"  stroke="#C5A059" stroke-width=".6" stroke-opacity=".25"/>
-  <line x1="200" y1="114" x2="200" y2="140" stroke="#C5A059" stroke-width=".6" stroke-opacity=".25"/>
-  <line x1="148" y1="88" x2="170" y2="88"  stroke="#C5A059" stroke-width=".6" stroke-opacity=".25"/>
-  <line x1="230" y1="88" x2="252" y2="88"  stroke="#C5A059" stroke-width=".6" stroke-opacity=".25"/>
-</svg></div>
-        <div class="phil-body">
-          <div class="phil-num" data-i18n="phil2_num">2. 예측 불가능한 경험 설계</div>
+      <div class="phil-card fade-in"><div class="phil-body"><span class="phil-big">02</span>
+          <div class="phil-num" data-i18n="phil2_num">예측 불가능한 경험 설계</div>
           <div class="phil-title" data-i18n="phil2_title">예측 불가능한 이벤트로 최고의 경험을</div>
           <div class="phil-desc" data-i18n="phil2_desc">하렌할 레이드 중간에 바닥이 무너져내려 새로운 환경과 분위기를 주며, 부서진 유적지에 트리거를 작동시키면 지도에 나오지 않은 새로운 지하 유적을 발견하는 등 예측 불가능한 경험이 탄생하는 유연한 레벨을 지향합니다.</div>
         </div>
       </div>
-      <div class="glass phil-card">
-        <div class="phil-icon-area"><svg width="100%" height="100%" viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <style>
-      @keyframes dash1{from{stroke-dashoffset:200}to{stroke-dashoffset:0}}
-      @keyframes dash2{from{stroke-dashoffset:160}to{stroke-dashoffset:0}}
-      @keyframes dash3{from{stroke-dashoffset:120}to{stroke-dashoffset:0}}
-      @keyframes nodeGlow{0%,100%{fill-opacity:.12}50%{fill-opacity:.32}}
-      @keyframes packetMove1{0%{offset-distance:0%}100%{offset-distance:100%}}
-      @keyframes blinkNode{0%,100%{opacity:.55}50%{opacity:1}}
-      .path1{stroke-dasharray:200;stroke-dashoffset:200;animation:dash1 2.2s ease infinite}
-      .path2{stroke-dasharray:160;stroke-dashoffset:160;animation:dash2 2.5s ease infinite .4s}
-      .path3{stroke-dasharray:120;stroke-dashoffset:120;animation:dash3 2.8s ease infinite .8s}
-      .path4{stroke-dasharray:120;stroke-dashoffset:120;animation:dash3 3s   ease infinite 1.2s}
-      .path5{stroke-dasharray:100;stroke-dashoffset:100;animation:dash3 2.4s ease infinite 1.6s}
-      .path6{stroke-dasharray:100;stroke-dashoffset:100;animation:dash3 2.6s ease infinite 0.2s}
-      .ng{animation:nodeGlow 3s ease-in-out infinite}
-      .ng2{animation:nodeGlow 3s ease-in-out infinite .8s}
-      .ng3{animation:nodeGlow 3s ease-in-out infinite 1.6s}
-      .bn{animation:blinkNode 2.2s ease-in-out infinite}
-      .bn2{animation:blinkNode 2.5s ease-in-out infinite .5s}
-      .bn3{animation:blinkNode 2.8s ease-in-out infinite 1s}
-      .bn4{animation:blinkNode 3s   ease-in-out infinite 1.5s}
-      .bn5{animation:blinkNode 2.4s ease-in-out infinite .3s}
-      .bn6{animation:blinkNode 2.6s ease-in-out infinite 0.8s}
-    </style>
-    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0%" stop-color="#C5A059" stop-opacity=".0"/>
-      <stop offset="50%" stop-color="#C5A059" stop-opacity=".9"/>
-      <stop offset="100%" stop-color="#C5A059" stop-opacity=".0"/>
-    </linearGradient>
-    <filter id="glow3">
-      <feGaussianBlur stdDeviation="2.5" result="blur"/>
-      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <radialGradient id="bg3" cx="50%" cy="40%" r="60%">
-      <stop offset="0%" stop-color="#112244" stop-opacity=".55"/>
-      <stop offset="100%" stop-color="#050c1a" stop-opacity="0"/>
-    </radialGradient>
-  </defs>
-  <rect width="400" height="180" fill="#05101d"/>
-  <rect width="400" height="180" fill="url(#bg3)"/>
-
-  <!-- ── Node definitions (hexagons drawn as rect with rx) ── -->
-  <!-- Root node -->
-  <rect class="ng"  x="150" y="12"  width="100" height="26" rx="5" fill="#C5A059" fill-opacity=".12" stroke="#C5A059" stroke-width=".8" stroke-opacity=".5"/>
-  <text class="bn"  x="200" y="29" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7.5" fill="#C5A059" fill-opacity=".9">CLAUDE CODE · MCP</text>
-
-  <!-- Level 2 left -->
-  <rect class="ng2" x="70"  y="62"  width="52" height="24" rx="4" fill="#C5A059" fill-opacity=".1" stroke="#C5A059" stroke-width=".7" stroke-opacity=".4"/>
-  <text class="bn2" x="96"  y="78" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#C5A059" fill-opacity=".8">DOCUMENT</text>
-
-  <!-- Level 2 right -->
-  <rect class="ng2" x="278" y="62"  width="52" height="24" rx="4" fill="#C5A059" fill-opacity=".1" stroke="#C5A059" stroke-width=".7" stroke-opacity=".4"/>
-  <text class="bn2" x="304" y="78" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#C5A059" fill-opacity=".8">MOCK-UP</text>
-
-  <!-- Level 2 center -->
-  <rect class="ng3" x="172" y="62"  width="56" height="24" rx="4" fill="#8a6f35" fill-opacity=".12" stroke="#8a6f35" stroke-width=".7" stroke-opacity=".4"/>
-  <text class="bn3" x="200" y="78" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="7" fill="#C5A059" fill-opacity=".7">CONDITION</text>
-
-  <!-- Level 3 leaf nodes -->
-  <rect class="ng"  x="22"  y="120" width="60" height="22" rx="3.5" fill="#C5A059" fill-opacity=".08" stroke="#C5A059" stroke-width=".6" stroke-opacity=".35"/>
-  <text class="bn4" x="52"  y="135" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" fill="#9ca8b8" fill-opacity=".8">DESIGN DOC</text>
-
-  <rect class="ng"  x="84"  y="120" width="56" height="22" rx="3.5" fill="#C5A059" fill-opacity=".08" stroke="#C5A059" stroke-width=".6" stroke-opacity=".35"/>
-  <text class="bn5" x="112" y="135" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" fill="#9ca8b8" fill-opacity=".8">ART REQ</text>
-
-  <rect class="ng3" x="165" y="120" width="70" height="22" rx="3.5" fill="#C5A059" fill-opacity=".1"  stroke="#C5A059" stroke-width=".7" stroke-opacity=".4"/>
-  <text class="bn6" x="200" y="135" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" fill="#C5A059" fill-opacity=".85">DATA LAYER</text>
-
-  <rect class="ng"  x="238" y="120" width="60" height="22" rx="3.5" fill="#C5A059" fill-opacity=".08" stroke="#C5A059" stroke-width=".6" stroke-opacity=".35"/>
-  <text class="bn4" x="268" y="135" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" fill="#9ca8b8" fill-opacity=".8">DUMMY LEVEL</text>
-
-  <rect class="ng"  x="302" y="120" width="52" height="22" rx="3.5" fill="#C5A059" fill-opacity=".08" stroke="#C5A059" stroke-width=".6" stroke-opacity=".35"/>
-  <text class="bn5" x="328" y="135" text-anchor="middle" font-family="Montserrat,sans-serif" font-size="6.5" fill="#9ca8b8" fill-opacity=".8">UE5 BUILD</text>
-
-  <!-- ── Connection lines with animated dash ── -->
-  <!-- Root → L2 left -->
-  <path class="path1" d="M150,25 C120,25 110,62 122,74" fill="none" stroke="#C5A059" stroke-width="1.1" stroke-opacity=".5"/>
-  <!-- Root → L2 center -->
-  <line class="path2" x1="200" y1="38"  x2="200" y2="62"   stroke="#C5A059" stroke-width="1.1" stroke-opacity=".5"/>
-  <!-- Root → L2 right -->
-  <path class="path2" d="M250,25 C280,25 290,62 278,74" fill="none" stroke="#C5A059" stroke-width="1.1" stroke-opacity=".5"/>
-  <!-- L2 left → leaf1 -->
-  <path class="path3" d="M84,86 C64,86 52,110 52,120" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".4"/>
-  <!-- L2 left → leaf2 -->
-  <path class="path4" d="M108,86 C116,86 116,110 112,120" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".4"/>
-  <!-- L2 center → leaf center -->
-  <line class="path3" x1="200" y1="86" x2="200" y2="120" stroke="#C5A059" stroke-width=".9" stroke-opacity=".45"/>
-  <!-- L2 right → leaf4 -->
-  <path class="path5" d="M292,86 C280,86 268,110 268,120" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".4"/>
-  <!-- L2 right → leaf5 -->
-  <path class="path6" d="M316,86 C326,86 328,110 328,120" fill="none" stroke="#C5A059" stroke-width=".9" stroke-opacity=".4"/>
-
-  <!-- Bottom dots decoration -->
-  <g fill="#C5A059" fill-opacity=".12">
-    <circle cx="20"  cy="165" r="2"/><circle cx="36"  cy="165" r="1.5"/><circle cx="50"  cy="165" r="2"/>
-    <circle cx="350" cy="165" r="2"/><circle cx="364" cy="165" r="1.5"/><circle cx="378" cy="165" r="2"/>
-  </g>
-</svg></div>
-        <div class="phil-body">
-          <div class="phil-num" data-i18n="phil3_num">3. 데이터·로직·AI 기반 설계</div>
+      <div class="phil-card fade-in"><div class="phil-body"><span class="phil-big">03</span>
+          <div class="phil-num" data-i18n="phil3_num">데이터·로직·AI 기반 설계</div>
           <div class="phil-title" data-i18n="phil3_title">AI와 데이터로 설계의 속도와 깊이를 높인다</div>
           <div class="phil-desc" data-i18n="phil3_desc">BT 로직과 조건별 Data Layer 전환 같은 시스템적 설계 위에, Claude Code·MCP를 연동한 AI 제작 파이프라인을 더해 기획 문서부터 더미 레벨 목업까지의 과정을 빠르게 반복합니다. 이 방식으로 대형 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완성했고, 팀 전체가 함께 쓰는 AI 레벨 디자인 프로세스를 만들어 가고 있습니다.</div>
         </div>
@@ -1114,21 +710,21 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     <div class="tech-stack-wrap">
       <div class="tech-stack-section fade-in" style="transition-delay:.2s;">
-    <div class="tech-stack-title" data-i18n="tech_stack_title">핵심 역량 및 활용 툴 — Core Tech Stack</div>
+    <div class="tech-stack-title" data-i18n="tech_stack_title">TOOLS &amp; SKILLS</div>
     <div class="tech-badge-grid">
-      <div class="tech-badge primary"><span class="tb-icon">⚡</span><span data-i18n="tb_ue5">Unreal Engine 5</span></div>
-      <div class="tech-badge primary"><span class="tb-icon">⚡</span><span data-i18n="tb_ue4">Unreal Engine 4</span></div>
-      <div class="tech-badge primary"><span class="tb-icon">📐</span><span data-i18n="tb_topdown">Top-down Level Design</span></div>
-      <div class="tech-badge primary"><span class="tb-icon">🤖</span><span data-i18n="tb_bt">AI Behavior Tree</span></div>
-      <div class="tech-badge primary"><span class="tb-icon">✨</span><span>Claude Code · MCP</span></div>
-      <div class="tech-badge"><span class="tb-icon">🗂️</span><span data-i18n="tb_datalayer">Data Layer</span></div>
-      <div class="tech-badge"><span class="tb-icon">🌐</span><span data-i18n="tb_worldpartition">World Partition</span></div>
-      <div class="tech-badge"><span class="tb-icon">🔷</span><span data-i18n="tb_bp">Blueprint (BP)</span></div>
-      <div class="tech-badge"><span class="tb-icon">📊</span><span data-i18n="tb_json">JSON / CSV</span></div>
-      <div class="tech-badge"><span class="tb-icon">🎯</span><span data-i18n="tb_jira">Jira</span></div>
-      <div class="tech-badge"><span class="tb-icon">🔀</span><span data-i18n="tb_svn">SVN</span></div>
-      <div class="tech-badge"><span class="tb-icon">🗺️</span><span data-i18n="tb_openworld">오픈월드 디자인</span></div>
-      <div class="tech-badge"><span class="tb-icon">🎮</span><span data-i18n="tb_leveldesign">레벨 디자인</span></div>
+      <div class="tech-badge primary"><span data-i18n="tb_ue5">Unreal Engine 5</span></div>
+      <div class="tech-badge primary"><span data-i18n="tb_ue4">Unreal Engine 4</span></div>
+      <div class="tech-badge primary"><span data-i18n="tb_topdown">Top-down Level Design</span></div>
+      <div class="tech-badge primary"><span data-i18n="tb_bt">AI Behavior Tree</span></div>
+      <div class="tech-badge primary"><span>Claude Code · MCP</span></div>
+      <div class="tech-badge"><span data-i18n="tb_datalayer">Data Layer</span></div>
+      <div class="tech-badge"><span data-i18n="tb_worldpartition">World Partition</span></div>
+      <div class="tech-badge"><span data-i18n="tb_bp">Blueprint (BP)</span></div>
+      <div class="tech-badge"><span data-i18n="tb_json">JSON / CSV</span></div>
+      <div class="tech-badge"><span data-i18n="tb_jira">Jira</span></div>
+      <div class="tech-badge"><span data-i18n="tb_svn">SVN</span></div>
+      <div class="tech-badge"><span data-i18n="tb_openworld">오픈월드 디자인</span></div>
+      <div class="tech-badge"><span data-i18n="tb_leveldesign">레벨 디자인</span></div>
     </div>
     </div>
   </div>
@@ -1146,12 +742,13 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     <div class="modal-body">
       <div class="modal-tabs" id="tabs-kings">
-          <button class="modal-tab active" data-panel="kings-openworld" data-i18n="proj1_s1">🗺️ 원작 IP 기반 심리스 오픈월드 필드 지형 및 식생 설계</button>
-          <button class="modal-tab" data-panel="kings-datalayer" data-i18n="proj1_s2">🎬 시나리오 기반 지형 변화와 데이터 레이어(Data Layer) 연출</button>
-          <button class="modal-tab" data-panel="kings-raid" data-i18n="proj1_s3">⚔️ 코옵 레이드 동선 설계 및 지형 변화를 통한 동적 아레나 구축</button>
+          <button class="modal-tab active" data-panel="kings-openworld"><span class="tab-idx">01</span><span data-i18n="proj1_s1">심리스 오픈월드 필드</span></button>
+          <button class="modal-tab" data-panel="kings-datalayer"><span class="tab-idx">02</span><span data-i18n="proj1_s2">데이터 레이어 연출</span></button>
+          <button class="modal-tab" data-panel="kings-raid"><span class="tab-idx">03</span><span data-i18n="proj1_s3">4인 코옵 레이드</span></button>
       </div>
       <div class="modal-content" id="content-kings">
             <div class="modal-panel active" id="kings-openworld">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / REGION</span><span class="spec-v" data-i18n="sp_ko_1">골든투스 · 카스타미어</span></div><div class="spec"><span class="spec-k">SPEC 02 / DURATION</span><span class="spec-v" data-i18n="sp_ko_2">3.5개월</span></div><div class="spec"><span class="spec-k">SPEC 03 / ENGINE</span><span class="spec-v" data-i18n="sp_ko_3">Unreal Engine 5</span></div><div class="spec"><span class="spec-k">SPEC 04 / OUTPUT</span><span class="spec-v" data-i18n="sp_ko_4">지형 · 식생 · 퀘스트 동선 · 필드 콘텐츠</span></div></div>
               <div class="wf-step wf-video">
                 <div class="wf-step-header">
                   <div class="wf-step-num"><i class="fa fa-play"></i></div>
@@ -1201,6 +798,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="kings-datalayer">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / SCENARIO</span><span class="spec-v" data-i18n="sp_kd_1">캐슬블랙 전투</span></div><div class="spec"><span class="spec-k">SPEC 02 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_kd_2">UE5 Data Layer</span></div><div class="spec"><span class="spec-k">SPEC 03 / METHOD</span><span class="spec-v" data-i18n="sp_kd_3">서브 레벨 로딩 없는 실시간 환경 변화</span></div><div class="spec"><span class="spec-k">SPEC 04 / VALIDATION</span><span class="spec-v" data-i18n="sp_kd_4">플레이 테스트 · 아트 리뷰</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1243,6 +841,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="kings-raid">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / REGION</span><span class="spec-v" data-i18n="sp_kr_1">하렌홀</span></div><div class="spec"><span class="spec-k">SPEC 02 / FORMAT</span><span class="spec-v" data-i18n="sp_kr_2">4인 코옵 · 2:2 분할 동선</span></div><div class="spec"><span class="spec-k">SPEC 03 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_kr_3">Data Layer 페이즈 전환</span></div><div class="spec"><span class="spec-k">SPEC 04 / BOSS</span><span class="spec-v" data-i18n="sp_kr_4">대연회장 쌍둥이 보스 → 검은 하렌</span></div></div>
               <div class="wf-step wf-video">
                 <div class="wf-step-header">
                   <div class="wf-step-num"><i class="fa fa-play"></i></div>
@@ -1270,12 +869,6 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
                 </div>
                 <div class="wf-img-wrap">
                   <img src="./코옵레이드_진행시나리오에_맞춰_세부_구성.webp" alt="코옵레이드 진행시나리오에 맞춰 세부 구성" loading="lazy" />
-                </div>
-                <div class="wf-img-wrap">
-                  <img src="./왕좌의게임_코옵맵.webp" alt="왕좌의게임 코옵맵" loading="lazy" />
-                </div>
-                <div class="wf-img-wrap">
-                  <img src="./하렌홀_통로존_인게임.webp" alt="하렌홀 통로존 인게임" loading="lazy" />
                 </div>
                 <div class="wf-desc" data-i18n="k_t3_s2_d">4인 코옵(Co-op) 레이드에서 유저들이 자연스럽게 2:2로 나뉘어 진입하도록 디테일한 동선과 시선 유도를 설계했습니다. 중세 건축 양식에 고증을 맞춘 '샹들리에 추락을 통한 장애물(기둥) 파괴' 기믹 등을 배치하여, 몰입감을 유지하면서 자연스러운 기믹 학습과 협동 플레이를 유도했습니다.</div>
               </div>
@@ -1307,12 +900,13 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     <div class="modal-body">
       <div class="modal-tabs" id="tabs-memento">
-          <button class="modal-tab active" data-panel="memento-policy" data-i18n="proj2_s1">🌍 심리스 오픈월드 환경의 구역별 테마에 맞춘 레벨 배치 정책 수립</button>
-          <button class="modal-tab" data-panel="memento-bt" data-i18n="proj2_s2">🦌 AI Behavior Tree 기반 식생물 배회 생태계 및 상호작용 기획</button>
-          <button class="modal-tab" data-panel="memento-dungeon" data-i18n="proj2_s3">🗝️ 내러티브 중심의 선형 인스턴스 던전 및 기믹 설계</button>
+          <button class="modal-tab active" data-panel="memento-policy"><span class="tab-idx">01</span><span data-i18n="proj2_s1">오픈월드 배치 정책</span></button>
+          <button class="modal-tab" data-panel="memento-bt"><span class="tab-idx">02</span><span data-i18n="proj2_s2">BT 생태계 · 퍼즐 기믹</span></button>
+          <button class="modal-tab" data-panel="memento-dungeon"><span class="tab-idx">03</span><span data-i18n="proj2_s3">내러티브 인스턴스 던전</span></button>
       </div>
       <div class="modal-content" id="content-memento">
             <div class="modal-panel active" id="memento-policy">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / FIELD</span><span class="spec-v" data-i18n="sp_mp_1">심리스 오픈월드</span></div><div class="spec"><span class="spec-k">SPEC 02 / OUTPUT</span><span class="spec-v" data-i18n="sp_mp_2">레벨 배치 정책</span></div><div class="spec"><span class="spec-k">SPEC 03 / SCOPE</span><span class="spec-v" data-i18n="sp_mp_3">콘텐츠 · 몬스터 · 채집물 · 보물상자</span></div><div class="spec"><span class="spec-k">SPEC 04 / GUIDE</span><span class="spec-v" data-i18n="sp_mp_4">랜드마크 · 핀포인트 동선 유도</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1336,6 +930,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="memento-bt">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_mb_1">AI Behavior Tree</span></div><div class="spec"><span class="spec-k">SPEC 02 / GIMMICK</span><span class="spec-v" data-i18n="sp_mb_2">마로론 · 물의 정령 · 빛의 기둥</span></div><div class="spec"><span class="spec-k">SPEC 03 / OUTPUT</span><span class="spec-v" data-i18n="sp_mb_3">BT 설계 · 리소스 요청 문서</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1369,6 +964,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="memento-dungeon">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / STRUCTURE</span><span class="spec-v" data-i18n="sp_md_1">A → B → C → D 선형 구조</span></div><div class="spec"><span class="spec-k">SPEC 02 / THEME</span><span class="spec-v" data-i18n="sp_md_2">얼음 동굴 속 숨겨진 신전</span></div><div class="spec"><span class="spec-k">SPEC 03 / FOCUS</span><span class="spec-v" data-i18n="sp_md_3">내러티브 몰입 동선</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1410,11 +1006,12 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
     </div>
     <div class="modal-body">
       <div class="modal-tabs" id="tabs-closers">
-          <button class="modal-tab active" data-panel="closers-busan" data-i18n="proj3_s1">🏙️ 실제 배경(부산) 기반 선형 구조 맵 및 이동 동선 설계</button>
-          <button class="modal-tab" data-panel="closers-strategy" data-i18n="proj3_s2">⚖️ 기믹 조합을 통한 고효율 전략 스테이지 산출</button>
+          <button class="modal-tab active" data-panel="closers-busan"><span class="tab-idx">01</span><span data-i18n="proj3_s1">부산 선형 맵 설계</span></button>
+          <button class="modal-tab" data-panel="closers-strategy"><span class="tab-idx">02</span><span data-i18n="proj3_s2">기믹 조합 전략 스테이지</span></button>
       </div>
       <div class="modal-content" id="content-closers">
             <div class="modal-panel active" id="closers-busan">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / LOCATION</span><span class="spec-v" data-i18n="sp_cb_1">파괴된 부산 · 부산역 일대</span></div><div class="spec"><span class="spec-k">SPEC 02 / ENGINE</span><span class="spec-v" data-i18n="sp_cb_2">Unreal Engine 4</span></div><div class="spec"><span class="spec-k">SPEC 03 / PROCESS</span><span class="spec-v" data-i18n="sp_cb_3">분석 → 영역 설정 → 더미 레벨 → 폴리싱</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1460,6 +1057,7 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
               </div>
             </div>
             <div class="modal-panel" id="closers-strategy">
+              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / RULE</span><span class="spec-v" data-i18n="sp_cs_1">5의 배수 스테이지에 특수 기믹</span></div><div class="spec"><span class="spec-k">SPEC 02 / GIMMICK</span><span class="spec-v" data-i18n="sp_cs_2">차원 균열 · 억제기 · 차원 압력</span></div><div class="spec"><span class="spec-k">SPEC 03 / CONTROL</span><span class="spec-v" data-i18n="sp_cs_3">Auto / Manual 동선 분리</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1478,69 +1076,23 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
 
 <section id="contact">
 <div class="contact-inner">
-  <div class="section-title fade-in">
-    <span class="en">CONTACT</span>
-    <h2 data-i18n="contact_title">연락처</h2>
-  </div>
-
-  <div class="glass contact-card fade-in" style="transition-delay:.1s;">
-    <!-- Background shimmer -->
-    <div class="contact-bg">
-      <div class="sk-hero"></div>
+  <div class="sec-head"><span class="sec-idx">04</span><span class="sec-en">CONTACT</span><h2 data-i18n="contact_title">연락처</h2></div>
+  <div class="contact-grid fade-in">
+    <div class="contact-left">
+      <div class="contact-label">LET'S BUILD SOMETHING GREAT</div>
+      <div class="contact-tagline" data-i18n="contact_tagline">새로운 세계를<br>함께 설계할<br><span>기회를 기다립니다.</span></div>
     </div>
-
-    <div class="contact-fg">
-      <div class="contact-split">
-
-        <!-- LEFT: Copy text -->
-        <div class="contact-left">
-          <div class="contact-label">LET'S BUILD SOMETHING GREAT</div>
-          <div class="contact-tagline" data-i18n="contact_tagline">새로운 세계를<br>함께 설계할<br><span>기회를 기다립니다.</span></div>
-          <div class="contact-divider"></div>
-        </div>
-
-        <!-- RIGHT: Contact info (email / phone rows copy to clipboard) -->
-        <div class="contact-right">
-
-          <div class="ci-row ci-link" data-copy="jyl134@naver.com" data-i18n-title="copy_hint" title="클릭하면 복사됩니다" role="button" tabindex="0">
-            <div class="ci-icon"><i class="fa fa-envelope"></i></div>
-            <div class="ci-detail">
-              <div class="ci-label">Email</div>
-              <div class="ci-text">jyl134@naver.com</div>
-            </div>
-            <span class="ci-copied" data-i18n="copied">복사됨</span>
-          </div>
-
-          <div class="ci-row ci-link" data-copy="010-6375-4575" data-i18n-title="copy_hint" title="클릭하면 복사됩니다" role="button" tabindex="0">
-            <div class="ci-icon"><i class="fa fa-mobile-alt"></i></div>
-            <div class="ci-detail">
-              <div class="ci-label">Phone</div>
-              <div class="ci-text">010-6375-4575</div>
-            </div>
-            <span class="ci-copied" data-i18n="copied">복사됨</span>
-          </div>
-
-          <div class="ci-row">
-            <div class="ci-icon"><i class="fa fa-map-marker-alt"></i></div>
-            <div class="ci-detail">
-              <div class="ci-label">Location</div>
-              <div class="ci-text" data-i18n="contact_location">서울, 대한민국 / 강서구 강서로 231</div>
-            </div>
-          </div>
-
-        </div>
-      </div>
+    <div class="contact-right">
+      <div class="ci-row"><span class="ci-label">Email</span><span class="ci-text">jyl134@naver.com</span><button class="ci-copy" data-copy="jyl134@naver.com">COPY</button></div>
+      <div class="ci-row"><span class="ci-label">Phone</span><span class="ci-text">010-6375-4575</span><button class="ci-copy" data-copy="010-6375-4575">COPY</button></div>
+      <div class="ci-row"><span class="ci-label">Location</span><span class="ci-text" data-i18n="contact_location">서울특별시 강서구 (대한민국)</span><span></span></div>
     </div>
   </div>
-
-  <div class="scroll-chevron">
-    <button class="chevron-circle" id="toTopBtn" data-i18n-title="to_top" title="맨 위로" aria-label="Top">
-      <i class="fa fa-chevron-up"></i>
-    </button>
-  </div>
+  <div class="to-top"><button id="toTopBtn" data-i18n-title="to_top" title="맨 위로" aria-label="Top"><i class="fa fa-arrow-up"></i></button></div>
 </div>
 </section>
-<footer data-i18n="footer">&copy; 2026 이진용 (LEE JIN-YONG) · Level Designer · Unreal Open World · ALL RIGHTS RESERVED</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<footer data-i18n="footer">© 2026 이진용 (LEE JIN-YONG) · Level Designer · Unreal Open World · ALL RIGHTS RESERVED</footer>
 
 <script>
 /* ==================== TEXT (ko / en / ja / zh) ====================
@@ -1548,24 +1100,11 @@ footer{text-align:center;padding:1.4rem;font-family:var(--font-ko);font-size:.67
 const I18N = {
   ko:{
     page_title:"이진용 | Level Designer · Unreal Open World",
-    nav_home:"홈",
-    nav_exp:"경력",
-    nav_proj:"프로젝트",
-    nav_phil:"철학",
-    nav_contact:"연락처",
-    hero_headline:"내러티브가 살아 숨 쉬는<br><span class=\"gold\">압도적인 오픈월드</span>를<br>설계합니다.",
-    hero_sub:"압도적인 스케일의 오픈월드, 논리적인 레벨 레이아웃, 그리고 AAA급 환경 설계에 특화된 레벨 디자이너 이진용입니다. 넷마블네오에서 핵심 IP 프로젝트인 <strong>왕좌의 게임: 킹스로드</strong>의 레벨 디자인을 담당했고, 현재는 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.",
-    btn_projects:"프로젝트 보기",
-    btn_contact:"연락하기",
-    stat1_num:"4+",
-    stat1_label:"년 차 레벨 디자이너",
-    stat1_sub:"Level Designer",
-    stat2_num:"출시 타이틀 3개",
-    stat2_label:"킹스로드 · 리메멘토 · 클로저스RT",
-    stat2_sub:"글로벌 런칭 2개 (킹스로드 · 리메멘토)",
-    stat3_num:"AI 레벨 파이프라인",
-    stat3_label:"1개월 · 레벨 6종 완성",
-    stat3_sub:"사냥터 2 · 던전 3 · 내러티브 1 (Claude Code · MCP)",
+    nav_exp:"EXPERIENCE",
+    nav_proj:"WORK",
+    nav_phil:"PHILOSOPHY",
+    nav_contact:"CONTACT",
+    hero_sub:"언리얼 엔진 5 기반 심리스 오픈월드 지형 설계, Data Layer 동적 레벨 연출, 4인 코옵 레이드 동선을 기획해 왔습니다. 현재 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.",
     exp_title:"주요 경력",
     exp1_year:"2025.06 — 2026.10",
     exp1_company:"NETMARBLE NEO",
@@ -1588,31 +1127,15 @@ const I18N = {
     exp4_role:"Level Designer",
     exp4_desc:"75개+ 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.",
     btn_collapse:"타임라인으로 돌아가기",
-    dd_title:"프로젝트 상세 포트폴리오 (작업 내용)",
-    dd_hint:"카드를 클릭하면 작업 내용, 이미지, 결과를 슬라이드로 탐색할 수 있습니다.",
-    dd_btn1:"기획 상세 탐색",
-    dd_btn_hint1:"클릭하여 심층 탐색",
-    dd_btn2:"기획 상세 탐색",
-    dd_btn_hint2:"클릭하여 심층 탐색",
-    dd_btn3:"기획 상세 탐색",
-    dd_btn_hint3:"클릭하여 심층 탐색",
-    proj1_badge:"NETMARBLE NEO · 2025~26",
-    proj1_eye:"PROJECT 01 · OPEN WORLD ARPG · UE5",
-    proj1_title:"왕좌의 게임: 킹스로드<br><span>오픈월드 레벨 디자인 및 데이터 레이어 연출</span>",
-    proj1_s1:"🗺️ 원작 IP 기반 심리스 오픈월드 필드 지형 및 식생 설계",
-    proj1_s2:"🎬 시나리오 기반 지형 변화와 데이터 레이어(Data Layer) 연출",
-    proj1_s3:"⚔️ 코옵 레이드 동선 설계 및 지형 변화를 통한 동적 아레나 구축",
-    proj2_badge:"BLACKSTORM · 2024~25",
-    proj2_eye:"PROJECT 02 · OPEN WORLD RPG · UE5",
-    proj2_title:"RE:MEMENTO (리메멘토)<br><span>오픈월드 필드 기획 및 시스템 구조 설계</span>",
-    proj2_s1:"🌍 심리스 오픈월드 환경의 구역별 테마에 맞춘 레벨 배치 정책 수립",
-    proj2_s2:"🦌 AI Behavior Tree 기반 식생물 배회 생태계 및 상호작용 기획",
-    proj2_s3:"🗝️ 내러티브 중심의 선형 인스턴스 던전 및 기믹 설계",
-    proj3_badge:"NADDIC GAMES · 2022~23",
-    proj3_eye:"PROJECT 03 · STAGE DESIGN · UE4",
-    proj3_title:"CLOSERS RT (클로저스 RT)<br><span>맵 기믹을 활용한 전략 스테이지 기획</span>",
-    proj3_s1:"🏙️ 실제 배경(부산) 기반 선형 구조 맵 및 이동 동선 설계",
-    proj3_s2:"⚖️ 기믹 조합을 통한 고효율 전략 스테이지 산출",
+    dd_title:"대표 프로젝트",
+    proj1_s1:"심리스 오픈월드 필드",
+    proj1_s2:"데이터 레이어 연출",
+    proj1_s3:"4인 코옵 레이드",
+    proj2_s1:"오픈월드 배치 정책",
+    proj2_s2:"BT 생태계 · 퍼즐 기믹",
+    proj2_s3:"내러티브 인스턴스 던전",
+    proj3_s1:"부산 선형 맵 설계",
+    proj3_s2:"기믹 조합 전략 스테이지",
     mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
     mod1_title:"왕좌의 게임: 킹스로드 — 레벨 디자인 워크플로우",
     mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
@@ -1664,8 +1187,8 @@ const I18N = {
     c_t2_s1_d:"단순 스펙으로 밀어붙이는 일반 스테이지(1~4)와 달리, 5의 배수 스테이지(5, 10, 15 등)는 특수 기믹(차원 균열, 억제기, 차원 압력 등)을 조합하여 유저의 전략적인 플레이를 요구하도록 설계했습니다. 수동 조작과 자동 조작 유저의 동선을 의도적으로 분리해 각기 다른 성취감을 주었으며, 이러한 시스템적인 접근을 통해 제한된 맵 리소스로도 다채롭고 깊이 있는 스테이지를 대량으로 산출할 수 있었습니다.",
     phil_title:"레벨 디자인 철학",
     contact_title:"연락처",
-    contact_location:"서울, 대한민국 / 강서구 강서로 231",
-    tech_stack_title:"핵심 역량 및 활용 툴 — Core Tech Stack",
+    contact_location:"서울특별시 강서구 (대한민국)",
+    tech_stack_title:"TOOLS &amp; SKILLS",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1679,14 +1202,6 @@ const I18N = {
     tb_openworld:"오픈월드 디자인",
     tb_leveldesign:"레벨 디자인",
     footer:"© 2026 이진용 (LEE JIN-YONG) · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
-    cap0:"하렌홀 — 최종 보스존",
-    cap1:"하렌홀 — 통로 존",
-    cap2:"하렌홀 — 최종 보스존 (Data Layer 전환 후)",
-    cap3:"CLOSERS RT — 강남 필드",
-    cap4:"RE:MEMENTO — 아레나",
-    cap5:"RE:MEMENTO — 최종 보스전",
-    cap6:"RE:MEMENTO — 홍염성",
-    hero_zoom_hint:"클릭하면 크게 볼 수 있습니다",
     tag_ow_policy:"오픈월드 정책",
     tag_instance:"인스턴스 던전",
     tag_gimmick:"기믹 설계",
@@ -1734,18 +1249,16 @@ const I18N = {
     hc3_t2:"실시간 전략 전투",
     hc3_t3:"전술 오브젝트",
     hc3_t4:"난이도 밸런싱",
-    phil1_num:"1. 내러티브 기반 세계 설계",
+    phil1_num:"내러티브 기반 세계 설계",
     phil1_title:"공간이 이야기를 말하게 한다",
     phil1_desc:"폐허가 된 카스타미어에서 참혹한 습격의 흔적을 느끼고, 무너져 내린 하렌할에서 드래곤의 파괴적인 위력을 예상할 수 있듯, 환경 자체가 세계관을 전달하는 '환경적 스토리텔링(Environmental Storytelling)'을 추구합니다.",
-    phil2_num:"2. 예측 불가능한 경험 설계",
+    phil2_num:"예측 불가능한 경험 설계",
     phil2_title:"예측 불가능한 이벤트로 최고의 경험을",
     phil2_desc:"하렌할 레이드 중간에 바닥이 무너져내려 새로운 환경과 분위기를 주며, 부서진 유적지에 트리거를 작동시키면 지도에 나오지 않은 새로운 지하 유적을 발견하는 등 예측 불가능한 경험이 탄생하는 유연한 레벨을 지향합니다.",
-    phil3_num:"3. 데이터·로직·AI 기반 설계",
+    phil3_num:"데이터·로직·AI 기반 설계",
     phil3_title:"AI와 데이터로 설계의 속도와 깊이를 높인다",
     phil3_desc:"BT 로직과 조건별 Data Layer 전환 같은 시스템적 설계 위에, Claude Code·MCP를 연동한 AI 제작 파이프라인을 더해 기획 문서부터 더미 레벨 목업까지의 과정을 빠르게 반복합니다. 이 방식으로 대형 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완성했고, 팀 전체가 함께 쓰는 AI 레벨 디자인 프로세스를 만들어 가고 있습니다.",
     contact_tagline:"새로운 세계를<br>함께 설계할<br><span>기회를 기다립니다.</span>",
-    copy_hint:"클릭하면 복사됩니다",
-    copied:"복사됨",
     to_top:"맨 위로",
     exp0_year:"2026.10 — 재직 중",
     exp0_game:"다크프리스트 (DP)",
@@ -1759,37 +1272,49 @@ const I18N = {
     hc_dp_w3:"<strong>범용 AI 레벨 제작 툴 구축:</strong> Claude Code와 MCP를 로컬 환경에 연동해 기획 문서 작성부터 더미 레벨 목업까지 이어지는 자체 툴을 개발. 최신 레벨 디자인 트렌드와 표준화된 문서 양식을 지속적으로 학습시켜 장르에 관계없이 빠르게 프로토타이핑할 수 있도록 고도화했으며, 이 툴로 위 사냥터·던전·내러티브 레벨을 단기간에 산출하고 아트 파트와의 발주·협업 속도를 크게 단축. 팀 내 AI 활용 레벨 디자인 프로세스 확장에 기여.",
     hc_dp_t1:"사냥터·던전 기획",
     hc_dp_t5:"아트 발주",
-    reel_label:"플레이 영상",
-    chip_gt:"골든투스",
-    chip_hh:"하렌홀",
     reel_gt:"골든투스 &amp; 카스타미어 · 오픈월드 퀘스트 동선 (3:20)",
     reel_hh:"하렌홀 · 4인 코옵 레이드 동선 (1:58)",
     k_vid_gt:"플레이 영상 · 골든투스 &amp; 카스타미어 퀘스트 동선",
     k_vid_hh:"플레이 영상 · 하렌홀 4인 코옵 레이드 동선",
     yt_open:"YouTube에서 보기",
-    reel_min:"최소화",
-    reel_restore:"영상 펼치기"
+    sc_compare:"카스타미어 · 왕좌의 게임: 킹스로드 — 좌우로 드래그해 UE5 목업과 최종 인게임을 비교해 보세요.",
+    toast_copied:"복사되었습니다",
+    sp_ko_1:"골든투스 · 카스타미어",
+    sp_ko_2:"3.5개월",
+    sp_ko_3:"Unreal Engine 5",
+    sp_ko_4:"지형 · 식생 · 퀘스트 동선 · 필드 콘텐츠",
+    sp_kd_1:"캐슬블랙 전투",
+    sp_kd_2:"UE5 Data Layer",
+    sp_kd_3:"서브 레벨 로딩 없는 실시간 환경 변화",
+    sp_kd_4:"플레이 테스트 · 아트 리뷰",
+    sp_kr_1:"하렌홀",
+    sp_kr_2:"4인 코옵 · 2:2 분할 동선",
+    sp_kr_3:"Data Layer 페이즈 전환",
+    sp_kr_4:"대연회장 쌍둥이 보스 → 검은 하렌",
+    sp_mp_1:"심리스 오픈월드",
+    sp_mp_2:"레벨 배치 정책",
+    sp_mp_3:"콘텐츠 · 몬스터 · 채집물 · 보물상자",
+    sp_mp_4:"랜드마크 · 핀포인트 동선 유도",
+    sp_mb_1:"AI Behavior Tree",
+    sp_mb_2:"마로론 · 물의 정령 · 빛의 기둥",
+    sp_mb_3:"BT 설계 · 리소스 요청 문서",
+    sp_md_1:"A → B → C → D 선형 구조",
+    sp_md_2:"얼음 동굴 속 숨겨진 신전",
+    sp_md_3:"내러티브 몰입 동선",
+    sp_cb_1:"파괴된 부산 · 부산역 일대",
+    sp_cb_2:"Unreal Engine 4",
+    sp_cb_3:"분석 → 영역 설정 → 더미 레벨 → 폴리싱",
+    sp_cs_1:"5의 배수 스테이지에 특수 기믹",
+    sp_cs_2:"차원 균열 · 억제기 · 차원 압력",
+    sp_cs_3:"Auto / Manual 동선 분리"
   },
   en:{
     page_title:"Lee Jin-yong | Level Designer · Unreal Open World",
-    nav_home:"Home",
-    nav_exp:"Experience",
-    nav_proj:"Projects",
-    nav_phil:"Philosophy",
-    nav_contact:"Contact",
-    hero_headline:"Designing <span class=\"gold\">Expansive Open Worlds</span> That Tell Stories.",
-    hero_sub:"A level designer specializing in large-scale open worlds, logical level layouts, and AAA-grade environments. Led level design for <strong>Game of Thrones: King's Road</strong> at Netmarble Neo, and now designs hunting grounds and dungeons for the new project <strong>Dark Priest (DP)</strong> with an AI level pipeline built on Claude Code and MCP.",
-    btn_projects:"View Projects",
-    btn_contact:"Contact",
-    stat1_num:"4+",
-    stat1_label:"Years Level Designer",
-    stat1_sub:"Level Designer",
-    stat2_num:"3 Shipped Titles",
-    stat2_label:"King's Road · RE:MEMENTO · CLOSERS RT",
-    stat2_sub:"2 Global Launches (King's Road · RE:MEMENTO)",
-    stat3_num:"AI Level Pipeline",
-    stat3_label:"6 levels in 1 month",
-    stat3_sub:"2 hunting grounds · 3 dungeons · 1 narrative (Claude Code · MCP)",
+    nav_exp:"EXPERIENCE",
+    nav_proj:"WORK",
+    nav_phil:"PHILOSOPHY",
+    nav_contact:"CONTACT",
+    hero_sub:"I design seamless open-world terrain in Unreal Engine 5, dynamic levels with Data Layers, and routes for 4-player co-op raids. I'm currently designing hunting grounds and dungeons for Netmarble Neo's new project <strong>Dark Priest (DP)</strong> with an AI level pipeline built on Claude Code and MCP.",
     exp_title:"Professional Experience",
     exp1_year:"2025.06 — 2026.10",
     exp1_company:"NETMARBLE NEO",
@@ -1812,31 +1337,15 @@ const I18N = {
     exp4_role:"Level Designer",
     exp4_desc:"75+ stage design, pre-validation via Top-down Blueprint, dedicated QA handling, and Raid design policy establishment.",
     btn_collapse:"Back to Timeline",
-    dd_title:"Project Portfolio (Work Details)",
-    dd_hint:"Click a card to explore design intent, document images, and player experience analysis in depth.",
-    dd_btn1:"Explore Design",
-    dd_btn_hint1:"Click to deep-dive",
-    dd_btn2:"Explore Design",
-    dd_btn_hint2:"Click to deep-dive",
-    dd_btn3:"Explore Design",
-    dd_btn_hint3:"Click to deep-dive",
-    proj1_badge:"NETMARBLE NEO · 2025~26",
-    proj1_eye:"PROJECT 01 · OPEN WORLD ARPG · UE5",
-    proj1_title:"Game of Thrones: King's Road<br><span>Open World Level Design & Data Layer</span>",
-    proj1_s1:"🗺️ Seamless Open World Terrain & Vegetation Design based on Original IP",
-    proj1_s2:"🎬 Scenario-driven Terrain Changes & Data Layer Staging",
-    proj1_s3:"⚔️ Co-op Raid Routing & Dynamic Arena Construction via Terrain Shifts",
-    proj2_badge:"BLACKSTORM · 2024~25",
-    proj2_eye:"PROJECT 02 · OPEN WORLD RPG · UE5",
-    proj2_title:"RE:MEMENTO<br><span>Open World Field Design & System Architecture</span>",
-    proj2_s1:"🌍 Open World Placement Policy by Regional Themes",
-    proj2_s2:"🦌 AI Behavior Tree-based Wildlife Ecosystem & Puzzle Design",
-    proj2_s3:"🗝️ Narrative-focused Linear Instance Dungeon Design",
-    proj3_badge:"NADDIC GAMES · 2022~23",
-    proj3_eye:"PROJECT 03 · STAGE DESIGN · UE4",
-    proj3_title:"CLOSERS RT<br><span>Stage Design utilizing Gimmicks</span>",
-    proj3_s1:"🏙️ Linear Map & Routing Design based on Real Locations (Busan)",
-    proj3_s2:"⚖️ Highly Efficient Strategic Stage Generation via Gimmick Combos",
+    dd_title:"Selected Work",
+    proj1_s1:"Seamless Open World Field",
+    proj1_s2:"Data Layer Staging",
+    proj1_s3:"4-Player Co-op Raid",
+    proj2_s1:"Open World Placement Policy",
+    proj2_s2:"BT Ecosystem & Puzzle Gimmicks",
+    proj2_s3:"Narrative Instance Dungeon",
+    proj3_s1:"Busan Linear Map Design",
+    proj3_s2:"Gimmick-combo Strategy Stages",
     mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
     mod1_title:"Game of Thrones: King's Road — Level Design Workflow",
     mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
@@ -1888,8 +1397,8 @@ const I18N = {
     c_t2_s1_d:"Unlike regular stages (1-4), the 5th-multiple stages combined special gimmicks to demand strategic play. By intentionally separating routes for Auto and Manual players, I generated highly diverse stages with limited map resources.",
     phil_title:"Design Philosophy",
     contact_title:"Contact",
-    contact_location:"Seoul, South Korea / Gangseo-ro 231",
-    tech_stack_title:"Core Tech Stack & Tools",
+    contact_location:"Gangseo-gu, Seoul (South Korea)",
+    tech_stack_title:"TOOLS &amp; SKILLS",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1903,14 +1412,6 @@ const I18N = {
     tb_openworld:"Open World Design",
     tb_leveldesign:"Level Design",
     footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
-    hero_zoom_hint:"Click to enlarge",
-    cap0:"Harrenhal — Final Boss Zone",
-    cap1:"Harrenhal — Passage Zone",
-    cap2:"Harrenhal — Final Boss Zone (after Data Layer switch)",
-    cap3:"CLOSERS RT — Gangnam Field",
-    cap4:"RE:MEMENTO — Arena",
-    cap5:"RE:MEMENTO — Final Boss",
-    cap6:"RE:MEMENTO — Hongyeom Castle",
     tag_ow_policy:"Open World Policy",
     tag_instance:"Instance Dungeon",
     tag_gimmick:"Gimmick Design",
@@ -1958,18 +1459,16 @@ const I18N = {
     hc3_t2:"Real-time Strategy Combat",
     hc3_t3:"Tactical Objects",
     hc3_t4:"Difficulty Balancing",
-    phil1_num:"1. Narrative-driven World Design",
+    phil1_num:"Narrative-driven World Design",
     phil1_title:"Let the Space Tell the Story",
     phil1_desc:"Just as players sense the brutal raid in ruined Castamere, or the dragon's destructive power in collapsed Harrenhal, I pursue 'Environmental Storytelling' where the environment itself conveys the world.",
-    phil2_num:"2. Designing the Unexpected",
+    phil2_num:"Designing the Unexpected",
     phil2_title:"The Best Experiences Come from the Unexpected",
     phil2_desc:"The floor of the Harrenhal raid collapses mid-fight to bring a new environment and mood; a trigger in broken ruins reveals hidden underground ruins not on the map. I aim for flexible levels where unexpected experiences are born.",
-    phil3_num:"3. Data, Logic & AI-driven Design",
+    phil3_num:"Data, Logic & AI-driven Design",
     phil3_title:"Faster, Deeper Design with AI and Data",
     phil3_desc:"On top of systematic design such as BT logic and condition-based Data Layer switching, I add an AI production pipeline built on Claude Code and MCP to iterate quickly from design documents to dummy-level mock-ups. With this approach I completed 2 hunting grounds, 3 dungeons and 1 narrative level in one month, and I'm building an AI-driven level design process the whole team can use.",
     contact_tagline:"Looking for the chance<br>to design new worlds<br><span>together.</span>",
-    copy_hint:"Click to copy",
-    copied:"Copied",
     to_top:"Back to top",
     exp0_year:"2026.10 — Present",
     exp0_game:"Dark Priest (DP)",
@@ -1983,37 +1482,49 @@ const I18N = {
     hc_dp_w3:"<strong>General-purpose AI Level Tool:</strong> Developed an in-house tool that connects Claude Code and MCP to the local environment, covering everything from design documents to dummy-level mock-ups. Continuously trained it on current level design trends and standardized document formats so it can prototype quickly in any genre. This tool produced the hunting grounds, dungeons and narrative level above in a short time and greatly shortened art requests and collaboration, helping expand AI-driven level design across the team.",
     hc_dp_t1:"Hunting Ground & Dungeon Design",
     hc_dp_t5:"Art Requests",
-    reel_label:"Gameplay",
-    chip_gt:"Golden Tooth",
-    chip_hh:"Harrenhal",
     reel_gt:"Golden Tooth &amp; Castamere · Open World Quest Route (3:20)",
     reel_hh:"Harrenhal · 4-Player Co-op Raid Route (1:58)",
     k_vid_gt:"Gameplay · Golden Tooth &amp; Castamere Quest Route",
     k_vid_hh:"Gameplay · Harrenhal 4-Player Co-op Raid Route",
     yt_open:"Watch on YouTube",
-    reel_min:"Minimize",
-    reel_restore:"Expand video"
+    sc_compare:"Castamere · Game of Thrones: Kingsroad — drag to compare the UE5 mockup with the final in-game shot.",
+    toast_copied:"Copied",
+    sp_ko_1:"Golden Tooth · Castamere",
+    sp_ko_2:"3.5 months",
+    sp_ko_3:"Unreal Engine 5",
+    sp_ko_4:"Terrain · Vegetation · Quest Routes · Field Content",
+    sp_kd_1:"Battle of Castle Black",
+    sp_kd_2:"UE5 Data Layer",
+    sp_kd_3:"Real-time environment changes without sub-level loading",
+    sp_kd_4:"Playtests · Art reviews",
+    sp_kr_1:"Harrenhal",
+    sp_kr_2:"4-player co-op · 2:2 split routes",
+    sp_kr_3:"Data Layer phase transition",
+    sp_kr_4:"Twin bosses in the Great Hall → Harren the Black",
+    sp_mp_1:"Seamless open world",
+    sp_mp_2:"Level placement policy",
+    sp_mp_3:"Content · Monsters · Gatherables · Treasure chests",
+    sp_mp_4:"Landmark & pinpoint route guidance",
+    sp_mb_1:"AI Behavior Tree",
+    sp_mb_2:"Maroron · Water Spirit · Pillar of Light",
+    sp_mb_3:"BT design · Resource request docs",
+    sp_md_1:"Linear A → B → C → D",
+    sp_md_2:"A temple hidden in an ice cave",
+    sp_md_3:"Narrative-immersive routing",
+    sp_cb_1:"Destroyed Busan · around Busan Station",
+    sp_cb_2:"Unreal Engine 4",
+    sp_cb_3:"Analysis → Area setup → Dummy level → Polish",
+    sp_cs_1:"Special gimmicks on every 5th stage",
+    sp_cs_2:"Dimensional rift · Suppressor · Dimensional pressure",
+    sp_cs_3:"Separate Auto / Manual routes"
   },
   ja:{
     page_title:"イ・ジニョン | Level Designer · Unreal Open World",
-    nav_home:"ホーム",
-    nav_exp:"経歴",
-    nav_proj:"プロジェクト",
-    nav_phil:"哲学",
-    nav_contact:"連絡先",
-    hero_headline:"ナラティブが息づく<span class=\"gold\">圧倒的なオープンワールド</span>を設計します。",
-    hero_sub:"大規模オープンワールドに特化したレベルデザイナー、イ・ジニョンです。ネットマーブルネオで<strong>ゲーム・オブ・スローンズ: King's Road</strong>のレベルデザインを担当し、現在は新規プロジェクト<strong>ダークプリースト(DP)</strong>でClaude Code・MCPベースのAIレベル制作パイプラインを用いて狩場やダンジョンを設計しています。",
-    btn_projects:"プロジェクトを見る",
-    btn_contact:"連絡する",
-    stat1_num:"4+",
-    stat1_label:"年レベルデザイナー",
-    stat1_sub:"Level Designer",
-    stat2_num:"リリース3タイトル",
-    stat2_label:"King's Road · リメメント · クロージャーズRT",
-    stat2_sub:"グローバル2作 (King's Road · リメメント)",
-    stat3_num:"AIレベルパイプライン",
-    stat3_label:"1ヶ月でレベル6種完成",
-    stat3_sub:"狩場2 · ダンジョン3 · ナラティブ1 (Claude Code · MCP)",
+    nav_exp:"EXPERIENCE",
+    nav_proj:"WORK",
+    nav_phil:"PHILOSOPHY",
+    nav_contact:"CONTACT",
+    hero_sub:"Unreal Engine 5でのシームレスなオープンワールド地形設計、Data Layerによる動的レベル演出、4人Co-opレイドの動線企画を手がけてきました。現在はネットマーブルネオの新規プロジェクト<strong>ダークプリースト(DP)</strong>で、Claude Code・MCPベースのAIレベル制作パイプラインを用いて狩場やダンジョンを設計しています。",
     exp_title:"主な経歴",
     exp1_year:"2025.06 — 2026.10",
     exp1_company:"NETMARBLE NEO",
@@ -2036,31 +1547,15 @@ const I18N = {
     exp4_role:"Level Designer",
     exp4_desc:"75以上のステージ設計、Top-downブループリントによる動線事前検証、QA担当。",
     btn_collapse:"タイムラインに戻る",
-    dd_title:"プロジェクト詳細（作業内容）",
-    dd_hint:"カードをクリックして企画意図、ドキュメント、プレイヤー体験を深く探索できます。",
-    dd_btn1:"詳細探索",
-    dd_btn_hint1:"クリックして深堀り",
-    dd_btn2:"詳細探索",
-    dd_btn_hint2:"クリックして深堀り",
-    dd_btn3:"詳細探索",
-    dd_btn_hint3:"クリックして深堀り",
-    proj1_badge:"NETMARBLE NEO · 2025~26",
-    proj1_eye:"PROJECT 01 · OPEN WORLD ARPG · UE5",
-    proj1_title:"GoT: King's Road<br><span>OWレベルデザイン & データレイヤー</span>",
-    proj1_s1:"🗺️ 原作IPに基づくシームレスなオープンワールド地形・植生設計",
-    proj1_s2:"🎬 シナリオ連動の地形変化とデータレイヤー演出",
-    proj1_s3:"⚔️ Co-opレイド動線設計と地形変化によるダイナミックアリーナ構築",
-    proj2_badge:"BLACKSTORM · 2024~25",
-    proj2_eye:"PROJECT 02 · OPEN WORLD RPG · UE5",
-    proj2_title:"RE:MEMENTO<br><span>OWフィールド設計 & システム構造</span>",
-    proj2_s1:"🌍 エリア別テーマに合わせたOWレベル配置ポリシー策定",
-    proj2_s2:"🦌 AI BTベースの生態系およびパズルギミック企画",
-    proj2_s3:"🗝️ ナラティブ中心の線形インスタンスダンジョン設計",
-    proj3_badge:"NADDIC GAMES · 2022~23",
-    proj3_eye:"PROJECT 03 · STAGE DESIGN · UE4",
-    proj3_title:"CLOSERS RT<br><span>ステージ設計 & ボス/モンスターギミック</span>",
-    proj3_s1:"🏙️ 現実の背景(釜山)に基づく線形構造マップ・動線設計",
-    proj3_s2:"⚖️ ギミックの組み合わせによる高効率な戦略ステージ創出",
+    dd_title:"代表プロジェクト",
+    proj1_s1:"シームレスOWフィールド",
+    proj1_s2:"データレイヤー演出",
+    proj1_s3:"4人Co-opレイド",
+    proj2_s1:"OW配置ポリシー",
+    proj2_s2:"BT生態系・パズルギミック",
+    proj2_s3:"ナラティブ・インスタンスダンジョン",
+    proj3_s1:"釜山リニアマップ設計",
+    proj3_s2:"ギミック組み合わせ戦略ステージ",
     mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
     mod1_title:"GoT: King's Road — レベルデザインワークフロー",
     mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
@@ -2112,8 +1607,8 @@ const I18N = {
     c_t2_s1_d:"単純にスペックで押し切る一般ステージとは異なり、特殊ギミックを組み合わせて戦略的なプレイを要求するよう設計しました。手動操作と自動操作ユーザーの動線を意図的に分離し、多彩なステージを大量に創出しました。",
     phil_title:"レベルデザイン哲学",
     contact_title:"連絡先",
-    contact_location:"ソウル、韓国 / カンソ区カンソロ231",
-    tech_stack_title:"コアテックスタック & ツール",
+    contact_location:"ソウル特別市 江西区 (韓国)",
+    tech_stack_title:"TOOLS &amp; SKILLS",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -2127,14 +1622,6 @@ const I18N = {
     tb_openworld:"オープンワールドデザイン",
     tb_leveldesign:"レベルデザイン",
     footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
-    hero_zoom_hint:"クリックで拡大",
-    cap0:"ハレンの巨城 — 最終ボスゾーン",
-    cap1:"ハレンの巨城 — 通路ゾーン",
-    cap2:"ハレンの巨城 — 最終ボスゾーン (Data Layer切替後)",
-    cap3:"CLOSERS RT — 江南フィールド",
-    cap4:"RE:MEMENTO — アリーナ",
-    cap5:"RE:MEMENTO — 最終ボス戦",
-    cap6:"RE:MEMENTO — 紅炎城",
     tag_ow_policy:"OW配置ポリシー",
     tag_instance:"インスタンスダンジョン",
     tag_gimmick:"ギミック設計",
@@ -2182,18 +1669,16 @@ const I18N = {
     hc3_t2:"リアルタイム戦略戦闘",
     hc3_t3:"戦術オブジェクト",
     hc3_t4:"難易度調整",
-    phil1_num:"1. ナラティブに基づく世界設計",
+    phil1_num:"ナラティブに基づく世界設計",
     phil1_title:"空間に物語を語らせる",
     phil1_desc:"廃墟となったキャスタミアで凄惨な襲撃の痕跡を感じ、崩れ落ちたハレンの巨城でドラゴンの破壊力を予感できるように、環境そのものが世界観を伝える『環境ストーリーテリング』を追求します。",
-    phil2_num:"2. 予測不能な体験の設計",
+    phil2_num:"予測不能な体験の設計",
     phil2_title:"予測不能なイベントで最高の体験を",
     phil2_desc:"ハレンの巨城のレイド中に床が崩れて新たな環境と雰囲気が生まれ、壊れた遺跡のトリガーを作動させると地図にない地下遺跡が見つかるなど、予測不能な体験が生まれる柔軟なレベルを目指します。",
-    phil3_num:"3. データ・ロジック・AIに基づく設計",
+    phil3_num:"データ・ロジック・AIに基づく設計",
     phil3_title:"AIとデータで設計のスピードと深さを高める",
     phil3_desc:"BTロジックや条件に応じたData Layer切り替えなどのシステム的な設計に、Claude Code・MCPを連携したAI制作パイプラインを加え、企画書からダミーレベルのモックアップまでを素早く反復します。この方法で大型狩場2種・ダンジョン3種・ナラティブレベル1種を1ヶ月で完成させ、チーム全体で使えるAIレベルデザインプロセスを構築しています。",
     contact_tagline:"新しい世界を<br>共に設計する<br><span>機会をお待ちしています。</span>",
-    copy_hint:"クリックでコピー",
-    copied:"コピーしました",
     to_top:"トップへ",
     exp0_year:"2026.10 — 在職中",
     exp0_game:"ダークプリースト (DP)",
@@ -2207,37 +1692,49 @@ const I18N = {
     hc_dp_w3:"<strong>汎用AIレベル制作ツール:</strong> Claude CodeとMCPをローカル環境に連携し、企画書作成からダミーレベルのモックアップまでをつなぐ自社ツールを開発。最新のレベルデザイントレンドと標準化された資料フォーマットを継続的に学習させ、ジャンルを問わず素早くプロトタイピングできるよう改良。このツールで上記の狩場・ダンジョン・ナラティブレベルを短期間で制作し、アートパートとの発注・協業スピードを大幅に短縮。チーム内のAI活用レベルデザインプロセスの拡大に貢献。",
     hc_dp_t1:"狩場・ダンジョン企画",
     hc_dp_t5:"アート発注",
-    reel_label:"プレイ映像",
-    chip_gt:"ゴールデン・トゥース",
-    chip_hh:"ハレンの巨城",
     reel_gt:"ゴールデン・トゥース &amp; キャスタミア · オープンワールドのクエスト動線 (3:20)",
     reel_hh:"ハレンの巨城 · 4人Co-opレイド動線 (1:58)",
     k_vid_gt:"プレイ映像 · ゴールデン・トゥース &amp; キャスタミアのクエスト動線",
     k_vid_hh:"プレイ映像 · ハレンの巨城 4人Co-opレイド動線",
     yt_open:"YouTubeで見る",
-    reel_min:"最小化",
-    reel_restore:"動画を開く"
+    sc_compare:"キャスタミア · ゲーム・オブ・スローンズ: King's Road — 左右にドラッグしてUE5モックアップと最終インゲームを比較できます。",
+    toast_copied:"コピーしました",
+    sp_ko_1:"ゴールデン・トゥース · キャスタミア",
+    sp_ko_2:"3.5ヶ月",
+    sp_ko_3:"Unreal Engine 5",
+    sp_ko_4:"地形 · 植生 · クエスト動線 · フィールドコンテンツ",
+    sp_kd_1:"黒の城の戦い",
+    sp_kd_2:"UE5 Data Layer",
+    sp_kd_3:"サブレベルのロードなしのリアルタイム環境変化",
+    sp_kd_4:"プレイテスト · アートレビュー",
+    sp_kr_1:"ハレンの巨城",
+    sp_kr_2:"4人Co-op · 2:2分割動線",
+    sp_kr_3:"Data Layerによるフェーズ転換",
+    sp_kr_4:"大広間の双子ボス → 黒のハレン",
+    sp_mp_1:"シームレスオープンワールド",
+    sp_mp_2:"レベル配置ポリシー",
+    sp_mp_3:"コンテンツ · モンスター · 採集物 · 宝箱",
+    sp_mp_4:"ランドマーク · ピンポイントによる動線誘導",
+    sp_mb_1:"AI Behavior Tree",
+    sp_mb_2:"マロロン · 水の精霊 · 光の柱",
+    sp_mb_3:"BT設計 · リソース依頼書",
+    sp_md_1:"A → B → C → D の線形構造",
+    sp_md_2:"氷の洞窟に隠された神殿",
+    sp_md_3:"ナラティブに没入できる動線",
+    sp_cb_1:"破壊された釜山 · 釜山駅周辺",
+    sp_cb_2:"Unreal Engine 4",
+    sp_cb_3:"分析 → エリア設定 → ダミーレベル → ポリッシュ",
+    sp_cs_1:"5の倍数ステージに特殊ギミック",
+    sp_cs_2:"次元の裂け目 · 抑制器 · 次元圧力",
+    sp_cs_3:"Auto / Manual 動線の分離"
   },
   zh:{
     page_title:"李珍勇 | Level Designer · Unreal Open World",
-    nav_home:"首页",
-    nav_exp:"经历",
-    nav_proj:"项目",
-    nav_phil:"理念",
-    nav_contact:"联系",
-    hero_headline:"设计叙事感强烈的<span class=\"gold\">宏大开放世界</span>。",
-    hero_sub:"专注于大型开放世界和AAA级环境设计的关卡设计师李珍勇。曾在Netmarble Neo负责<strong>权力的游戏：王者之路</strong>的关卡设计，目前在新项目<strong>Dark Priest (DP)</strong>中运用基于Claude Code·MCP的AI关卡制作流程设计狩猎场与地下城。",
-    btn_projects:"查看项目",
-    btn_contact:"联系我",
-    stat1_num:"4+",
-    stat1_label:"年资关卡设计师",
-    stat1_sub:"Level Designer",
-    stat2_num:"已发布3款作品",
-    stat2_label:"王者之路 · RE:MEMENTO · CLOSERS RT",
-    stat2_sub:"全球发行2款 (王者之路 · RE:MEMENTO)",
-    stat3_num:"AI关卡制作流程",
-    stat3_label:"1个月完成6个关卡",
-    stat3_sub:"狩猎场2 · 地下城3 · 叙事1 (Claude Code · MCP)",
+    nav_exp:"EXPERIENCE",
+    nav_proj:"WORK",
+    nav_phil:"PHILOSOPHY",
+    nav_contact:"CONTACT",
+    hero_sub:"一直负责基于虚幻引擎5的无缝开放世界地形设计、Data Layer动态关卡演出以及4人协作突袭动线策划。目前在Netmarble Neo新项目<strong>Dark Priest (DP)</strong>中，运用基于Claude Code·MCP的AI关卡制作流程设计狩猎场与地下城。",
     exp_title:"主要经历",
     exp1_year:"2025.06 — 2026.10",
     exp1_company:"NETMARBLE NEO",
@@ -2260,31 +1757,15 @@ const I18N = {
     exp4_role:"Level Designer",
     exp4_desc:"75+关卡/区域布局设计，Top-down蓝图预验证流程，专职QA处理，突袭策略制定。",
     btn_collapse:"返回时间线",
-    dd_title:"项目详细作品集（工作内容）",
-    dd_hint:"点击卡片可深入探索设计意图、文档图像和玩家体验分析。",
-    dd_btn1:"深入探索",
-    dd_btn_hint1:"点击深入了解",
-    dd_btn2:"深入探索",
-    dd_btn_hint2:"点击深入了解",
-    dd_btn3:"深入探索",
-    dd_btn_hint3:"点击深入了解",
-    proj1_badge:"NETMARBLE NEO · 2025~26",
-    proj1_eye:"PROJECT 01 · OPEN WORLD ARPG · UE5",
-    proj1_title:"权力的游戏：王者之路<br><span>开放世界关卡设计与数据层演出</span>",
-    proj1_s1:"🗺️ 基于原著IP的无缝开放世界地形与植被设计",
-    proj1_s2:"🎬 基于剧情的地形变化与数据层(Data Layer)演出",
-    proj1_s3:"⚔️ 协作突袭动线设计与地形变化构建的动态竞技场",
-    proj2_badge:"BLACKSTORM · 2024~25",
-    proj2_eye:"PROJECT 02 · OPEN WORLD RPG · UE5",
-    proj2_title:"RE:MEMENTO<br><span>开放世界野外设计 & 系统架构</span>",
-    proj2_s1:"🌍 根据区域主题制定开放世界关卡布置策略",
-    proj2_s2:"🦌 基于AI BT的生态系统及互动谜题设计",
-    proj2_s3:"🗝️ 以叙事为中心的线性副本关卡及机关设计",
-    proj3_badge:"NADDIC GAMES · 2022~23",
-    proj3_eye:"PROJECT 03 · STAGE DESIGN · UE4",
-    proj3_title:"CLOSERS RT<br><span>利用机关进行战略关卡设计</span>",
-    proj3_s1:"🏙️ 基于实际背景(釜山)的线性结构地图及动线设计",
-    proj3_s2:"⚖️ 通过组合机关高效产出战略关卡",
+    dd_title:"代表项目",
+    proj1_s1:"无缝开放世界野外",
+    proj1_s2:"数据层演出",
+    proj1_s3:"4人协作突袭",
+    proj2_s1:"开放世界布置策略",
+    proj2_s2:"BT生态 · 谜题机关",
+    proj2_s3:"叙事副本",
+    proj3_s1:"釜山线性地图设计",
+    proj3_s2:"机关组合战略关卡",
     mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
     mod1_title:"权力的游戏：王者之路 — 关卡设计工作流",
     mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
@@ -2336,8 +1817,8 @@ const I18N = {
     c_t2_s1_d:"与单纯依靠数值的普通关卡不同，设计了组合特殊机关要求战略游玩的关卡。通过有意分离手动和自动玩家的动线，在有限的资源内大量产出了多样的关卡。",
     phil_title:"关卡设计理念",
     contact_title:"联系方式",
-    contact_location:"首尔，韩国 / 江西区江西路231",
-    tech_stack_title:"核心技术栈 & 工具",
+    contact_location:"首尔特别市 江西区 (韩国)",
+    tech_stack_title:"TOOLS &amp; SKILLS",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -2351,14 +1832,6 @@ const I18N = {
     tb_openworld:"开放世界设计",
     tb_leveldesign:"关卡设计",
     footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
-    hero_zoom_hint:"点击放大",
-    cap0:"赫伦堡 — 最终Boss区域",
-    cap1:"赫伦堡 — 通道区域",
-    cap2:"赫伦堡 — 最终Boss区域 (Data Layer切换后)",
-    cap3:"CLOSERS RT — 江南区域",
-    cap4:"RE:MEMENTO — 竞技场",
-    cap5:"RE:MEMENTO — 最终Boss战",
-    cap6:"RE:MEMENTO — 红焰城",
     tag_ow_policy:"开放世界布置策略",
     tag_instance:"副本",
     tag_gimmick:"机关设计",
@@ -2406,18 +1879,16 @@ const I18N = {
     hc3_t2:"即时战略战斗",
     hc3_t3:"战术物件",
     hc3_t4:"难度平衡",
-    phil1_num:"1. 基于叙事的世界设计",
+    phil1_num:"基于叙事的世界设计",
     phil1_title:"让空间讲述故事",
     phil1_desc:"正如在化为废墟的卡斯特梅感受到惨烈袭击的痕迹、在崩塌的赫伦堡预感到巨龙的毁灭之力，我追求由环境本身传递世界观的“环境叙事(Environmental Storytelling)”。",
-    phil2_num:"2. 设计不可预测的体验",
+    phil2_num:"设计不可预测的体验",
     phil2_title:"用不可预测的事件带来最佳体验",
     phil2_desc:"赫伦堡突袭中地面崩塌带来全新的环境与氛围，在破碎遗迹中触发机关便能发现地图上没有的地下遗迹——我追求能诞生不可预测体验的灵活关卡。",
-    phil3_num:"3. 基于数据·逻辑·AI的设计",
+    phil3_num:"基于数据·逻辑·AI的设计",
     phil3_title:"用AI与数据提升设计的速度与深度",
     phil3_desc:"在BT逻辑、按条件切换Data Layer等系统化设计之上，加入联动Claude Code·MCP的AI制作流程，从策划文档到Dummy关卡原型快速迭代。以此方式在1个月内完成大型狩猎场2个、地下城3个、叙事关卡1个，并正在打造全团队可共用的AI关卡设计流程。",
     contact_tagline:"期待与您<br>共同设计<br><span>新的世界。</span>",
-    copy_hint:"点击复制",
-    copied:"已复制",
     to_top:"返回顶部",
     exp0_year:"2026.10 — 在职",
     exp0_game:"Dark Priest (DP)",
@@ -2431,22 +1902,46 @@ const I18N = {
     hc_dp_w3:"<strong>通用AI关卡制作工具:</strong> 将Claude Code与MCP接入本地环境，开发从策划文档编写到Dummy关卡原型全流程的自研工具。持续学习最新关卡设计趋势与标准化文档格式，使其可不限类型快速制作原型。借助该工具在短期内产出上述狩猎场、地下城与叙事关卡，并大幅缩短与美术的需求对接与协作时间，推动团队内AI关卡设计流程的推广。",
     hc_dp_t1:"狩猎场·地下城策划",
     hc_dp_t5:"美术需求",
-    reel_label:"实机视频",
-    chip_gt:"金牙城",
-    chip_hh:"赫伦堡",
     reel_gt:"金牙城 &amp; 卡斯特梅 · 开放世界任务动线 (3:20)",
     reel_hh:"赫伦堡 · 4人协作突袭动线 (1:58)",
     k_vid_gt:"实机视频 · 金牙城 &amp; 卡斯特梅任务动线",
     k_vid_hh:"实机视频 · 赫伦堡4人协作突袭动线",
     yt_open:"在YouTube观看",
-    reel_min:"最小化",
-    reel_restore:"展开视频"
+    sc_compare:"卡斯特梅 · 权力的游戏：王者之路 — 左右拖动即可比较UE5白盒与最终游戏画面。",
+    toast_copied:"已复制",
+    sp_ko_1:"金牙城 · 卡斯特梅",
+    sp_ko_2:"3.5个月",
+    sp_ko_3:"Unreal Engine 5",
+    sp_ko_4:"地形 · 植被 · 任务动线 · 野外内容",
+    sp_kd_1:"黑城堡之战",
+    sp_kd_2:"UE5 Data Layer",
+    sp_kd_3:"无需加载子关卡的实时环境变化",
+    sp_kd_4:"游戏测试 · 美术评审",
+    sp_kr_1:"赫伦堡",
+    sp_kr_2:"4人协作 · 2:2分路动线",
+    sp_kr_3:"Data Layer阶段切换",
+    sp_kr_4:"大宴会厅双子Boss → 黑心赫伦",
+    sp_mp_1:"无缝开放世界",
+    sp_mp_2:"关卡布置策略",
+    sp_mp_3:"内容 · 怪物 · 采集物 · 宝箱",
+    sp_mp_4:"地标 · 指引点动线引导",
+    sp_mb_1:"AI Behavior Tree",
+    sp_mb_2:"马洛隆 · 水之精灵 · 光之柱",
+    sp_mb_3:"BT设计 · 资源需求文档",
+    sp_md_1:"A → B → C → D 线性结构",
+    sp_md_2:"隐藏在冰洞中的神殿",
+    sp_md_3:"沉浸式叙事动线",
+    sp_cb_1:"被摧毁的釜山 · 釜山站一带",
+    sp_cb_2:"Unreal Engine 4",
+    sp_cb_3:"分析 → 区域设定 → Dummy关卡 → 打磨",
+    sp_cs_1:"每逢5的倍数关卡加入特殊机关",
+    sp_cs_2:"次元裂缝 · 抑制器 · 次元压力",
+    sp_cs_3:"Auto / Manual 动线分离"
   }
 };
 
 /* ==================== LANGUAGE ==================== */
 let currentLang = 'ko';
-const LANG_LABELS = {ko:'KOR', en:'ENG', ja:'JPN', zh:'CHN'};
 const t = (key) => (I18N[currentLang] && I18N[currentLang][key] !== undefined) ? I18N[currentLang][key] : I18N.ko[key];
 
 function setLang(lang){
@@ -2463,102 +1958,102 @@ function setLang(lang){
     if(v !== undefined) el.title = v;
   });
   if(dict.page_title) document.title = dict.page_title;
-  document.getElementById('langLabel').textContent = LANG_LABELS[lang];
-  document.querySelectorAll('.lang-dropdown button').forEach(btn => {
-    btn.classList.toggle('active-lang', btn.dataset.lang === lang);
-  });
-  Hero.refreshCaption();
-  langDropdown.classList.remove('open');
+  document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active-lang', b.dataset.lang === lang));
 }
-
-const langDropdown = document.getElementById('langDropdown');
-document.getElementById('langBtn').addEventListener('click', e => {
-  e.stopPropagation();
-  langDropdown.classList.toggle('open');
-});
-langDropdown.querySelectorAll('button').forEach(btn => {
-  btn.addEventListener('click', () => setLang(btn.dataset.lang));
-});
-
-/* ==================== BACKGROUND STARS ==================== */
-(function(){
-  const c = document.getElementById('stars');
-  for(let i = 0; i < 90; i++){
-    const s = document.createElement('span');
-    const sz = Math.random() * 2 + .8;
-    s.style.cssText = 'width:'+sz+'px;height:'+sz+'px;top:'+Math.random()*100+'%;left:'+Math.random()*100+'%;'+
-      '--d:'+(3+Math.random()*5)+'s;--delay:-'+(Math.random()*8)+'s;--op:'+(0.15+Math.random()*.65)+';';
-    c.appendChild(s);
-  }
-})();
+document.querySelectorAll('.lang-switch button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
 /* ==================== NAV ACTIVE LINK ==================== */
 const sections = document.querySelectorAll('section[id]');
-const navLinks = document.querySelectorAll('nav a[href^="#"]');
-window.addEventListener('scroll', () => {
+const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+function updateNav(){
   const y = window.scrollY; let cur = '';
-  sections.forEach(s => { if(y >= s.offsetTop - 130) cur = s.id; });
+  sections.forEach(s => { if(y >= s.offsetTop - 140) cur = s.id; });
   navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + cur));
-}, {passive:true});
+}
+window.addEventListener('scroll', updateNav, {passive:true});
 
 /* ==================== SCROLL FADE-IN ==================== */
 const fadeObserver = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if(e.isIntersecting){ e.target.classList.add('visible'); fadeObserver.unobserve(e.target); }
-  });
-}, {threshold:.1});
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
+}, {threshold:.08});
 document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-/* ==================== HERO SLIDESHOW + LIGHTBOX ==================== */
-const Hero = (function(){
-  const slides = document.querySelectorAll('.hero-bg-slide');
-  const caption = document.getElementById('heroCaption');
-  const slider = document.getElementById('heroBgSlider');
-  const lb = document.getElementById('heroLightbox');
-  const lbImg = document.getElementById('lightboxImg');
-  const lbCap = document.getElementById('lightboxCaption');
-  const INTERVAL = 2500;
-  let cur = 0, timer = null;
-
-  // Slides 2+ are loaded only after the page has finished loading
-  window.addEventListener('load', () => {
-    slides.forEach(s => { if(s.dataset.bg) s.style.backgroundImage = "url('" + s.dataset.bg + "')"; });
+/* ==================== VIDEO PLAYERS ==================== */
+// The YouTube player is created only on click, so the page stays light until someone wants to watch.
+function playVideo(el){
+  if(el.classList.contains('playing')) return;
+  el._facade = el.innerHTML;
+  el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + el.dataset.yt +
+    '?autoplay=1&rel=0&playsinline=1" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
+  el.classList.add('playing');
+}
+function stopVideos(root){
+  (root || document).querySelectorAll('.yt-facade.playing').forEach(el => {
+    el.innerHTML = el._facade;
+    el.classList.remove('playing');
+    el.querySelectorAll('[data-i18n]').forEach(x => { const v = t(x.dataset.i18n); if(v !== undefined) x.innerHTML = v; });
   });
+}
+document.querySelectorAll('.yt-facade').forEach(el => {
+  el.addEventListener('click', () => playVideo(el));
+  el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); playVideo(el); } });
+});
+// mp4 clips (converted GIFs) play only while visible
+(function(){
+  const videos = document.querySelectorAll('video[data-src]');
+  if(!videos.length) return;
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(({target: v, isIntersecting}) => {
+      if(isIntersecting){ if(!v.src) v.src = v.dataset.src; v.play().catch(() => {}); }
+      else v.pause();
+    });
+  }, {threshold:.15});
+  videos.forEach(v => io.observe(v));
+})();
 
-  const slideSrc = (i) => slides[i].dataset.bg || (slides[i].style.backgroundImage.match(/url\(['"]?(.*?)['"]?\)/) || [])[1] || '';
-  const refreshCaption = () => {
-    if(caption) caption.textContent = t('cap' + cur);
-    if(lbCap) lbCap.textContent = t('cap' + cur);
-  };
-  function show(i){
-    slides[cur].classList.remove('active');
-    cur = (i + slides.length) % slides.length;
-    slides[cur].classList.add('active');
-    refreshCaption();
-  }
-  const start = () => { clearInterval(timer); timer = setInterval(() => show(cur + 1), INTERVAL); };
-  const stop = () => clearInterval(timer);
+/* ==================== HERO SHOWCASE ==================== */
+// Before/after slider: a transparent range input covers the image, so mouse drag, touch and keyboard all work natively.
+(function(){
+  const ba = document.getElementById('baSlider');
+  const range = document.getElementById('baRange');
+  const set = () => ba.style.setProperty('--pos', range.value + '%');
+  range.addEventListener('input', set);
+  set();
 
-  function openLightbox(){
-    stop();
-    lbImg.src = slideSrc(cur);
-    refreshCaption();
+  const frame = document.getElementById('showcaseFrame');
+  const reel = document.getElementById('heroReel');
+  const cap = document.getElementById('showcaseCap');
+  document.querySelectorAll('.sc-tab').forEach(tab => tab.addEventListener('click', () => {
+    if(tab.classList.contains('active')) return;
+    document.querySelectorAll('.sc-tab').forEach(x => x.classList.toggle('active', x === tab));
+    stopVideos(frame);
+    const isVideo = tab.dataset.view === 'video';
+    ba.hidden = isVideo;
+    reel.hidden = !isVideo;
+    if(isVideo){
+      reel.dataset.yt = tab.dataset.yt;
+      reel.querySelector('img').src = tab.dataset.thumb;
+    }
+    cap.dataset.i18n = tab.dataset.cap;
+    cap.innerHTML = t(tab.dataset.cap);
+  }));
+})();
+
+/* ==================== LIGHTBOX (modal images) ==================== */
+const Lightbox = (function(){
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightboxImg');
+  const cap = document.getElementById('lightboxCaption');
+  function open(src, caption){
+    img.src = src; img.alt = caption || '';
+    cap.textContent = caption || '';
     lb.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
-  function closeLightbox(){
-    lb.classList.remove('open');
-    document.body.style.overflow = '';
-    start();
-  }
-
-  if(slides.length){
-    slider.addEventListener('click', openLightbox);
-    document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
-    lb.addEventListener('click', e => { if(e.target === lb) closeLightbox(); });
-    start();
-  }
-  return { refreshCaption, closeLightbox, isLightboxOpen: () => lb.classList.contains('open') };
+  function close(){ lb.classList.remove('open'); }
+  document.getElementById('lightboxClose').addEventListener('click', close);
+  lb.addEventListener('click', e => { if(e.target === lb) close(); });
+  document.querySelectorAll('.wf-img-wrap img').forEach(im => im.addEventListener('click', () => open(im.currentSrc || im.src, im.alt)));
+  return { close, isOpen: () => lb.classList.contains('open') };
 })();
 
 /* ==================== EXPERIENCE: TIMELINE + HIGHLIGHT PANEL ==================== */
@@ -2585,18 +2080,14 @@ const Hero = (function(){
     stopVideos(expDynamic);
     items.forEach(it => it.classList.remove('active'));
   }
-
   items.forEach((item, i) => {
     const toggle = () => (item.classList.contains('active') && expDynamic.classList.contains('shifted')) ? collapse() : expand(i);
     item.addEventListener('click', toggle);
     item.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); toggle(); } });
   });
-  dots.forEach((dot, i) => dot.addEventListener('click', () => {
-    if(expDynamic.classList.contains('shifted')) showPanel(i);
-  }));
+  dots.forEach((dot, i) => dot.addEventListener('click', () => { if(expDynamic.classList.contains('shifted')) showPanel(i); }));
   document.getElementById('panelCloseBtn').addEventListener('click', collapse);
-
-  window.expandExp = expand;      // kept for debugging from the console
+  window.expandExp = expand;
   window.collapseExp = collapse;
 })();
 
@@ -2620,100 +2111,35 @@ function switchModalTab(modalId, panelId, tabEl){
   const content = document.getElementById('content-' + modalId);
   if(content) content.scrollTop = 0;
 }
-
-document.querySelectorAll('.proj-card[data-modal]').forEach(card => {
-  const open = () => openModal(card.dataset.modal);
-  card.addEventListener('click', open);
-  card.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); } });
+// project cards and the hero quick-jump buttons
+document.querySelectorAll('[data-modal]').forEach(el => {
+  const open = () => openModal(el.dataset.modal);
+  el.addEventListener('click', open);
+  el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); } });
 });
 document.querySelectorAll('.modal-tab[data-panel]').forEach(tab => {
   const modalId = tab.closest('.modal-tabs').id.replace('tabs-', '');
   tab.addEventListener('click', () => switchModalTab(modalId, tab.dataset.panel, tab));
 });
-
-/* ==================== GLOBAL CLICK / KEYBOARD ==================== */
 document.addEventListener('click', e => {
-  langDropdown.classList.remove('open');
   const closeBtn = e.target.closest('.modal-close');
   if(closeBtn){ closeModal(closeBtn.closest('.modal-dimmer').id.replace('modal-', '')); return; }
   if(e.target.classList.contains('modal-dimmer')) closeModal(e.target.id.replace('modal-', ''));
 });
 document.addEventListener('keydown', e => {
   if(e.key !== 'Escape') return;
-  if(Hero.isLightboxOpen()) Hero.closeLightbox();
+  if(Lightbox.isOpen()){ Lightbox.close(); return; }
   document.querySelectorAll('.modal-dimmer.open').forEach(m => closeModal(m.id.replace('modal-', '')));
 });
 
-/* ==================== MODAL VIDEOS (converted from GIF) ==================== */
-// Videos play only while visible, so hidden modals never download/decode them.
-(function(){
-  const videos = document.querySelectorAll('video[data-src]');
-  if(!videos.length) return;
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(({target: v, isIntersecting}) => {
-      if(isIntersecting){
-        if(!v.src){ v.src = v.dataset.src; }
-        v.play().catch(() => {});
-      } else {
-        v.pause();
-      }
-    });
-  }, {threshold:.15});
-  videos.forEach(v => io.observe(v));
-})();
-
-/* ==================== VIDEO PLAYERS ==================== */
-// The YouTube player is only created on click, so the page stays light until someone actually wants to watch.
-function playVideo(el){
-  if(el.classList.contains('playing')) return;
-  el._facade = el.innerHTML;
-  el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + el.dataset.yt +
-    '?autoplay=1&rel=0&playsinline=1" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
-  el.classList.add('playing');
+/* ==================== CONTACT: COPY + TOAST ==================== */
+const toast = document.getElementById('toast');
+function showToast(msg){
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 1800);
 }
-function stopVideos(root){
-  (root || document).querySelectorAll('.yt-facade.playing').forEach(el => {
-    el.innerHTML = el._facade;
-    el.classList.remove('playing');
-    el.querySelectorAll('[data-i18n]').forEach(x => { const v = t(x.dataset.i18n); if(v !== undefined) x.innerHTML = v; });
-  });
-}
-document.querySelectorAll('.yt-facade').forEach(el => {
-  el.addEventListener('click', () => playVideo(el));
-  el.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); playVideo(el); } });
-});
-// Hero card: minimize / restore
-(function(){
-  const card = document.querySelector('.hero-reel');
-  const btn = document.getElementById('reelMinBtn');
-  const icon = btn.querySelector('i');
-  function setMin(min){
-    card.classList.toggle('minimized', min);
-    if(min) stopVideos(card);
-    icon.className = min ? 'fa fa-expand-alt' : 'fa fa-minus';
-    btn.dataset.i18nTitle = min ? 'reel_restore' : 'reel_min';
-    btn.title = t(btn.dataset.i18nTitle);
-    btn.setAttribute('aria-expanded', String(!min));
-  }
-  btn.addEventListener('click', () => setMin(!card.classList.contains('minimized')));
-  document.getElementById('reelLabel').addEventListener('click', () => { if(card.classList.contains('minimized')) setMin(false); });
-})();
-// Hero card: switch between the two route videos
-(function(){
-  const reel = document.getElementById('heroReel');
-  const cap = document.getElementById('heroReelCap');
-  document.querySelectorAll('.reel-chip').forEach(chip => chip.addEventListener('click', () => {
-    if(chip.classList.contains('active')) return;
-    document.querySelectorAll('.reel-chip').forEach(c => c.classList.toggle('active', c === chip));
-    stopVideos(reel.parentElement);
-    reel.dataset.yt = chip.dataset.yt;
-    reel.querySelector('img').src = chip.dataset.thumb;
-    cap.dataset.i18n = chip.dataset.cap;
-    cap.innerHTML = t(chip.dataset.cap);
-  }));
-})();
-
-/* ==================== CONTACT: COPY TO CLIPBOARD ==================== */
 // Fallback for browsers / in-app webviews that block the async Clipboard API
 function legacyCopy(text){
   const ta = document.createElement('textarea');
@@ -2725,25 +2151,15 @@ function legacyCopy(text){
   ta.remove();
   return ok;
 }
-document.querySelectorAll('.ci-row[data-copy]').forEach(row => {
-  const done = () => {
-    row.classList.add('copied');
-    clearTimeout(row._copyTimer);
-    row._copyTimer = setTimeout(() => row.classList.remove('copied'), 1600);
-  };
-  const copy = () => {
-    const text = row.dataset.copy;
-    const fallback = () => { if(legacyCopy(text)) done(); };
-    if(navigator.clipboard && window.isSecureContext){
-      navigator.clipboard.writeText(text).then(done, fallback);
-    } else {
-      fallback();
-    }
-  };
-  row.addEventListener('click', copy);
-  row.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); copy(); } });
-});
+document.querySelectorAll('.ci-copy[data-copy]').forEach(btn => btn.addEventListener('click', () => {
+  const text = btn.dataset.copy;
+  const done = () => showToast(t('toast_copied') + ' — ' + text);
+  const fallback = () => { if(legacyCopy(text)) done(); };
+  if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
+  else fallback();
+}));
 document.getElementById('toTopBtn').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+updateNav();
 </script>
 </body>
 </html>
