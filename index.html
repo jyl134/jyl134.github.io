@@ -26,15 +26,16 @@
    One restrained accent for indices, active states and the slider.
    ===================================================================== */
 :root{
-  --bg-base:#121316;
-  --bg-surface:#181a1f;
-  --bg-elevated:#20232a;
-  --border-hairline:#282c34;
-  --border-strong:#383e4a;
+  /* neutrals tinted slightly warm (tungsten) instead of default cool grey */
+  --bg-base:#141312;
+  --bg-surface:#1a1917;
+  --bg-elevated:#22201d;
+  --border-hairline:#2b2925;
+  --border-strong:#3c3934;
 
-  --ink-primary:#edeff2;
-  --ink-secondary:#9ba2b0;
-  --ink-muted:#6b7280;
+  --ink-primary:#eeebe5;
+  --ink-secondary:#a39d94;
+  --ink-muted:#78736b;
 
   --accent:#c49b66;
   --accent-dim:rgba(196,155,102,.22);
@@ -74,10 +75,10 @@ section{position:relative;}
 /* ==================== NAV ==================== */
 nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;background:var(--bg-base);border-bottom:1px solid var(--border-hairline);}
 .nav-inner{max-width:1360px;height:100%;margin:0 auto;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.brand{font-family:var(--font-en);font-weight:700;font-size:.82rem;letter-spacing:.08em;color:var(--ink-primary);text-decoration:none;white-space:nowrap;}
+.brand{font-family:var(--font-en);font-weight:600;font-size:.82rem;letter-spacing:.04em;color:var(--ink-primary);text-decoration:none;white-space:nowrap;}
 .brand span{color:var(--ink-muted);font-weight:500;}
 .nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{font-family:var(--font-en);font-size:.72rem;font-weight:600;letter-spacing:.1em;color:var(--ink-secondary);text-decoration:none;
+.nav-links a{font-family:var(--font-en);font-size:.72rem;font-weight:500;letter-spacing:.05em;color:var(--ink-secondary);text-decoration:none;
   padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
 .nav-links a:hover{color:var(--ink-primary);}
 .nav-links a.active{color:var(--ink-primary);border-bottom-color:var(--accent);}
@@ -93,14 +94,14 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 #experience,#deepdive,#philosophy,#contact{padding:96px 0;border-top:1px solid var(--border-hairline);}
 .sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--border-hairline);}
 .sec-idx{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);}
-.sec-en{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;color:var(--ink-muted);}
-.sec-head h2{flex-basis:100%;font-size:clamp(1.5rem,2.4vw,2rem);font-weight:700;letter-spacing:-.01em;line-height:1.3;margin-top:6px;}
+.sec-en{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--ink-muted);}
+.sec-head h2{flex-basis:100%;font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-top:6px;}
 
 /* ==================== HERO ==================== */
 #hero{padding:calc(var(--nav-h) + 56px) 0 72px;}
 .hero-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;padding-bottom:32px;margin-bottom:28px;border-bottom:1px solid var(--border-hairline);}
-.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.14em;color:var(--accent);margin-bottom:14px;}
-.hero-name{font-family:var(--font-en);font-weight:800;font-size:clamp(2.4rem,5.2vw,4.2rem);letter-spacing:-.02em;line-height:1;margin-bottom:20px;}
+.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;color:var(--accent);margin-bottom:14px;}
+.hero-name{font-family:var(--font-en);font-weight:600;font-size:clamp(2.4rem,5.2vw,4.2rem);letter-spacing:-.02em;line-height:1;margin-bottom:20px;}
 .hero-name .ko{font-family:var(--font-ko);font-weight:500;font-size:.36em;letter-spacing:0;color:var(--ink-secondary);margin-left:14px;vertical-align:middle;}
 .hero-sub{max-width:680px;font-size:.98rem;line-height:1.8;color:var(--ink-secondary);}
 .hero-sub strong{color:var(--ink-primary);font-weight:600;}
@@ -108,8 +109,8 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .hero-meta{display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--border-hairline);border-radius:var(--radius-md);}
 .hero-meta > div{padding:14px 20px;border-right:1px solid var(--border-hairline);}
 .hero-meta > div:last-child{border-right:0;}
-.hero-meta dt{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.1em;color:var(--ink-muted);margin-bottom:6px;white-space:nowrap;}
-.hero-meta dd{font-family:var(--font-en);font-weight:700;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;}
+.hero-meta dt{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.03em;color:var(--ink-muted);margin-bottom:6px;white-space:nowrap;}
+.hero-meta dd{font-family:var(--font-en);font-weight:600;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;}
 
 /* Showcase: before/after slider + gameplay videos */
 .showcase-tabs{display:flex;width:max-content;max-width:100%;overflow-x:auto;border:1px solid var(--border-hairline);border-bottom:0;border-radius:var(--radius-md) var(--radius-md) 0 0;}
@@ -126,9 +127,9 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0);}
 .ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--ink-primary);pointer-events:none;}
 .ba-handle span{position:absolute;top:50%;left:50%;width:38px;height:38px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;
-  background:rgba(18,19,22,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:.8rem;}
+  background:rgba(20,19,18,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:.8rem;}
 .ba-label{position:absolute;bottom:14px;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;color:var(--ink-primary);
-  background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:5px 9px;pointer-events:none;}
+  background:rgba(20,19,18,.88);border:1px solid var(--border-strong);border-radius:3px;padding:5px 9px;pointer-events:none;}
 .ba-label.left{left:14px;}
 .ba-label.right{right:14px;}
 .ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;}
@@ -141,7 +142,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .quick-jump button:last-child{border-right:0;}
 .quick-jump button:hover,.quick-jump button:focus-visible{background:var(--bg-surface);}
 .qj-idx{font-family:var(--font-mono);font-size:.68rem;color:var(--accent);}
-.qj-t{font-family:var(--font-en);font-weight:700;font-size:.95rem;letter-spacing:.04em;}
+.qj-t{font-family:var(--font-en);font-weight:600;font-size:.95rem;letter-spacing:.04em;}
 .qj-s{font-family:var(--font-mono);font-size:.64rem;color:var(--ink-muted);}
 .quick-jump .fa{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--ink-muted);transition:color .15s,transform .15s;}
 .quick-jump button:hover .fa{color:var(--ink-primary);transform:translate(3px,-50%);}
@@ -165,7 +166,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .company-logo-box img{display:block;width:100%;height:100%;object-fit:contain;padding:4px;mix-blend-mode:multiply;}
 .exp-year{font-family:var(--font-en);font-size:.76rem;font-weight:500;color:var(--ink-secondary);}
 .exp-company{font-family:var(--font-en);font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--ink-muted);text-transform:uppercase;}
-.exp-game-title{font-size:1.2rem;font-weight:700;line-height:1.35;margin-bottom:8px;transition:font-size .3s;}
+.exp-game-title{font-size:1.2rem;font-weight:600;line-height:1.35;margin-bottom:8px;transition:font-size .3s;}
 .exp-role-badge{margin-bottom:10px;}
 .exp-desc{font-size:.88rem;color:var(--ink-secondary);line-height:1.75;transition:opacity .25s,max-height .3s;}
 .exp-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px;transition:opacity .25s;}
@@ -190,7 +191,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .hc-panel{display:none;}
 .hc-panel.hc-visible{display:block;}
 .hc-panel-year{font-family:var(--font-en);font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:6px;}
-.hc-panel-title{font-size:1.3rem;font-weight:700;line-height:1.35;margin-bottom:16px;}
+.hc-panel-title{font-size:1.3rem;font-weight:600;line-height:1.35;margin-bottom:16px;}
 .hc-panel-sub{font-family:var(--font-mono);font-size:.66rem;font-weight:400;letter-spacing:.04em;color:var(--ink-muted);}
 .hc-game-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-sm);margin-bottom:16px;}
 .hc-game-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
@@ -212,11 +213,11 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .2s;}
 .yt-facade:hover img{filter:brightness(.8);}
 .yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;display:flex;align-items:center;justify-content:center;
-  background:rgba(18,19,22,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:1rem;padding-left:3px;
+  background:rgba(20,19,18,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:1rem;padding-left:3px;
   transition:background .15s,color .15s;pointer-events:none;}
 .yt-facade:hover .yt-play,.yt-facade:focus-visible .yt-play{background:var(--ink-primary);color:var(--bg-base);}
 .yt-label{position:absolute;left:12px;bottom:12px;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-en);font-size:.72rem;letter-spacing:0;
-  color:var(--ink-primary);background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:4px 9px;pointer-events:none;}
+  color:var(--ink-primary);background:rgba(20,19,18,.88);border:1px solid var(--border-strong);border-radius:3px;padding:4px 9px;pointer-events:none;}
 .yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 .yt-facade.playing{cursor:default;}
 .yt-facade[hidden]{display:none;}
@@ -230,13 +231,13 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .proj-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .proj-card:hover .proj-thumb,.proj-card:focus-visible .proj-thumb{border-color:var(--ink-secondary);}
 .proj-idx{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-primary);
-  background:rgba(18,19,22,.88);border:1px solid var(--border-strong);border-radius:3px;padding:2px 7px;}
+  background:rgba(20,19,18,.88);border:1px solid var(--border-strong);border-radius:3px;padding:2px 7px;}
 .proj-info{padding-top:12px;}
-.proj-name{font-size:1.02rem;font-weight:700;line-height:1.4;}
+.proj-name{font-size:1.02rem;font-weight:600;line-height:1.4;}
 .proj-line{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.04em;color:var(--ink-muted);margin-top:4px;}
 
 /* ==================== PROJECT MODAL ==================== */
-.modal-dimmer{position:fixed;inset:0;z-index:9000;background:rgba(10,11,13,.94);display:flex;align-items:center;justify-content:center;padding:24px;
+.modal-dimmer{position:fixed;inset:0;z-index:9000;background:rgba(12,11,10,.94);display:flex;align-items:center;justify-content:center;padding:24px;
   opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s;}
 .modal-dimmer.open{opacity:1;visibility:visible;pointer-events:auto;}
 .modal-box{width:100%;max-width:1180px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;background:var(--bg-base);
@@ -244,7 +245,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .modal-dimmer.open .modal-box{transform:none;}
 .modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-hairline);flex-shrink:0;}
 .modal-header-eyebrow{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:2px;}
-.modal-header-title{font-size:1.02rem;font-weight:700;}
+.modal-header-title{font-size:1.02rem;font-weight:600;}
 .modal-close{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);
   border-radius:var(--radius-sm);color:var(--ink-secondary);font-size:.95rem;cursor:pointer;}
 .modal-close:hover{color:var(--ink-primary);border-color:var(--border-strong);}
@@ -266,7 +267,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .spec-grid{display:flex;flex-wrap:wrap;gap:1px;background:var(--border-hairline);
   border:1px solid var(--border-hairline);border-radius:var(--radius-sm);overflow:hidden;}
 .spec{flex:1 1 180px;display:flex;flex-direction:column;gap:6px;padding:12px 14px;background:var(--bg-base);}
-.spec-k{font-family:var(--font-mono);font-size:.6rem;letter-spacing:.08em;color:var(--ink-muted);}
+.spec-k{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.02em;color:var(--ink-muted);}
 .spec-v{font-size:.86rem;font-weight:500;line-height:1.5;}
 
 .wf-step{display:flex;flex-direction:column;gap:12px;}
@@ -274,7 +275,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .wf-step-num{width:28px;height:28px;flex-shrink:0;display:flex;align-items:center;justify-content:center;border:1px solid var(--border-strong);
   border-radius:3px;font-family:var(--font-mono);font-size:.7rem;color:var(--accent);}
 .wf-step-num .fa-play{font-size:.55rem;padding-left:2px;}
-.wf-step-title{font-size:.95rem;font-weight:700;}
+.wf-step-title{font-size:.95rem;font-weight:600;}
 .wf-img-wrap{position:relative;width:100%;}
 .wf-img-wrap img,.wf-img-wrap video{display:block;width:100%;object-fit:contain;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);}
 .wf-img-wrap img{cursor:zoom-in;}
@@ -282,7 +283,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .wf-divider{width:100%;height:1px;background:var(--border-hairline);}
 
 /* Lightbox */
-.lightbox-overlay{position:fixed;inset:0;z-index:19000;background:rgba(10,11,13,.96);display:flex;align-items:center;justify-content:center;
+.lightbox-overlay{position:fixed;inset:0;z-index:19000;background:rgba(12,11,10,.96);display:flex;align-items:center;justify-content:center;
   opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s,visibility .2s;}
 .lightbox-overlay.open{opacity:1;visibility:visible;pointer-events:auto;}
 .lightbox-img{max-width:94vw;max-height:86vh;object-fit:contain;display:block;border:1px solid var(--border-hairline);}
@@ -299,22 +300,22 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .phil-card:last-child{border-right:0;padding-right:0;}
 .phil-big{display:block;font-family:var(--font-mono);font-size:3rem;line-height:1;color:var(--accent);margin-bottom:22px;}
 .phil-num{font-family:var(--font-en);font-size:.74rem;font-weight:500;letter-spacing:0;color:var(--ink-muted);margin-bottom:8px;}
-.phil-title{font-size:1.15rem;font-weight:700;line-height:1.4;margin-bottom:12px;}
+.phil-title{font-size:1.15rem;font-weight:600;line-height:1.4;margin-bottom:12px;}
 .phil-desc{font-size:.88rem;line-height:1.8;color:var(--ink-secondary);}
 .tech-stack-wrap{margin-top:64px;}
-.tech-stack-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:14px;}
+.tech-stack-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:14px;}
 .tech-badge-grid{display:flex;flex-wrap:wrap;gap:8px;}
 .tech-badge{font-size:.74rem;padding:5px 10px;}
 .tech-badge.primary{color:var(--ink-primary);border-color:var(--border-strong);}
 
 /* ==================== CONTACT ==================== */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-.contact-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.12em;color:var(--ink-muted);margin-bottom:14px;}
-.contact-tagline{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:700;line-height:1.4;}
+.contact-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:14px;}
+.contact-tagline{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:600;line-height:1.4;}
 .contact-tagline span{color:var(--accent);}
 .ci-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--border-hairline);}
 .ci-row:last-child{border-bottom:1px solid var(--border-hairline);}
-.ci-label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.1em;color:var(--ink-muted);text-transform:uppercase;}
+.ci-label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.03em;color:var(--ink-muted);text-transform:uppercase;}
 .ci-text{font-size:1rem;}
 .ci-copy{background:none;border:1px solid var(--border-strong);border-radius:3px;color:var(--ink-secondary);font-family:var(--font-mono);font-size:.64rem;
   letter-spacing:.08em;padding:5px 10px;cursor:pointer;transition:color .15s,border-color .15s;}
@@ -409,7 +410,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
     <div class="hero-id">
       <div class="hero-eyebrow">LEVEL DESIGNER</div>
       <h1 class="hero-name">LEE JINYONG<span class="ko">이진용</span></h1>
-      <p class="hero-sub" data-i18n="hero_sub">언리얼 엔진 5 기반 심리스 오픈월드 지형 설계, Data Layer 동적 레벨 연출, 4인 코옵 레이드 동선을 기획해 왔습니다. 현재 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.</p>
+      <p class="hero-sub" data-i18n="hero_sub">언리얼 엔진 5로 심리스 오픈월드 지형, Data Layer 동적 레벨, 4인 코옵 레이드 동선을 설계해 왔습니다. 지금은 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP로 만든 AI 레벨 제작 파이프라인을 써서 사냥터와 던전을 설계합니다.</p>
       <div class="hero-line">Unreal Engine 5 / Open World &amp; Co-op Raid / 4.5+ Years</div>
     </div>
     <dl class="hero-meta">
@@ -565,11 +566,11 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
             <span class="hc-panel-sub">NETMARBLE NEO &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
           <div class="hc-game-thumb yt-facade" data-yt="-BfavVhJvFw" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드 trailer"><img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc0_yt">트레일러 재생</span></span></div>
-          <div class="hc-desc" data-i18n="hc0_desc">전 세계적인 인기 IP '왕좌의 게임'을 기반으로 한 심리스 오픈월드 액션 RPG입니다. 방대한 웨스테로스 대륙을 탐험하며 몰입감 있는 전투와 내러티브를 경험할 수 있습니다.</div>
+          <div class="hc-desc" data-i18n="hc0_desc">'왕좌의 게임' IP로 만든 심리스 오픈월드 액션 RPG입니다. 웨스테로스 대륙을 탐험하며 전투와 내러티브를 경험합니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
             <ul>
-              <li data-i18n="hc0_w1"><strong>오픈월드 레벨 디자인 및 월드 빌딩:</strong> 서부 지역 핵심 거점인 '골든 투스(Golden Tooth)' 및 '카스타미어(Castamere)' 지역 심층 기획. 드라마 원작 레퍼런스 분석을 통해 시대적 배경에 맞는 현실적인 지형 및 식생 생태계 고증.</li>
+              <li data-i18n="hc0_w1"><strong>오픈월드 레벨 디자인 및 월드 빌딩:</strong> 서부 지역 핵심 거점인 '골든 투스(Golden Tooth)'와 '카스타미어(Castamere)' 지역 심층 기획. 드라마 원작 레퍼런스를 분석해 시대 배경에 맞는 현실적인 지형과 식생 생태계 고증.</li>
               <li data-i18n="hc0_w2"><strong>퀘스트 동선 및 오픈월드 콘텐츠 기획:</strong> 메인/서브 퀘스트 흐름과 시선 유도를 고려한 유기적인 지형 설계. 유비소프트식 오픈월드 문법을 차용하여 탐험, 채집, 인카운터 등 밀도 높은 필드 콘텐츠 설계 및 배치.</li>
               <li data-i18n="hc0_w3"><strong>4인 코옵 레이드 및 동적 레벨 설계:</strong> 4인 코옵 레이드 보스존 기획 및 공간적 특성을 활용한 전투 동선 설계. 퀘스트 진행도 및 시간의 흐름(Phase 5.0 → 5.1)에 따라 기존 환경이 변화하는 동적 레벨(Dynamic Level) 기획 적용.</li>
             </ul>
@@ -594,8 +595,8 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
           <div class="hc-work-text">
             <ul>
               <li data-i18n="hc1_w1"><strong>오픈월드 레벨 배치 정책 수립 및 AI 생태계 구현:</strong> 필드 배치 가이드라인을 수립하고, AI Behavior Tree 기반의 몬스터·NPC·야생동물 생태계 및 상호작용 기획.</li>
-              <li data-i18n="hc1_w2"><strong>인스턴스 던전 레벨 설계:</strong> 턴제 전투와 탐험의 템포를 조율하는 선형적 던전 레벨 설계 및 더미 레벨 검증 파이프라인 확립을 통한 개발 효율성 증대.</li>
-              <li data-i18n="hc1_w3"><strong>인터랙티브 기믹 요소 강화:</strong> 퍼즐 및 기믹 BT 연쇄 트리거 설계를 통해 필드 플레이 경험을 고도화하고 탐험의 몰입감을 부여.</li>
+              <li data-i18n="hc1_w2"><strong>인스턴스 던전 레벨 설계:</strong> 턴제 전투와 탐험의 템포를 조율하는 선형 던전 레벨 설계, 더미 레벨 검증 파이프라인을 만들어 개발 효율을 높임.</li>
+              <li data-i18n="hc1_w3"><strong>인터랙티브 기믹 요소 강화:</strong> 퍼즐·기믹 BT 연쇄 트리거를 설계해 필드 플레이와 탐험의 몰입감을 높임.</li>
             </ul>
           </div>
           <div class="hc-tags-new">
@@ -617,7 +618,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
             <ul>
-              <li data-i18n="hc2_w1"><strong>신규 전투 콘텐츠 기획 및 레벨 디자인:</strong> 플레이어의 전투 동선과 액션 스킬 활용을 극대화할 수 있는 던전 환경 및 몬스터/보스 배치 설계.</li>
+              <li data-i18n="hc2_w1"><strong>신규 전투 콘텐츠 기획 및 레벨 디자인:</strong> 플레이어의 전투 동선과 액션 스킬 활용을 살릴 수 있는 던전 환경과 몬스터/보스 배치 설계.</li>
               <li data-i18n="hc2_w2"><strong>기존 레벨 및 패턴 밸런싱:</strong> 라이브 서비스 데이터를 바탕으로 몬스터 패턴 및 기믹 밸런스 조정, 유저 플레이 경험(UX) 최적화.</li>
               <li data-i18n="hc2_w3"><strong>이벤트 던전 및 특수 기믹 설계:</strong> 라이브 서비스 주기에 맞춘 시즌별 이벤트 던전의 컨셉 기획 및 특수 전투 기믹 구현.</li>
             </ul>
@@ -637,7 +638,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
             <span class="hc-panel-sub">Naddic Games &nbsp;|&nbsp; Unreal Engine 4</span>
           </h3>
           <div class="hc-game-thumb yt-facade" data-yt="-eVzUCq3tTA" role="button" tabindex="0" aria-label="CLOSERS RT trailer"><img src="./클로저스RT.webp" alt="CLOSERS RT" loading="lazy" /><span class="yt-play"><i class="fa fa-play"></i></span><span class="yt-label"><i class="fab fa-youtube"></i><span data-i18n="hc3_yt">트레일러 재생</span></span></div>
-          <div class="hc-desc" data-i18n="hc3_desc">클로저스 IP의 매력적인 세계관과 캐릭터들을 확장하여, 모바일 환경에 맞춰 새롭게 해석한 실시간 전략 RPG입니다.</div>
+          <div class="hc-desc" data-i18n="hc3_desc">클로저스 IP의 세계관과 캐릭터를 모바일 환경에 맞게 새로 풀어낸 실시간 전략 RPG입니다.</div>
           <div class="hc-work-title" data-i18n="hc_work_title">주요 업무 및 성과</div>
           <div class="hc-work-text">
             <ul>
@@ -794,7 +795,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./카스타미어지상_인게임.webp" alt="카스타미어지상 인게임" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t1_s3_d">레벨 디자인 목업을 바탕으로 아트 등 유관 부서와 지속적인 리뷰 및 피드백을 주고받으며 환경을 다듬어 나갑니다. 기획적 기능성(동선, 전투 공간)을 유지하면서 비주얼 완성도를 극대화한 최종 인게임 환경을 산출합니다. 해당 지역은 '골든투스 업데이트(11월 25일)'로 라이브 서비스에 반영되었습니다.</div>
+                <div class="wf-desc" data-i18n="k_t1_s3_d">레벨 디자인 목업을 바탕으로 아트 등 유관 부서와 리뷰와 피드백을 이어 가며 환경을 다듬습니다. 동선과 전투 공간 같은 기획적 기능은 유지하면서 비주얼 완성도를 끌어올린 최종 인게임 환경을 만듭니다. 해당 지역은 '골든투스 업데이트(11월 25일)'로 라이브 서비스에 반영되었습니다.</div>
               </div>
             </div>
             <div class="modal-panel" id="kings-datalayer">
@@ -807,7 +808,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./데이터레이어_시나리오분석및_어떤_형태로_데이터_레이어_구성할건지_기획.webp" alt="데이터레이어 시나리오분석및 어떤 형태로 데이터 레이어 구성할건지 기획" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t2_s1_d">서브 레벨 전환 방식이 아닌, 언리얼 엔진의 Data Layer를 활용해 실시간으로 지형이 변화하는 동적 레벨을 기획했습니다. '캐슬블랙 전투' 시나리오 흐름을 플로우 차트로 분석하여, 유저가 거대한 사건에 직접 휘말리는 듯한 몰입감을 주도록 설계했습니다.</div>
+                <div class="wf-desc" data-i18n="k_t2_s1_d">서브 레벨 전환 방식이 아닌, 언리얼 엔진의 Data Layer로 실시간으로 지형이 변하는 동적 레벨을 기획했습니다. '캐슬블랙 전투' 시나리오 흐름을 플로우 차트로 분석해 유저가 거대한 사건에 직접 휘말리는 듯한 몰입감을 주도록 설계했습니다.</div>
               </div>
               <div class="wf-divider"></div>
               <div class="wf-step">
@@ -829,7 +830,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./데이터레이어_퀘스트동선_구성__시선유도.webp" alt="데이터레이어 퀘스트동선 구성 시선유도" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t2_s3_d">시시각각 변화하는 환경 속에서도 유저가 길을 잃지 않도록 직관적인 퀘스트 동선을 구축했습니다. 지형지물과 광원을 활용한 정교한 시선 유도를 통해, 개발 의도에 맞는 감정선과 플레이 경험을 완벽하게 전달할 수 있도록 디테일을 다듬었습니다.</div>
+                <div class="wf-desc" data-i18n="k_t2_s3_d">시시각각 변하는 환경 속에서도 유저가 길을 잃지 않도록 직관적인 퀘스트 동선을 만들었습니다. 지형지물과 광원으로 시선을 유도하고 의도한 감정선과 플레이 경험이 그대로 전달되도록 디테일을 다듬었습니다.</div>
               </div>
               <div class="wf-divider"></div>
               <div class="wf-step">
@@ -859,7 +860,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./코옵레이드_지역설정__레이드_진행_시나리오.webp" alt="코옵레이드 지역설정 레이드 진행 시나리오" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t3_s1_d">전투 기획 파트와의 긴밀한 협업을 통해 하렌할(Harrenhal) 지역의 배경 설정을 확립하고, 전체적인 레이드 진행 시나리오 기획 및 기초 공간 목업(Mock-up)을 진행하여 전투의 뼈대를 세웠습니다.</div>
+                <div class="wf-desc" data-i18n="k_t3_s1_d">전투 기획 파트와 함께 하렌할(Harrenhal) 지역의 배경 설정을 확립하고 레이드 진행 시나리오와 기초 공간 목업(Mock-up)을 만들어 전투의 뼈대를 세웠습니다.</div>
               </div>
               <div class="wf-divider"></div>
               <div class="wf-step">
@@ -870,7 +871,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./코옵레이드_진행시나리오에_맞춰_세부_구성.webp" alt="코옵레이드 진행시나리오에 맞춰 세부 구성" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t3_s2_d">4인 코옵(Co-op) 레이드에서 유저들이 자연스럽게 2:2로 나뉘어 진입하도록 디테일한 동선과 시선 유도를 설계했습니다. 중세 건축 양식에 고증을 맞춘 '샹들리에 추락을 통한 장애물(기둥) 파괴' 기믹 등을 배치하여, 몰입감을 유지하면서 자연스러운 기믹 학습과 협동 플레이를 유도했습니다.</div>
+                <div class="wf-desc" data-i18n="k_t3_s2_d">4인 코옵(Co-op) 레이드에서 유저들이 자연스럽게 2:2로 나뉘어 진입하도록 동선과 시선 유도를 설계했습니다. 중세 건축 양식에 맞춘 '샹들리에 추락을 통한 장애물(기둥) 파괴' 같은 기믹을 배치해 몰입감을 유지하면서 기믹 학습과 협동 플레이를 자연스럽게 이끌었습니다.</div>
               </div>
               <div class="wf-divider"></div>
               <div class="wf-step">
@@ -881,7 +882,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./코옵레이드_보스존.webp" alt="코옵레이드 보스존" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="k_t3_s3_d">최종 보스 아레나에서는 Data Layer를 활용해 1페이즈에서 2페이즈로 넘어가는 극적인 환경 변화를 연출했습니다. 드래곤의 기습적인 공격으로 맵의 층이 무너져 내리고, 그 화염에 의해 보스가 화상을 입은 채 2페이즈를 시작하는 입체적인 시나리오를 시스템으로 구현하여 전투의 긴박감을 극대화했습니다.</div>
+                <div class="wf-desc" data-i18n="k_t3_s3_d">최종 보스 아레나에서는 Data Layer로 1페이즈에서 2페이즈로 넘어가는 환경 변화를 연출했습니다. 드래곤의 기습으로 맵의 층이 무너져 내리고, 보스가 그 화염에 화상을 입은 채 2페이즈를 시작하는 시나리오를 시스템으로 구현해 전투의 긴박감을 높였습니다.</div>
               </div>
             </div>
       </div>
@@ -926,7 +927,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./리메멘토필드정책_2.webp" alt="리메멘토필드정책 2" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="m_t1_s2_d">길잡이가 되는 핀포인트 및 랜드마크의 콘셉트와 세부 지형을 디자인했습니다. 이를 통해 플레이어들을 주요 지역으로 자연스럽게 유도하고 탐험의 동기를 부여했습니다.</div>
+                <div class="wf-desc" data-i18n="m_t1_s2_d">길잡이가 되는 핀포인트와 랜드마크의 콘셉트와 세부 지형을 디자인했습니다. 이 랜드마크로 플레이어를 주요 지역으로 자연스럽게 이끌고 탐험할 동기를 주었습니다.</div>
               </div>
             </div>
             <div class="modal-panel" id="memento-bt">
@@ -1042,7 +1043,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./부산_3.webp" alt="부산 3" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="c_t1_s3_d">기획된 문서를 바탕으로 언리얼 엔진 상에서 크기와 동선을 가늠할 수 있는 더미 레벨(목업)을 직접 제작했습니다. 이를 통해 유저의 이동 경로와 공간감을 사전에 검증했습니다.</div>
+                <div class="wf-desc" data-i18n="c_t1_s3_d">기획 문서를 바탕으로 언리얼 엔진에서 크기와 동선을 가늠할 수 있는 더미 레벨(목업)을 직접 만들었습니다. 이 더미 레벨로 유저의 이동 경로와 공간감을 미리 검증했습니다.</div>
               </div>
               <div class="wf-divider"></div>
               <div class="wf-step">
@@ -1053,7 +1054,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./부산_4.webp" alt="부산 4" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="c_t1_s4_d">제작된 더미 레벨과 기획안을 바탕으로 아트팀과 끊임없이 소통하며 수많은 수정 과정을 거쳤습니다. 배경의 디테일을 살리면서도 쾌적한 전투가 가능하도록 인게임 퀄리티를 성공적으로 끌어올렸습니다.</div>
+                <div class="wf-desc" data-i18n="c_t1_s4_d">더미 레벨과 기획안을 바탕으로 아트팀과 꾸준히 소통하며 여러 차례 수정을 거쳤습니다. 배경의 디테일을 살리면서도 전투가 쾌적하도록 인게임 퀄리티를 끌어올렸습니다.</div>
               </div>
             </div>
             <div class="modal-panel" id="closers-strategy">
@@ -1066,7 +1067,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
                 <div class="wf-img-wrap">
                   <img src="./전략스테이지_기획.webp" alt="전략스테이지 기획" loading="lazy" />
                 </div>
-                <div class="wf-desc" data-i18n="c_t2_s1_d">단순 스펙으로 밀어붙이는 일반 스테이지(1~4)와 달리, 5의 배수 스테이지(5, 10, 15 등)는 특수 기믹(차원 균열, 억제기, 차원 압력 등)을 조합하여 유저의 전략적인 플레이를 요구하도록 설계했습니다. 수동 조작과 자동 조작 유저의 동선을 의도적으로 분리해 각기 다른 성취감을 주었으며, 이러한 시스템적인 접근을 통해 제한된 맵 리소스로도 다채롭고 깊이 있는 스테이지를 대량으로 산출할 수 있었습니다.</div>
+                <div class="wf-desc" data-i18n="c_t2_s1_d">단순 스펙으로 밀어붙이는 일반 스테이지(1~4)와 달리, 5의 배수 스테이지(5, 10, 15 등)는 특수 기믹(차원 균열, 억제기, 차원 압력 등)을 조합해 유저의 전략적인 플레이를 요구하도록 설계했습니다. 수동 조작과 자동 조작 유저의 동선을 의도적으로 나눠 각기 다른 성취감을 주었습니다. 이 방식 덕분에 제한된 맵 리소스로도 다채롭고 깊이 있는 스테이지를 대량으로 만들 수 있었습니다.</div>
               </div>
             </div>
       </div>
@@ -1104,7 +1105,7 @@ const I18N = {
     nav_proj:"WORK",
     nav_phil:"PHILOSOPHY",
     nav_contact:"CONTACT",
-    hero_sub:"언리얼 엔진 5 기반 심리스 오픈월드 지형 설계, Data Layer 동적 레벨 연출, 4인 코옵 레이드 동선을 기획해 왔습니다. 현재 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP 기반 AI 레벨 제작 파이프라인으로 사냥터와 던전을 설계하고 있습니다.",
+    hero_sub:"언리얼 엔진 5로 심리스 오픈월드 지형, Data Layer 동적 레벨, 4인 코옵 레이드 동선을 설계해 왔습니다. 지금은 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP로 만든 AI 레벨 제작 파이프라인을 써서 사냥터와 던전을 설계합니다.",
     exp_title:"주요 경력",
     exp1_year:"2025.06 — 2026.10",
     exp1_company:"NETMARBLE NEO",
@@ -1147,25 +1148,25 @@ const I18N = {
     k_t1_s2_t:"랜드스케이프 구축 및 오픈월드 콘텐츠 목업(Mock-up)",
     k_t1_s2_d:"기획된 동선을 바탕으로 엔진 내 랜드스케이프를 조형하여 지형을 구축하고 뼈대가 되는 목업을 쌓습니다. 그 위에 위어우드의 기억, 초소, 세력 은신처, 점령지, 흉포한 동물 출현지 등 필수 오픈월드 콘텐츠를 유기적으로 배치하여 탐험의 밀도를 높입니다.",
     k_t1_s3_t:"유관 부서 협업 및 비주얼 폴리싱",
-    k_t1_s3_d:"레벨 디자인 목업을 바탕으로 아트 등 유관 부서와 지속적인 리뷰 및 피드백을 주고받으며 환경을 다듬어 나갑니다. 기획적 기능성(동선, 전투 공간)을 유지하면서 비주얼 완성도를 극대화한 최종 인게임 환경을 산출합니다. 해당 지역은 '골든투스 업데이트(11월 25일)'로 라이브 서비스에 반영되었습니다.",
+    k_t1_s3_d:"레벨 디자인 목업을 바탕으로 아트 등 유관 부서와 리뷰와 피드백을 이어 가며 환경을 다듬습니다. 동선과 전투 공간 같은 기획적 기능은 유지하면서 비주얼 완성도를 끌어올린 최종 인게임 환경을 만듭니다. 해당 지역은 '골든투스 업데이트(11월 25일)'로 라이브 서비스에 반영되었습니다.",
     k_t2_s1_t:"시나리오 분석 및 동적 환경(Data Layer) 기획",
-    k_t2_s1_d:"서브 레벨 전환 방식이 아닌, 언리얼 엔진의 Data Layer를 활용해 실시간으로 지형이 변화하는 동적 레벨을 기획했습니다. '캐슬블랙 전투' 시나리오 흐름을 플로우 차트로 분석하여, 유저가 거대한 사건에 직접 휘말리는 듯한 몰입감을 주도록 설계했습니다.",
+    k_t2_s1_d:"서브 레벨 전환 방식이 아닌, 언리얼 엔진의 Data Layer로 실시간으로 지형이 변하는 동적 레벨을 기획했습니다. '캐슬블랙 전투' 시나리오 흐름을 플로우 차트로 분석해 유저가 거대한 사건에 직접 휘말리는 듯한 몰입감을 주도록 설계했습니다.",
     k_t2_s2_t:"원작 고증 기반 목업 및 시간 흐름 연출",
     k_t2_s2_d:"원작 드라마의 실제 방영 장면과 세밀하게 비교 및 고증하며 환경 목업을 진행했습니다. 플레이어의 퀘스트 진행과 시간의 흐름에 따라 성벽이 무너지고 화재가 발생하는 등, 파괴되어 가는 캐슬블랙의 처참한 상황을 환경 변화로 생생하게 연출했습니다.",
     k_t2_s3_t:"퀘스트 동선 구축 및 시선 유도 설계",
-    k_t2_s3_d:"시시각각 변화하는 환경 속에서도 유저가 길을 잃지 않도록 직관적인 퀘스트 동선을 구축했습니다. 지형지물과 광원을 활용한 정교한 시선 유도를 통해, 개발 의도에 맞는 감정선과 플레이 경험을 완벽하게 전달할 수 있도록 디테일을 다듬었습니다.",
+    k_t2_s3_d:"시시각각 변하는 환경 속에서도 유저가 길을 잃지 않도록 직관적인 퀘스트 동선을 만들었습니다. 지형지물과 광원으로 시선을 유도하고 의도한 감정선과 플레이 경험이 그대로 전달되도록 디테일을 다듬었습니다.",
     k_t2_s4_t:"인게임 검증 및 성과 (Outcome)",
     k_t2_s4_d:"서브 레벨 로딩 없이 Data Layer 전환만으로 퀘스트 단계에 따라 성벽 붕괴·화재 확산 같은 환경 변화를 구현하고, 반복 플레이 테스트와 아트 부서 리뷰로 재미와 동선을 검증했습니다. 내부 기획 리뷰에서는 \"극적인 긴장감과 몰입도를 훌륭하게 이끌어냈다\"는 평가를 받았습니다.",
     k_t3_s1_t:"지역 설정 및 레이드 시나리오 기획",
-    k_t3_s1_d:"전투 기획 파트와의 긴밀한 협업을 통해 하렌할(Harrenhal) 지역의 배경 설정을 확립하고, 전체적인 레이드 진행 시나리오 기획 및 기초 공간 목업(Mock-up)을 진행하여 전투의 뼈대를 세웠습니다.",
+    k_t3_s1_d:"전투 기획 파트와 함께 하렌할(Harrenhal) 지역의 배경 설정을 확립하고 레이드 진행 시나리오와 기초 공간 목업(Mock-up)을 만들어 전투의 뼈대를 세웠습니다.",
     k_t3_s2_t:"2:2 분할 동선 설계 및 환경 기믹 연출",
-    k_t3_s2_d:"4인 코옵(Co-op) 레이드에서 유저들이 자연스럽게 2:2로 나뉘어 진입하도록 디테일한 동선과 시선 유도를 설계했습니다. 중세 건축 양식에 고증을 맞춘 '샹들리에 추락을 통한 장애물(기둥) 파괴' 기믹 등을 배치하여, 몰입감을 유지하면서 자연스러운 기믹 학습과 협동 플레이를 유도했습니다.",
+    k_t3_s2_d:"4인 코옵(Co-op) 레이드에서 유저들이 자연스럽게 2:2로 나뉘어 진입하도록 동선과 시선 유도를 설계했습니다. 중세 건축 양식에 맞춘 '샹들리에 추락을 통한 장애물(기둥) 파괴' 같은 기믹을 배치해 몰입감을 유지하면서 기믹 학습과 협동 플레이를 자연스럽게 이끌었습니다.",
     k_t3_s3_t:"Data Layer를 활용한 보스 페이즈(Phase) 전환",
-    k_t3_s3_d:"최종 보스 아레나에서는 Data Layer를 활용해 1페이즈에서 2페이즈로 넘어가는 극적인 환경 변화를 연출했습니다. 드래곤의 기습적인 공격으로 맵의 층이 무너져 내리고, 그 화염에 의해 보스가 화상을 입은 채 2페이즈를 시작하는 입체적인 시나리오를 시스템으로 구현하여 전투의 긴박감을 극대화했습니다.",
+    k_t3_s3_d:"최종 보스 아레나에서는 Data Layer로 1페이즈에서 2페이즈로 넘어가는 환경 변화를 연출했습니다. 드래곤의 기습으로 맵의 층이 무너져 내리고, 보스가 그 화염에 화상을 입은 채 2페이즈를 시작하는 시나리오를 시스템으로 구현해 전투의 긴박감을 높였습니다.",
     m_t1_s1_t:"오픈월드 레벨 배치 정책 설계",
     m_t1_s1_d:"게임의 지속적인 관리를 수월하게 하기 위해 세계관에 맞는 대략적인 지형 설계와 환경 디자인을 기획했습니다. 콘텐츠, 몬스터, 채집물, 사냥감, 보물상자 등의 수량 관리 및 배치 정책을 수립했습니다.",
     m_t1_s2_t:"랜드마크 기반 동선 유도 설계",
-    m_t1_s2_d:"길잡이가 되는 핀포인트 및 랜드마크의 콘셉트와 세부 지형을 디자인했습니다. 이를 통해 플레이어들을 주요 지역으로 자연스럽게 유도하고 탐험의 동기를 부여했습니다.",
+    m_t1_s2_d:"길잡이가 되는 핀포인트와 랜드마크의 콘셉트와 세부 지형을 디자인했습니다. 이 랜드마크로 플레이어를 주요 지역으로 자연스럽게 이끌고 탐험할 동기를 주었습니다.",
     m_t2_s1_t:"인터랙티브 퍼즐 기믹 BT 기획 및 리소스 설계",
     m_t2_s1_d:"플레이어와 상호작용하는 퍼즐 기믹을 기획하고 이를 구현하기 위한 Behavior Tree(BT)를 설계했습니다. 기믹 작동에 필요한 모델링, 애니메이션, 이펙트 등의 리소스 요청 문서도 함께 작성하여 유관 부서와 소통했습니다.",
     m_t2_s2_t:"인게임 퍼즐 기믹 구현 및 검증",
@@ -1180,11 +1181,11 @@ const I18N = {
     c_t1_s2_t:"실제 랜드마크 기반 영역 설정 및 기획",
     c_t1_s2_d:"실제 부산역 주변의 지도를 베이스로 주 무대가 될 영역을 분할하고 세부적인 디자인 방향성을 설정했습니다. 각 구역별 파괴된 형태, 필요한 프랍, 동선 특징 등을 꼼꼼하게 문서로 정리했습니다.",
     c_t1_s3_t:"엔진 내 더미 레벨 제작 및 목업",
-    c_t1_s3_d:"기획된 문서를 바탕으로 언리얼 엔진 상에서 크기와 동선을 가늠할 수 있는 더미 레벨(목업)을 직접 제작했습니다. 이를 통해 유저의 이동 경로와 공간감을 사전에 검증했습니다.",
+    c_t1_s3_d:"기획 문서를 바탕으로 언리얼 엔진에서 크기와 동선을 가늠할 수 있는 더미 레벨(목업)을 직접 만들었습니다. 이 더미 레벨로 유저의 이동 경로와 공간감을 미리 검증했습니다.",
     c_t1_s4_t:"유관 부서 협업을 통한 인게임 폴리싱",
-    c_t1_s4_d:"제작된 더미 레벨과 기획안을 바탕으로 아트팀과 끊임없이 소통하며 수많은 수정 과정을 거쳤습니다. 배경의 디테일을 살리면서도 쾌적한 전투가 가능하도록 인게임 퀄리티를 성공적으로 끌어올렸습니다.",
+    c_t1_s4_d:"더미 레벨과 기획안을 바탕으로 아트팀과 꾸준히 소통하며 여러 차례 수정을 거쳤습니다. 배경의 디테일을 살리면서도 전투가 쾌적하도록 인게임 퀄리티를 끌어올렸습니다.",
     c_t2_s1_t:"기믹 활용 및 조작(Auto/Manual) 분리 설계",
-    c_t2_s1_d:"단순 스펙으로 밀어붙이는 일반 스테이지(1~4)와 달리, 5의 배수 스테이지(5, 10, 15 등)는 특수 기믹(차원 균열, 억제기, 차원 압력 등)을 조합하여 유저의 전략적인 플레이를 요구하도록 설계했습니다. 수동 조작과 자동 조작 유저의 동선을 의도적으로 분리해 각기 다른 성취감을 주었으며, 이러한 시스템적인 접근을 통해 제한된 맵 리소스로도 다채롭고 깊이 있는 스테이지를 대량으로 산출할 수 있었습니다.",
+    c_t2_s1_d:"단순 스펙으로 밀어붙이는 일반 스테이지(1~4)와 달리, 5의 배수 스테이지(5, 10, 15 등)는 특수 기믹(차원 균열, 억제기, 차원 압력 등)을 조합해 유저의 전략적인 플레이를 요구하도록 설계했습니다. 수동 조작과 자동 조작 유저의 동선을 의도적으로 나눠 각기 다른 성취감을 주었습니다. 이 방식 덕분에 제한된 맵 리소스로도 다채롭고 깊이 있는 스테이지를 대량으로 만들 수 있었습니다.",
     phil_title:"레벨 디자인 철학",
     contact_title:"연락처",
     contact_location:"서울특별시 강서구 (대한민국)",
@@ -1211,9 +1212,9 @@ const I18N = {
     tag_qa:"QA 전담",
     tag_raid_policy:"레이드 정책",
     hc0_yt:"트레일러 재생",
-    hc0_desc:"전 세계적인 인기 IP '왕좌의 게임'을 기반으로 한 심리스 오픈월드 액션 RPG입니다. 방대한 웨스테로스 대륙을 탐험하며 몰입감 있는 전투와 내러티브를 경험할 수 있습니다.",
+    hc0_desc:"'왕좌의 게임' IP로 만든 심리스 오픈월드 액션 RPG입니다. 웨스테로스 대륙을 탐험하며 전투와 내러티브를 경험합니다.",
     hc_work_title:"주요 업무 및 성과",
-    hc0_w1:"<strong>오픈월드 레벨 디자인 및 월드 빌딩:</strong> 서부 지역 핵심 거점인 '골든 투스(Golden Tooth)' 및 '카스타미어(Castamere)' 지역 심층 기획. 드라마 원작 레퍼런스 분석을 통해 시대적 배경에 맞는 현실적인 지형 및 식생 생태계 고증.",
+    hc0_w1:"<strong>오픈월드 레벨 디자인 및 월드 빌딩:</strong> 서부 지역 핵심 거점인 '골든 투스(Golden Tooth)'와 '카스타미어(Castamere)' 지역 심층 기획. 드라마 원작 레퍼런스를 분석해 시대 배경에 맞는 현실적인 지형과 식생 생태계 고증.",
     hc0_w2:"<strong>퀘스트 동선 및 오픈월드 콘텐츠 기획:</strong> 메인/서브 퀘스트 흐름과 시선 유도를 고려한 유기적인 지형 설계. 유비소프트식 오픈월드 문법을 차용하여 탐험, 채집, 인카운터 등 밀도 높은 필드 콘텐츠 설계 및 배치.",
     hc0_w3:"<strong>4인 코옵 레이드 및 동적 레벨 설계:</strong> 4인 코옵 레이드 보스존 기획 및 공간적 특성을 활용한 전투 동선 설계. 퀘스트 진행도 및 시간의 흐름(Phase 5.0 → 5.1)에 따라 기존 환경이 변화하는 동적 레벨(Dynamic Level) 기획 적용.",
     hc0_t1:"오픈월드 설계",
@@ -1224,8 +1225,8 @@ const I18N = {
     hc1_yt:"트레일러 재생",
     hc1_desc:"언리얼 엔진 5 기반의 고퀄리티 애니메이션풍 오픈월드 RPG입니다. 개성 있는 캐릭터들과 함께 넓은 세계를 탐험하며 턴제 전투의 전략적 재미를 제공합니다.",
     hc1_w1:"<strong>오픈월드 레벨 배치 정책 수립 및 AI 생태계 구현:</strong> 필드 배치 가이드라인을 수립하고, AI Behavior Tree 기반의 몬스터·NPC·야생동물 생태계 및 상호작용 기획.",
-    hc1_w2:"<strong>인스턴스 던전 레벨 설계:</strong> 턴제 전투와 탐험의 템포를 조율하는 선형적 던전 레벨 설계 및 더미 레벨 검증 파이프라인 확립을 통한 개발 효율성 증대.",
-    hc1_w3:"<strong>인터랙티브 기믹 요소 강화:</strong> 퍼즐 및 기믹 BT 연쇄 트리거 설계를 통해 필드 플레이 경험을 고도화하고 탐험의 몰입감을 부여.",
+    hc1_w2:"<strong>인스턴스 던전 레벨 설계:</strong> 턴제 전투와 탐험의 템포를 조율하는 선형 던전 레벨 설계, 더미 레벨 검증 파이프라인을 만들어 개발 효율을 높임.",
+    hc1_w3:"<strong>인터랙티브 기믹 요소 강화:</strong> 퍼즐·기믹 BT 연쇄 트리거를 설계해 필드 플레이와 탐험의 몰입감을 높임.",
     hc1_t1:"오픈월드 생태계",
     hc1_t4:"퍼즐/기믹 기획",
     hc1_t5:"파이프라인 구축",
@@ -1233,7 +1234,7 @@ const I18N = {
     hc2_sub:"Naddic Games &nbsp;|&nbsp; 자체 엔진",
     hc2_yt:"트레일러 재생",
     hc2_desc:"근미래를 배경으로 한 이능 액션 MORPG로, 개성 있는 캐릭터들과 속도감 넘치는 화려한 전투 액션이 특징인 PC 온라인 게임입니다.",
-    hc2_w1:"<strong>신규 전투 콘텐츠 기획 및 레벨 디자인:</strong> 플레이어의 전투 동선과 액션 스킬 활용을 극대화할 수 있는 던전 환경 및 몬스터/보스 배치 설계.",
+    hc2_w1:"<strong>신규 전투 콘텐츠 기획 및 레벨 디자인:</strong> 플레이어의 전투 동선과 액션 스킬 활용을 살릴 수 있는 던전 환경과 몬스터/보스 배치 설계.",
     hc2_w2:"<strong>기존 레벨 및 패턴 밸런싱:</strong> 라이브 서비스 데이터를 바탕으로 몬스터 패턴 및 기믹 밸런스 조정, 유저 플레이 경험(UX) 최적화.",
     hc2_w3:"<strong>이벤트 던전 및 특수 기믹 설계:</strong> 라이브 서비스 주기에 맞춘 시즌별 이벤트 던전의 컨셉 기획 및 특수 전투 기믹 구현.",
     hc2_t1:"전투 레벨 디자인",
@@ -1242,7 +1243,7 @@ const I18N = {
     hc2_t5:"던전 기믹",
     hc3_title:"CLOSERS RT: 뉴 오더",
     hc3_yt:"트레일러 재생",
-    hc3_desc:"클로저스 IP의 매력적인 세계관과 캐릭터들을 확장하여, 모바일 환경에 맞춰 새롭게 해석한 실시간 전략 RPG입니다.",
+    hc3_desc:"클로저스 IP의 세계관과 캐릭터를 모바일 환경에 맞게 새로 풀어낸 실시간 전략 RPG입니다.",
     hc3_w1:"<strong>모바일 최적화 레벨 기획:</strong> 모바일 환경과 실시간 전략 RPG 장르 특성에 맞춘 스테이지 맵 구조 및 전투 동선 설계.",
     hc3_w2:"<strong>전투 환경 및 전술 오브젝트 배치:</strong> 플레이어가 전략적인 전투를 경험할 수 있도록 엄폐물, 지형지물 등 전술적 환경 오브젝트 기획 및 배치.",
     hc3_t1:"모바일 스테이지 기획",
@@ -1421,7 +1422,7 @@ const I18N = {
     tag_qa:"QA Owner",
     tag_raid_policy:"Raid Policy",
     hc0_yt:"Play trailer",
-    hc0_desc:"A seamless open-world action RPG based on the globally beloved 'Game of Thrones' IP. Players explore the vast continent of Westeros and experience immersive combat and narrative.",
+    hc0_desc:"A seamless open-world action RPG built on the 'Game of Thrones' IP. Players explore Westeros and experience its combat and narrative.",
     hc_work_title:"Key Responsibilities & Results",
     hc0_w1:"<strong>Open World Level Design & World Building:</strong> In-depth design of 'Golden Tooth' and 'Castamere', key hubs of the western region. Researched the drama's references to build realistic terrain and vegetation ecosystems true to the setting.",
     hc0_w2:"<strong>Quest Routing & Open World Content:</strong> Organic terrain design that accounts for main/sub quest flow and visual guidance. Adopted Ubisoft-style open-world grammar to design and place dense field content such as exploration, gathering and encounters.",
