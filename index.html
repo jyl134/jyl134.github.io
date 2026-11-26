@@ -11,12 +11,12 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 아이콘 (Font Awesome 5) / 폰트 (Pretendard, Inter, JetBrains Mono) -->
+<!-- 아이콘 (Font Awesome 5) / 폰트 (Pretendard, JetBrains Mono: 숫자 전용) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap">
 <!-- 검색 엔진 노출 차단 코드 추가 -->
 <meta name="robots" content="noindex, nofollow">
 <style>
@@ -35,7 +35,7 @@
 
   --ink-primary:#eeebe5;
   --ink-secondary:#a39d94;
-  --ink-muted:#78736b;
+  --ink-muted:#8c867d;
 
   --accent:#c49b66;
   --accent-dim:rgba(196,155,102,.22);
@@ -44,7 +44,7 @@
   --radius-md:6px;
 
   --font-ko:"Pretendard Variable","Pretendard",-apple-system,sans-serif;
-  --font-en:"Inter","Pretendard Variable",sans-serif;
+  --font-en:"Pretendard Variable","Pretendard",-apple-system,sans-serif;
   --font-mono:"JetBrains Mono","Pretendard Variable","Pretendard",monospace;
 
   --nav-h:60px;
@@ -69,58 +69,60 @@ section{position:relative;}
 
 /* Shared meta label (roles, tags, badges) */
 .meta-label,.exp-role-badge,.exp-tag,.hl-tag,.tech-badge{
-  display:inline-flex;align-items:center;font-family:var(--font-en);font-size:.7rem;font-weight:500;letter-spacing:0;line-height:1.5;
+  display:inline-flex;align-items:center;font-family:var(--font-en);font-size:.76rem;font-weight:500;letter-spacing:0;line-height:1.5;
   color:var(--ink-secondary);border:1px solid var(--border-hairline);border-radius:3px;padding:2px 8px;white-space:nowrap;}
 
 /* ==================== NAV ==================== */
 nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;background:var(--bg-base);border-bottom:1px solid var(--border-hairline);}
 .nav-inner{max-width:1360px;height:100%;margin:0 auto;padding:0 var(--gutter);display:flex;align-items:center;justify-content:space-between;gap:24px;}
-.brand{font-family:var(--font-en);font-weight:600;font-size:.82rem;letter-spacing:.04em;color:var(--ink-primary);text-decoration:none;white-space:nowrap;}
+.brand{font-family:var(--font-en);font-weight:600;font-size:.86rem;letter-spacing:.02em;display:inline-block;padding:4px 0;color:var(--ink-primary);text-decoration:none;white-space:nowrap;}
 .brand span{color:var(--ink-muted);font-weight:500;}
 .nav-links{display:flex;align-items:center;gap:28px;}
-.nav-links a{font-family:var(--font-en);font-size:.72rem;font-weight:500;letter-spacing:.05em;color:var(--ink-secondary);text-decoration:none;
+.nav-links a{font-family:var(--font-en);font-size:.86rem;font-weight:500;letter-spacing:0;color:var(--ink-secondary);text-decoration:none;
   padding:6px 0;border-bottom:1px solid transparent;transition:color .15s,border-color .15s;}
 .nav-links a:hover{color:var(--ink-primary);}
 .nav-links a.active{color:var(--ink-primary);border-bottom-color:var(--accent);}
 .lang-switch{display:flex;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);overflow:hidden;margin-left:4px;}
 .lang-switch button{background:none;border:0;border-right:1px solid var(--border-hairline);color:var(--ink-muted);font-family:var(--font-mono);
-  font-size:.66rem;padding:4px 8px;cursor:pointer;transition:color .15s,background .15s;}
+  font-size:.7rem;padding:5px 9px;min-height:28px;cursor:pointer;transition:color .15s,background .15s;}
 .lang-switch button:last-child{border-right:0;}
 .lang-switch button:hover{color:var(--ink-primary);}
 .lang-switch button.active-lang{background:var(--ink-primary);color:var(--bg-base);}
 
 /* ==================== LAYOUT ==================== */
 .wrap,.exp-outer,.phil-inner,.contact-inner{max-width:1360px;margin:0 auto;padding:0 var(--gutter);}
-#experience,#deepdive,#philosophy,#contact{padding:96px 0;border-top:1px solid var(--border-hairline);}
-.sec-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:40px;padding-bottom:18px;border-bottom:1px solid var(--border-hairline);}
-.sec-idx{font-family:var(--font-mono);font-size:.78rem;color:var(--accent);}
-.sec-en{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;color:var(--ink-muted);}
-.sec-head h2{flex-basis:100%;font-size:clamp(1.5rem,2.4vw,2rem);font-weight:600;letter-spacing:-.01em;line-height:1.3;margin-top:6px;}
+#experience,#deepdive,#philosophy,#contact{padding:120px 0;border-top:1px solid var(--border-hairline);}
+#philosophy{padding:144px 0;}
+#contact{padding-bottom:96px;}
+.sec-head{margin-bottom:40px;padding-bottom:20px;border-bottom:1px solid var(--border-hairline);}
+.sec-idx{font-family:var(--font-mono);font-size:.5em;font-weight:400;color:var(--accent);}
+
+.sec-head h2{display:flex;align-items:baseline;gap:16px;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:600;letter-spacing:-.01em;line-height:1.25;}
 
 /* ==================== HERO ==================== */
 #hero{padding:calc(var(--nav-h) + 56px) 0 72px;}
 .hero-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:40px;padding-bottom:32px;margin-bottom:28px;border-bottom:1px solid var(--border-hairline);}
-.hero-eyebrow{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.06em;color:var(--accent);margin-bottom:14px;}
-.hero-name{font-family:var(--font-en);font-weight:600;font-size:clamp(2.4rem,5.2vw,4.2rem);letter-spacing:-.02em;line-height:1;margin-bottom:20px;}
+
+.hero-name{font-family:var(--font-en);font-weight:600;font-size:clamp(2.4rem,5.2vw,4.2rem);letter-spacing:-.02em;line-height:1.05;overflow-wrap:break-word;min-width:0;margin-bottom:20px;}
 .hero-name .ko{font-family:var(--font-ko);font-weight:500;font-size:.36em;letter-spacing:0;color:var(--ink-secondary);margin-left:14px;vertical-align:middle;}
 .hero-sub{max-width:680px;font-size:.98rem;line-height:1.8;color:var(--ink-secondary);}
 .hero-sub strong{color:var(--ink-primary);font-weight:600;}
-.hero-line{font-family:var(--font-mono);font-size:.72rem;color:var(--ink-muted);margin-top:16px;letter-spacing:.02em;}
+.hero-line{font-size:.86rem;color:var(--ink-muted);margin-top:14px;}
 .hero-meta{display:grid;grid-template-columns:repeat(4,auto);border:1px solid var(--border-hairline);border-radius:var(--radius-md);}
 .hero-meta > div{padding:14px 20px;border-right:1px solid var(--border-hairline);}
 .hero-meta > div:last-child{border-right:0;}
-.hero-meta dt{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.03em;color:var(--ink-muted);margin-bottom:6px;white-space:nowrap;}
+.hero-meta dt{font-size:.78rem;color:var(--ink-muted);margin-bottom:4px;white-space:nowrap;}
 .hero-meta dd{font-family:var(--font-en);font-weight:600;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;}
 
 /* Showcase: gameplay videos */
 .showcase-tabs{display:flex;width:max-content;max-width:100%;overflow-x:auto;border:1px solid var(--border-hairline);border-bottom:0;border-radius:var(--radius-md) var(--radius-md) 0 0;}
 .sc-tab{display:inline-flex;align-items:center;gap:8px;background:var(--bg-surface);border:0;border-right:1px solid var(--border-hairline);color:var(--ink-secondary);
-  font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:color .15s,background .15s;}
+  font-size:.84rem;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:color .15s,background .15s;}
 .sc-tab:last-child{border-right:0;}
 .sc-tab:hover{color:var(--ink-primary);}
 .sc-tab.active{background:var(--bg-elevated);color:var(--ink-primary);box-shadow:inset 0 -2px 0 var(--accent);}
 .sc-tab .fa{font-size:.6rem;}
-.showcase-frame{position:relative;border:1px solid var(--border-hairline);border-radius:0 var(--radius-md) var(--radius-md) var(--radius-md);overflow:hidden;background:#000;}
+.showcase-frame{position:relative;border:1px solid var(--border-hairline);border-radius:0 var(--radius-md) var(--radius-md) var(--radius-md);overflow:hidden;background:#0e0d0c;}
 .showcase-frame .yt-facade{border-radius:0;}
 .showcase-cap{padding:12px 2px 0;font-size:.82rem;color:var(--ink-secondary);}
 
@@ -130,8 +132,8 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .quick-jump button:last-child{border-right:0;}
 .quick-jump button:hover,.quick-jump button:focus-visible{background:var(--bg-surface);}
 .qj-idx{font-family:var(--font-mono);font-size:.68rem;color:var(--accent);}
-.qj-t{font-family:var(--font-en);font-weight:600;font-size:.95rem;letter-spacing:.04em;}
-.qj-s{font-family:var(--font-mono);font-size:.64rem;color:var(--ink-muted);}
+.qj-t{font-family:var(--font-en);font-weight:600;font-size:1rem;}
+.qj-s{font-size:.78rem;color:var(--ink-muted);}
 .quick-jump .fa{position:absolute;right:18px;top:50%;transform:translateY(-50%);font-size:.75rem;color:var(--ink-muted);transition:color .15s,transform .15s;}
 .quick-jump button:hover .fa{color:var(--ink-primary);transform:translate(3px,-50%);}
 
@@ -150,10 +152,10 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .timeline-item:hover .exp-row,.timeline-item:focus-visible .exp-row{background:var(--bg-surface);}
 .timeline-item.active .exp-row{background:var(--bg-surface);box-shadow:inset 2px 0 0 var(--accent);}
 .exp-meta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;}
-.company-logo-box{width:48px;height:48px;flex-shrink:0;border-radius:var(--radius-sm);overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;transition:width .3s,height .3s;}
+.company-logo-box{width:48px;height:48px;flex-shrink:0;border-radius:var(--radius-sm);overflow:hidden;background:#f3f0ea;display:flex;align-items:center;justify-content:center;transition:width .3s,height .3s;}
 .company-logo-box img{display:block;width:100%;height:100%;object-fit:contain;padding:4px;mix-blend-mode:multiply;}
 .exp-year{font-family:var(--font-en);font-size:.76rem;font-weight:500;color:var(--ink-secondary);}
-.exp-company{font-family:var(--font-en);font-size:.72rem;font-weight:600;letter-spacing:.06em;color:var(--ink-muted);text-transform:uppercase;}
+.exp-company{font-size:.8rem;font-weight:500;color:var(--ink-muted);}
 .exp-game-title{font-size:1.2rem;font-weight:600;line-height:1.35;margin-bottom:8px;transition:font-size .3s;}
 .exp-role-badge{margin-bottom:10px;}
 .exp-desc{font-size:.88rem;color:var(--ink-secondary);line-height:1.75;transition:opacity .25s,max-height .3s;}
@@ -172,7 +174,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .highlights-panel{position:sticky;top:calc(var(--nav-h) + 16px);max-height:calc(100vh - var(--nav-h) - 32px);overflow-y:auto;
   background:var(--bg-surface);border:1px solid var(--border-hairline);border-radius:var(--radius-md);padding:22px;}
 .panel-close-btn{display:none;align-items:center;gap:8px;margin-bottom:18px;background:none;border:1px solid var(--border-hairline);border-radius:3px;
-  color:var(--ink-secondary);font-family:var(--font-en);font-size:.74rem;padding:5px 10px;cursor:pointer;}
+  color:var(--ink-secondary);font-family:var(--font-en);font-size:.8rem;padding:5px 10px;cursor:pointer;}
 .panel-close-btn:hover{color:var(--ink-primary);border-color:var(--border-strong);}
 .panel-close-btn i{pointer-events:none;font-size:.6rem;}
 .exp-dynamic.shifted .panel-close-btn{display:inline-flex;}
@@ -180,7 +182,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .hc-panel.hc-visible{display:block;}
 .hc-panel-year{font-family:var(--font-en);font-size:.78rem;font-weight:600;color:var(--accent);margin-bottom:6px;}
 .hc-panel-title{font-size:1.3rem;font-weight:600;line-height:1.35;margin-bottom:16px;}
-.hc-panel-sub{font-family:var(--font-mono);font-size:.66rem;font-weight:400;letter-spacing:.04em;color:var(--ink-muted);}
+.hc-panel-sub{font-size:.8rem;font-weight:400;color:var(--ink-muted);}
 .hc-game-thumb{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:var(--radius-sm);margin-bottom:16px;}
 .hc-game-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .hc-desc{font-size:.86rem;color:var(--ink-secondary);line-height:1.75;padding-left:12px;border-left:1px solid var(--border-strong);margin-bottom:20px;}
@@ -193,11 +195,10 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .hc-work-text li strong{color:var(--ink-primary);font-weight:600;}
 .hc-tags-new{display:flex;flex-wrap:wrap;gap:6px;}
 .hc-dots{display:flex;gap:6px;justify-content:center;margin-top:18px;}
-.hc-dot{width:18px;height:3px;background:var(--border-strong);cursor:pointer;transition:background .15s;}
-.hc-dot.active{background:var(--accent);}
+.hc-dot{width:22px;cursor:pointer;}
 
 /* ==================== VIDEO PLAYERS (click to play) ==================== */
-.yt-facade{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#000;}
+.yt-facade{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;cursor:pointer;background:#0e0d0c;}
 .yt-facade img{width:100%;height:100%;object-fit:cover;display:block;transition:filter .2s;}
 .yt-facade:hover img{filter:brightness(.8);}
 .yt-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:56px;height:56px;display:flex;align-items:center;justify-content:center;
@@ -209,20 +210,23 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .yt-facade iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
 .yt-facade.playing{cursor:default;}
 .yt-facade[hidden]{display:none;}
-.yt-open{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;font-family:var(--font-en);font-size:.74rem;color:var(--ink-muted);text-decoration:none;}
+.yt-open{align-self:flex-start;display:inline-flex;align-items:center;gap:8px;min-height:28px;font-family:var(--font-en);font-size:.74rem;color:var(--ink-muted);text-decoration:none;}
 .yt-open:hover{color:var(--ink-primary);}
 
 /* ==================== WORK (projects) ==================== */
-.work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+.work-grid{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(0,1fr);gap:24px;}
+.work-grid .proj-card:first-child{grid-row:span 2;display:flex;flex-direction:column;}
+.work-grid .proj-card:first-child .proj-thumb{aspect-ratio:auto;flex:1;min-height:260px;}
+.work-grid .proj-card:first-child .proj-name{font-size:1.3rem;}
 .proj-card{cursor:pointer;outline:none;}
-.proj-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);transition:border-color .15s;}
+.proj-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#0e0d0c;border:1px solid var(--border-hairline);border-radius:var(--radius-sm);transition:border-color .15s;}
 .proj-thumb img{width:100%;height:100%;object-fit:cover;display:block;}
 .proj-card:hover .proj-thumb,.proj-card:focus-visible .proj-thumb{border-color:var(--ink-secondary);}
 .proj-idx{position:absolute;top:10px;left:10px;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-primary);
   background:rgba(20,19,18,.88);border:1px solid var(--border-strong);border-radius:3px;padding:2px 7px;}
 .proj-info{padding-top:12px;}
 .proj-name{font-size:1.02rem;font-weight:600;line-height:1.4;}
-.proj-line{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.04em;color:var(--ink-muted);margin-top:4px;}
+.proj-line{font-size:.8rem;color:var(--ink-muted);margin-top:4px;}
 
 /* ==================== PROJECT MODAL ==================== */
 .modal-dimmer{position:fixed;inset:0;z-index:9000;background:rgba(12,11,10,.94);display:flex;align-items:center;justify-content:center;padding:24px;
@@ -232,7 +236,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
   border:1px solid var(--border-strong);border-radius:var(--radius-md);transform:translateY(10px);transition:transform .2s ease;}
 .modal-dimmer.open .modal-box{transform:none;}
 .modal-header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 20px;border-bottom:1px solid var(--border-hairline);flex-shrink:0;}
-.modal-header-eyebrow{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.08em;color:var(--ink-muted);margin-bottom:2px;}
+.modal-header-eyebrow{font-size:.78rem;color:var(--ink-muted);margin-bottom:2px;}
 .modal-header-title{font-size:1.02rem;font-weight:600;}
 .modal-close{width:36px;height:36px;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);
   border-radius:var(--radius-sm);color:var(--ink-secondary);font-size:.95rem;cursor:pointer;}
@@ -255,7 +259,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .spec-grid{display:flex;flex-wrap:wrap;gap:1px;background:var(--border-hairline);
   border:1px solid var(--border-hairline);border-radius:var(--radius-sm);overflow:hidden;}
 .spec{flex:1 1 180px;display:flex;flex-direction:column;gap:6px;padding:12px 14px;background:var(--bg-base);}
-.spec-k{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.02em;color:var(--ink-muted);}
+.spec-k{font-size:.76rem;color:var(--ink-muted);}
 .spec-v{font-size:.86rem;font-weight:500;line-height:1.5;}
 
 .wf-step{display:flex;flex-direction:column;gap:12px;}
@@ -291,22 +295,22 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .phil-title{font-size:1.15rem;font-weight:600;line-height:1.4;margin-bottom:12px;}
 .phil-desc{font-size:.88rem;line-height:1.8;color:var(--ink-secondary);}
 .tech-stack-wrap{margin-top:64px;}
-.tech-stack-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:14px;}
+.tech-stack-title{font-size:1.05rem;font-weight:600;color:var(--ink-primary);margin-bottom:14px;}
 .tech-badge-grid{display:flex;flex-wrap:wrap;gap:8px;}
-.tech-badge{font-size:.74rem;padding:5px 10px;}
+.tech-badge{font-size:.8rem;padding:5px 10px;}
 .tech-badge.primary{color:var(--ink-primary);border-color:var(--border-strong);}
 
 /* ==================== CONTACT ==================== */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
-.contact-label{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.04em;color:var(--ink-muted);margin-bottom:14px;}
+
 .contact-tagline{font-size:clamp(1.5rem,2.6vw,2rem);font-weight:600;line-height:1.4;}
-.contact-tagline span{color:var(--accent);}
+.contact-tagline span{color:inherit;}
 .ci-row{display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:16px;padding:18px 0;border-top:1px solid var(--border-hairline);}
 .ci-row:last-child{border-bottom:1px solid var(--border-hairline);}
-.ci-label{font-family:var(--font-mono);font-size:.64rem;letter-spacing:.03em;color:var(--ink-muted);text-transform:uppercase;}
+.ci-label{font-size:.82rem;color:var(--ink-muted);}
 .ci-text{font-size:1rem;}
-.ci-copy{background:none;border:1px solid var(--border-strong);border-radius:3px;color:var(--ink-secondary);font-family:var(--font-mono);font-size:.64rem;
-  letter-spacing:.08em;padding:5px 10px;cursor:pointer;transition:color .15s,border-color .15s;}
+.ci-copy{background:none;border:1px solid var(--border-strong);border-radius:3px;color:var(--ink-secondary);font-size:.8rem;
+  padding:6px 12px;min-height:32px;cursor:pointer;transition:color .15s,border-color .15s;}
 .ci-copy:hover{color:var(--ink-primary);border-color:var(--ink-secondary);}
 .to-top{display:flex;justify-content:flex-end;margin-top:48px;}
 .to-top button{width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:none;border:1px solid var(--border-hairline);
@@ -315,13 +319,22 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .toast{position:fixed;left:50%;bottom:28px;z-index:20000;transform:translate(-50%,12px);background:var(--ink-primary);color:var(--bg-base);
   font-size:.82rem;font-weight:600;padding:10px 16px;border-radius:var(--radius-sm);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;}
 .toast.show{opacity:1;transform:translate(-50%,0);}
-footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);text-align:center;font-family:var(--font-mono);font-size:.64rem;color:var(--ink-muted);}
+footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);text-align:center;font-size:.78rem;color:var(--ink-muted);}
+
+/* ==================== ACCESSIBILITY ==================== */
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+.hc-dot{height:16px;background:linear-gradient(var(--border-strong),var(--border-strong)) center/100% 3px no-repeat;}
+.hc-dot.active{background:linear-gradient(var(--accent),var(--accent)) center/100% 3px no-repeat;}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .fade-in{opacity:1;transform:none;transition:none;}
+  *,*::before,*::after{transition-duration:.01ms !important;}
+}
 
 /* ==================== RESPONSIVE ==================== */
 @media(max-width:1100px){
   .hero-head{grid-template-columns:1fr;align-items:start;}
   .hero-meta{justify-self:start;}
-  .work-grid{grid-template-columns:1fr 1fr;}
   .exp-dynamic.shifted .exp-timeline-col{flex:0 0 38%;max-width:38%;}
   .exp-dynamic.shifted .exp-highlights-col{flex:0 0 62%;max-width:62%;padding-left:20px;}
 }
@@ -375,12 +388,12 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 <body>
 <nav id="navbar">
   <div class="nav-inner">
-    <a href="#hero" class="brand">LEE JINYONG <span>— LEVEL DESIGN</span></a>
+    <a href="#hero" class="brand">LEE JINYONG <span>Level designer</span></a>
     <div class="nav-links">
-      <a href="#experience" data-i18n="nav_exp">EXPERIENCE</a>
-      <a href="#deepdive" data-i18n="nav_proj">WORK</a>
-      <a href="#philosophy" data-i18n="nav_phil">PHILOSOPHY</a>
-      <a href="#contact" data-i18n="nav_contact">CONTACT</a>
+      <a href="#experience" data-i18n="nav_exp">경력</a>
+      <a href="#deepdive" data-i18n="nav_proj">프로젝트</a>
+      <a href="#philosophy" data-i18n="nav_phil">철학</a>
+      <a href="#contact" data-i18n="nav_contact">연락처</a>
       <div class="lang-switch" role="group" aria-label="Language">
         <button data-lang="ko" class="active-lang">KO</button><button data-lang="en">EN</button><button data-lang="ja">JA</button><button data-lang="zh">ZH</button>
       </div>
@@ -392,23 +405,22 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 <div class="wrap">
   <div class="hero-head">
     <div class="hero-id">
-      <div class="hero-eyebrow">LEVEL DESIGNER</div>
       <h1 class="hero-name">LEE JINYONG<span class="ko">이진용</span></h1>
       <p class="hero-sub" data-i18n="hero_sub">언리얼 엔진 5로 심리스 오픈월드 지형, Data Layer 동적 레벨, 4인 코옵 레이드 동선을 설계해 왔습니다. 지금은 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP로 만든 AI 레벨 제작 파이프라인을 써서 사냥터와 던전을 설계합니다.</p>
-      <div class="hero-line">Unreal Engine 5 / Open World &amp; Co-op Raid / 4.5+ Years</div>
+      <div class="hero-line">Level designer · Unreal Engine 5 · Open world and co-op raids</div>
     </div>
     <dl class="hero-meta">
-      <div><dt>EXPERIENCE</dt><dd>4.5+ YRS</dd></div>
-      <div><dt>MAIN ENGINE</dt><dd>UE5 · UE4</dd></div>
-      <div><dt>SHIPPED STAGES</dt><dd>150+</dd></div>
-      <div><dt>AI LEVEL PIPELINE</dt><dd>6 LV / 1 MO</dd></div>
+      <div><dt>Experience</dt><dd>4.5+ years</dd></div>
+      <div><dt>Engine</dt><dd>UE5 · UE4</dd></div>
+      <div><dt>Shipped stages</dt><dd>150+</dd></div>
+      <div><dt>AI level pipeline</dt><dd>6 levels / 1 month</dd></div>
     </dl>
   </div>
 
   <div class="showcase">
     <div class="showcase-tabs" role="tablist">
-      <button class="sc-tab active" data-view="video" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt"><i class="fa fa-play"></i>GOLDEN TOOTH ROUTE</button>
-      <button class="sc-tab" data-view="video" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh"><i class="fa fa-play"></i>HARRENHAL RAID</button>
+      <button class="sc-tab active" data-view="video" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt"><i class="fa fa-play"></i>Golden Tooth route</button>
+      <button class="sc-tab" data-view="video" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh"><i class="fa fa-play"></i>Harrenhal raid</button>
     </div>
     <div class="showcase-frame" id="showcaseFrame">
       <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
@@ -417,9 +429,9 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
   </div>
 
   <div class="quick-jump">
-    <button data-modal="kings"><span class="qj-idx">01</span><span class="qj-t">KINGSROAD</span><span class="qj-s">NETMARBLE NEO · UE5 · OPEN WORLD / RAID</span><i class="fa fa-arrow-right"></i></button>
-    <button data-modal="memento"><span class="qj-idx">02</span><span class="qj-t">RE:MEMENTO</span><span class="qj-s">BLACKSTORM · UE5 · OPEN WORLD RPG</span><i class="fa fa-arrow-right"></i></button>
-    <button data-modal="closers"><span class="qj-idx">03</span><span class="qj-t">CLOSERS RT</span><span class="qj-s">NADDIC GAMES · UE4 · STAGE RPG</span><i class="fa fa-arrow-right"></i></button>
+    <button data-modal="kings"><span class="qj-idx">01</span><span class="qj-t">Kingsroad</span><span class="qj-s">Netmarble Neo · UE5 · Open world, raid</span><i class="fa fa-arrow-right"></i></button>
+    <button data-modal="memento"><span class="qj-idx">02</span><span class="qj-t">RE:MEMENTO</span><span class="qj-s">Blackstorm · UE5 · Open world RPG</span><i class="fa fa-arrow-right"></i></button>
+    <button data-modal="closers"><span class="qj-idx">03</span><span class="qj-t">CLOSERS RT</span><span class="qj-s">Naddic Games · UE4 · Stage RPG</span><i class="fa fa-arrow-right"></i></button>
   </div>
 </div>
 </section>
@@ -432,7 +444,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 </div>
 <section id="experience">
 <div class="exp-outer">
-  <div class="sec-head"><span class="sec-idx">01</span><span class="sec-en">EXPERIENCE</span><h2 data-i18n="exp_title">주요 경력</h2></div>
+  <div class="sec-head"><h2><span class="sec-idx">01</span><span data-i18n="exp_title">주요 경력</span></h2></div>
 
   <div class="exp-dynamic" id="expDynamic">
 
@@ -442,7 +454,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
         <div class="timeline-item" data-idx="0" role="button" tabindex="0">
           <div class="exp-row">
-            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp0_year">2026.10 — 재직 중</div><div class="exp-company">NETMARBLE NEO</div></div>
+            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp0_year">2026.10 ~ 재직 중</div><div class="exp-company">NETMARBLE NEO</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp0_game">다크프리스트 (DP)</div>
               <span class="exp-role-badge" data-i18n="exp0_role">콘텐츠 기획 / AI 기반 레벨 디자인</span>
               <div class="exp-desc" data-i18n="exp0_desc">UE5 신규 MMORPG의 필드 사냥터·던전 등 핵심 콘텐츠 및 레벨 기획. Claude Code·MCP 연동 AI 제작 파이프라인으로 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완료.</div>
@@ -454,7 +466,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
         <div class="timeline-item" data-idx="1" role="button" tabindex="0">
           <div class="exp-row">
-            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp1_year">2025.06 — 2026.10</div><div class="exp-company" data-i18n="exp1_company">NETMARBLE NEO</div></div>
+            <div class="exp-meta"><div class="company-logo-box"><img src="./넷마블_네오.png" alt="NETMARBLE NEO" /></div><div class="exp-year" data-i18n="exp1_year">2025.06 ~ 2026.10</div><div class="exp-company" data-i18n="exp1_company">NETMARBLE NEO</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div>
               <span class="exp-role-badge" data-i18n="exp1_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp1_desc">UE5 Data Layer 기반 동적 내러티브 레벨 연출, 4인 코옵 레이드 설계, 환경 파괴 기반 다이나믹 아레나 구현 주도.</div>
@@ -466,7 +478,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
         <div class="timeline-item" data-idx="2" role="button" tabindex="0">
           <div class="exp-row">
-            <div class="exp-meta"><div class="company-logo-box"><img src="./블랙스톰.png" alt="BLACKSTORM" /></div><div class="exp-year" data-i18n="exp2_year">2024.04 — 2025.06</div><div class="exp-company" data-i18n="exp2_company">BLACKSTORM</div></div>
+            <div class="exp-meta"><div class="company-logo-box"><img src="./블랙스톰.png" alt="BLACKSTORM" /></div><div class="exp-year" data-i18n="exp2_year">2024.04 ~ 2025.06</div><div class="exp-company" data-i18n="exp2_company">BLACKSTORM</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div>
               <span class="exp-role-badge" data-i18n="exp2_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp2_desc">오픈월드 배치 정책 수립, AI BT 설계, 인스턴스 던전 선형 레벨 설계, 인게임 리소스·몬스터 조합 관리 전담.</div>
@@ -478,7 +490,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
         <div class="timeline-item" data-idx="3" role="button" tabindex="0">
           <div class="exp-row">
-            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp3_year">2023.06 — 2024.04</div><div class="exp-company" data-i18n="exp3_company">Naddic Games</div></div>
+            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp3_year">2023.06 ~ 2024.04</div><div class="exp-company" data-i18n="exp3_company">Naddic Games</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp3_game">CLOSERS PC Live</div>
               <span class="exp-role-badge" data-i18n="exp3_role">Combat Designer</span>
               <div class="exp-desc" data-i18n="exp3_desc">라이브 서비스 스테이지 유지보수, Lua 스크립트 기반 보스·일반 몬스터 디자인 및 인게임 적용.</div>
@@ -490,7 +502,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
         <div class="timeline-item" data-idx="4" role="button" tabindex="0">
           <div class="exp-row">
-            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp4_year">2022.03 — 2023.06</div><div class="exp-company" data-i18n="exp4_company">Naddic Games</div></div>
+            <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp4_year">2022.03 ~ 2023.06</div><div class="exp-company" data-i18n="exp4_company">Naddic Games</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div>
               <span class="exp-role-badge" data-i18n="exp4_role">Level Designer</span>
               <div class="exp-desc" data-i18n="exp4_desc">75개+ 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.</div>
@@ -512,7 +524,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
         </button>
 
         <div class="hc-panel hc-visible" id="hc-dp">
-          <div class="hc-panel-year" data-i18n="hc_dp_year">2026.10 — 현재</div>
+          <div class="hc-panel-year" data-i18n="hc_dp_year">2026.10 ~ 현재</div>
           <h3 class="hc-panel-title"><span data-i18n="exp0_game">다크프리스트 (DP)</span><br>
             <span class="hc-panel-sub">NETMARBLE NEO &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
@@ -536,7 +548,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
         </div>
 
         <div class="hc-panel" id="hc-0">
-          <div class="hc-panel-year">2025.06 — 2026.10</div>
+          <div class="hc-panel-year">2025.06 ~ 2026.10</div>
           <h3 class="hc-panel-title"><span data-i18n="exp1_game">왕좌의 게임: 킹스로드</span><br>
             <span class="hc-panel-sub">NETMARBLE NEO &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
@@ -560,7 +572,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
         </div>
 
         <div class="hc-panel" id="hc-1">
-          <div class="hc-panel-year">2024.04 — 2025.06</div>
+          <div class="hc-panel-year">2024.04 ~ 2025.06</div>
           <h3 class="hc-panel-title"><span data-i18n="exp2_game">RE:MEMENTO (리메멘토)</span><br>
             <span class="hc-panel-sub">BLACKSTORM &nbsp;|&nbsp; Unreal Engine 5</span>
           </h3>
@@ -584,7 +596,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
         </div>
 
         <div class="hc-panel" id="hc-2">
-          <div class="hc-panel-year">2023.06 — 2024.04</div>
+          <div class="hc-panel-year">2023.06 ~ 2024.04</div>
           <h3 class="hc-panel-title"><span data-i18n="hc2_title">CLOSERS PC Live (클로저스)</span><br>
             <span class="hc-panel-sub" data-i18n="hc2_sub">Naddic Games &nbsp;|&nbsp; 자체 엔진</span>
           </h3>
@@ -608,7 +620,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
         </div>
 
         <div class="hc-panel" id="hc-3">
-          <div class="hc-panel-year">2022.03 — 2023.06</div>
+          <div class="hc-panel-year">2022.03 ~ 2023.06</div>
           <h3 class="hc-panel-title"><span data-i18n="hc3_title">CLOSERS RT: 뉴 오더</span><br>
             <span class="hc-panel-sub">Naddic Games &nbsp;|&nbsp; Unreal Engine 4</span>
           </h3>
@@ -644,26 +656,26 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 </section>
 <section id="deepdive">
 <div class="wrap">
-  <div class="sec-head"><span class="sec-idx">02</span><span class="sec-en">SELECTED WORK</span><h2 data-i18n="dd_title">대표 프로젝트</h2></div>
+  <div class="sec-head"><h2><span class="sec-idx">02</span><span data-i18n="dd_title">대표 프로젝트</span></h2></div>
   <div class="work-grid fade-in">
     <div class="proj-card" data-modal="kings" role="button" tabindex="0" aria-label="왕좌의 게임: 킹스로드">
       <div class="proj-thumb"><img src="./왕좌의_게임_킹스로드.webp" alt="왕좌의 게임: 킹스로드" loading="lazy" /><span class="proj-idx">01</span></div>
-      <div class="proj-info"><div class="proj-name" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div><div class="proj-line">NETMARBLE NEO · LEVEL DESIGNER · UE5 · OPEN WORLD ARPG</div></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp1_game">왕좌의 게임: 킹스로드</div><div class="proj-line">Netmarble Neo · Level designer · UE5 · Open world ARPG</div></div>
     </div>
     <div class="proj-card" data-modal="memento" role="button" tabindex="0" aria-label="RE:MEMENTO">
       <div class="proj-thumb"><img src="./리메멘토.webp" alt="RE:MEMENTO" loading="lazy" /><span class="proj-idx">02</span></div>
-      <div class="proj-info"><div class="proj-name" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div><div class="proj-line">BLACKSTORM · LEVEL DESIGNER · UE5 · OPEN WORLD RPG</div></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp2_game">RE:MEMENTO (리메멘토)</div><div class="proj-line">Blackstorm · Level designer · UE5 · Open world RPG</div></div>
     </div>
     <div class="proj-card" data-modal="closers" role="button" tabindex="0" aria-label="CLOSERS RT">
       <div class="proj-thumb"><img src="./클로저스RT.webp" alt="CLOSERS RT" loading="lazy" /><span class="proj-idx">03</span></div>
-      <div class="proj-info"><div class="proj-name" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div><div class="proj-line">NADDIC GAMES · LEVEL DESIGNER · UE4 · STAGE RPG</div></div>
+      <div class="proj-info"><div class="proj-name" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div><div class="proj-line">Naddic Games · Level designer · UE4 · Stage RPG</div></div>
     </div>
   </div>
 </div>
 </section>
 <section id="philosophy">
   <div class="phil-inner">
-    <div class="sec-head"><span class="sec-idx">03</span><span class="sec-en">PHILOSOPHY</span><h2 data-i18n="phil_title">레벨 디자인 철학</h2></div>
+    <div class="sec-head"><h2><span class="sec-idx">03</span><span data-i18n="phil_title">레벨 디자인 철학</span></h2></div>
     <div class="phil-grid">
       <div class="phil-card fade-in"><div class="phil-body"><span class="phil-big">01</span>
           <div class="phil-num" data-i18n="phil1_num">내러티브 기반 세계 설계</div>
@@ -686,7 +698,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
     </div>
     <div class="tech-stack-wrap">
       <div class="tech-stack-section fade-in" style="transition-delay:.2s;">
-    <div class="tech-stack-title" data-i18n="tech_stack_title">TOOLS &amp; SKILLS</div>
+    <div class="tech-stack-title" data-i18n="tech_stack_title">주요 툴</div>
     <div class="tech-badge-grid">
       <div class="tech-badge primary"><span data-i18n="tb_ue5">Unreal Engine 5</span></div>
       <div class="tech-badge primary"><span data-i18n="tb_ue4">Unreal Engine 4</span></div>
@@ -711,8 +723,8 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-header-left">
-        <div class="modal-header-eyebrow" data-i18n="mod1_eye">PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG</div>
-        <div class="modal-header-title" data-i18n="mod1_title">왕좌의 게임: 킹스로드 — 레벨 디자인 워크플로우</div>
+        <div class="modal-header-eyebrow" data-i18n="mod1_eye">Project 01 · Netmarble Neo · UE5 open world ARPG</div>
+        <div class="modal-header-title" data-i18n="mod1_title">왕좌의 게임: 킹스로드 · 레벨 디자인 워크플로우</div>
       </div>
       <button class="modal-close" aria-label="닫기"><i class="fa fa-times"></i></button>
     </div>
@@ -724,7 +736,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
       </div>
       <div class="modal-content" id="content-kings">
             <div class="modal-panel active" id="kings-openworld">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / REGION</span><span class="spec-v" data-i18n="sp_ko_1">골든투스 · 카스타미어</span></div><div class="spec"><span class="spec-k">SPEC 02 / DURATION</span><span class="spec-v" data-i18n="sp_ko_2">3.5개월</span></div><div class="spec"><span class="spec-k">SPEC 03 / ENGINE</span><span class="spec-v" data-i18n="sp_ko_3">Unreal Engine 5</span></div><div class="spec"><span class="spec-k">SPEC 04 / OUTPUT</span><span class="spec-v" data-i18n="sp_ko_4">지형 · 식생 · 퀘스트 동선 · 필드 콘텐츠</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Region</span><span class="spec-v" data-i18n="sp_ko_1">골든투스 · 카스타미어</span></div><div class="spec"><span class="spec-k">02 · Duration</span><span class="spec-v" data-i18n="sp_ko_2">3.5개월</span></div><div class="spec"><span class="spec-k">03 · Engine</span><span class="spec-v" data-i18n="sp_ko_3">Unreal Engine 5</span></div><div class="spec"><span class="spec-k">04 · Output</span><span class="spec-v" data-i18n="sp_ko_4">지형 · 식생 · 퀘스트 동선 · 필드 콘텐츠</span></div></div>
               <div class="wf-step wf-video">
                 <div class="wf-step-header">
                   <div class="wf-step-num"><i class="fa fa-play"></i></div>
@@ -774,7 +786,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
               </div>
             </div>
             <div class="modal-panel" id="kings-datalayer">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / SCENARIO</span><span class="spec-v" data-i18n="sp_kd_1">캐슬블랙 전투</span></div><div class="spec"><span class="spec-k">SPEC 02 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_kd_2">UE5 Data Layer</span></div><div class="spec"><span class="spec-k">SPEC 03 / METHOD</span><span class="spec-v" data-i18n="sp_kd_3">서브 레벨 로딩 없는 실시간 환경 변화</span></div><div class="spec"><span class="spec-k">SPEC 04 / VALIDATION</span><span class="spec-v" data-i18n="sp_kd_4">플레이 테스트 · 아트 리뷰</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Scenario</span><span class="spec-v" data-i18n="sp_kd_1">캐슬블랙 전투</span></div><div class="spec"><span class="spec-k">02 · Core system</span><span class="spec-v" data-i18n="sp_kd_2">UE5 Data Layer</span></div><div class="spec"><span class="spec-k">03 · Method</span><span class="spec-v" data-i18n="sp_kd_3">서브 레벨 로딩 없는 실시간 환경 변화</span></div><div class="spec"><span class="spec-k">04 · Validation</span><span class="spec-v" data-i18n="sp_kd_4">플레이 테스트 · 아트 리뷰</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -817,7 +829,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
               </div>
             </div>
             <div class="modal-panel" id="kings-raid">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / REGION</span><span class="spec-v" data-i18n="sp_kr_1">하렌홀</span></div><div class="spec"><span class="spec-k">SPEC 02 / FORMAT</span><span class="spec-v" data-i18n="sp_kr_2">4인 코옵 · 2:2 분할 동선</span></div><div class="spec"><span class="spec-k">SPEC 03 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_kr_3">Data Layer 페이즈 전환</span></div><div class="spec"><span class="spec-k">SPEC 04 / BOSS</span><span class="spec-v" data-i18n="sp_kr_4">대연회장 쌍둥이 보스 → 검은 하렌</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Region</span><span class="spec-v" data-i18n="sp_kr_1">하렌홀</span></div><div class="spec"><span class="spec-k">02 · Format</span><span class="spec-v" data-i18n="sp_kr_2">4인 코옵 · 2:2 분할 동선</span></div><div class="spec"><span class="spec-k">03 · Core system</span><span class="spec-v" data-i18n="sp_kr_3">Data Layer 페이즈 전환</span></div><div class="spec"><span class="spec-k">04 · Boss</span><span class="spec-v" data-i18n="sp_kr_4">대연회장 쌍둥이 보스 → 검은 하렌</span></div></div>
               <div class="wf-step wf-video">
                 <div class="wf-step-header">
                   <div class="wf-step-num"><i class="fa fa-play"></i></div>
@@ -869,8 +881,8 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-header-left">
-        <div class="modal-header-eyebrow" data-i18n="mod2_eye">PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG</div>
-        <div class="modal-header-title" data-i18n="mod2_title">RE:MEMENTO (리메멘토) — 레벨 디자인 워크플로우</div>
+        <div class="modal-header-eyebrow" data-i18n="mod2_eye">Project 02 · Blackstorm · UE5 open world RPG</div>
+        <div class="modal-header-title" data-i18n="mod2_title">RE:MEMENTO (리메멘토) · 레벨 디자인 워크플로우</div>
       </div>
       <button class="modal-close" aria-label="닫기"><i class="fa fa-times"></i></button>
     </div>
@@ -882,7 +894,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
       </div>
       <div class="modal-content" id="content-memento">
             <div class="modal-panel active" id="memento-policy">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / FIELD</span><span class="spec-v" data-i18n="sp_mp_1">심리스 오픈월드</span></div><div class="spec"><span class="spec-k">SPEC 02 / OUTPUT</span><span class="spec-v" data-i18n="sp_mp_2">레벨 배치 정책</span></div><div class="spec"><span class="spec-k">SPEC 03 / SCOPE</span><span class="spec-v" data-i18n="sp_mp_3">콘텐츠 · 몬스터 · 채집물 · 보물상자</span></div><div class="spec"><span class="spec-k">SPEC 04 / GUIDE</span><span class="spec-v" data-i18n="sp_mp_4">랜드마크 · 핀포인트 동선 유도</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Field</span><span class="spec-v" data-i18n="sp_mp_1">심리스 오픈월드</span></div><div class="spec"><span class="spec-k">02 · Output</span><span class="spec-v" data-i18n="sp_mp_2">레벨 배치 정책</span></div><div class="spec"><span class="spec-k">03 · Scope</span><span class="spec-v" data-i18n="sp_mp_3">콘텐츠 · 몬스터 · 채집물 · 보물상자</span></div><div class="spec"><span class="spec-k">04 · Guide</span><span class="spec-v" data-i18n="sp_mp_4">랜드마크 · 핀포인트 동선 유도</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -906,7 +918,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
               </div>
             </div>
             <div class="modal-panel" id="memento-bt">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / CORE SYSTEM</span><span class="spec-v" data-i18n="sp_mb_1">AI Behavior Tree</span></div><div class="spec"><span class="spec-k">SPEC 02 / GIMMICK</span><span class="spec-v" data-i18n="sp_mb_2">마로론 · 물의 정령 · 빛의 기둥</span></div><div class="spec"><span class="spec-k">SPEC 03 / OUTPUT</span><span class="spec-v" data-i18n="sp_mb_3">BT 설계 · 리소스 요청 문서</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Core system</span><span class="spec-v" data-i18n="sp_mb_1">AI Behavior Tree</span></div><div class="spec"><span class="spec-k">02 · Gimmick</span><span class="spec-v" data-i18n="sp_mb_2">마로론 · 물의 정령 · 빛의 기둥</span></div><div class="spec"><span class="spec-k">03 · Output</span><span class="spec-v" data-i18n="sp_mb_3">BT 설계 · 리소스 요청 문서</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -940,7 +952,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
               </div>
             </div>
             <div class="modal-panel" id="memento-dungeon">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / STRUCTURE</span><span class="spec-v" data-i18n="sp_md_1">A → B → C → D 선형 구조</span></div><div class="spec"><span class="spec-k">SPEC 02 / THEME</span><span class="spec-v" data-i18n="sp_md_2">얼음 동굴 속 숨겨진 신전</span></div><div class="spec"><span class="spec-k">SPEC 03 / FOCUS</span><span class="spec-v" data-i18n="sp_md_3">내러티브 몰입 동선</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Structure</span><span class="spec-v" data-i18n="sp_md_1">A → B → C → D 선형 구조</span></div><div class="spec"><span class="spec-k">02 · Theme</span><span class="spec-v" data-i18n="sp_md_2">얼음 동굴 속 숨겨진 신전</span></div><div class="spec"><span class="spec-k">03 · Focus</span><span class="spec-v" data-i18n="sp_md_3">내러티브 몰입 동선</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -975,8 +987,8 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-header-left">
-        <div class="modal-header-eyebrow" data-i18n="mod3_eye">PROJECT 03 · NADDIC GAMES · UE4 STAGE RPG</div>
-        <div class="modal-header-title" data-i18n="mod3_title">CLOSERS RT: 뉴 오더 — 레벨 디자인 워크플로우</div>
+        <div class="modal-header-eyebrow" data-i18n="mod3_eye">Project 03 · Naddic Games · UE4 stage RPG</div>
+        <div class="modal-header-title" data-i18n="mod3_title">CLOSERS RT: 뉴 오더 · 레벨 디자인 워크플로우</div>
       </div>
       <button class="modal-close" aria-label="닫기"><i class="fa fa-times"></i></button>
     </div>
@@ -987,7 +999,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
       </div>
       <div class="modal-content" id="content-closers">
             <div class="modal-panel active" id="closers-busan">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / LOCATION</span><span class="spec-v" data-i18n="sp_cb_1">파괴된 부산 · 부산역 일대</span></div><div class="spec"><span class="spec-k">SPEC 02 / ENGINE</span><span class="spec-v" data-i18n="sp_cb_2">Unreal Engine 4</span></div><div class="spec"><span class="spec-k">SPEC 03 / PROCESS</span><span class="spec-v" data-i18n="sp_cb_3">분석 → 영역 설정 → 더미 레벨 → 폴리싱</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Location</span><span class="spec-v" data-i18n="sp_cb_1">파괴된 부산 · 부산역 일대</span></div><div class="spec"><span class="spec-k">02 · Engine</span><span class="spec-v" data-i18n="sp_cb_2">Unreal Engine 4</span></div><div class="spec"><span class="spec-k">03 · Process</span><span class="spec-v" data-i18n="sp_cb_3">분석 → 영역 설정 → 더미 레벨 → 폴리싱</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1033,7 +1045,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
               </div>
             </div>
             <div class="modal-panel" id="closers-strategy">
-              <div class="spec-grid"><div class="spec"><span class="spec-k">SPEC 01 / RULE</span><span class="spec-v" data-i18n="sp_cs_1">5의 배수 스테이지에 특수 기믹</span></div><div class="spec"><span class="spec-k">SPEC 02 / GIMMICK</span><span class="spec-v" data-i18n="sp_cs_2">차원 균열 · 억제기 · 차원 압력</span></div><div class="spec"><span class="spec-k">SPEC 03 / CONTROL</span><span class="spec-v" data-i18n="sp_cs_3">Auto / Manual 동선 분리</span></div></div>
+              <div class="spec-grid"><div class="spec"><span class="spec-k">01 · Rule</span><span class="spec-v" data-i18n="sp_cs_1">5의 배수 스테이지에 특수 기믹</span></div><div class="spec"><span class="spec-k">02 · Gimmick</span><span class="spec-v" data-i18n="sp_cs_2">차원 균열 · 억제기 · 차원 압력</span></div><div class="spec"><span class="spec-k">03 · Control</span><span class="spec-v" data-i18n="sp_cs_3">Auto / Manual 동선 분리</span></div></div>
               <div class="wf-step">
                 <div class="wf-step-header">
                   <div class="wf-step-num">1</div>
@@ -1052,15 +1064,14 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
 <section id="contact">
 <div class="contact-inner">
-  <div class="sec-head"><span class="sec-idx">04</span><span class="sec-en">CONTACT</span><h2 data-i18n="contact_title">연락처</h2></div>
+  <div class="sec-head"><h2><span class="sec-idx">04</span><span data-i18n="contact_title">연락처</span></h2></div>
   <div class="contact-grid fade-in">
     <div class="contact-left">
-      <div class="contact-label">LET'S BUILD SOMETHING GREAT</div>
       <div class="contact-tagline" data-i18n="contact_tagline">새로운 세계를<br>함께 설계할<br><span>기회를 기다립니다.</span></div>
     </div>
     <div class="contact-right">
-      <div class="ci-row"><span class="ci-label">Email</span><span class="ci-text">jyl134@naver.com</span><button class="ci-copy" data-copy="jyl134@naver.com">COPY</button></div>
-      <div class="ci-row"><span class="ci-label">Phone</span><span class="ci-text">010-6375-4575</span><button class="ci-copy" data-copy="010-6375-4575">COPY</button></div>
+      <div class="ci-row"><span class="ci-label">Email</span><span class="ci-text">jyl134@naver.com</span><button class="ci-copy" data-copy="jyl134@naver.com" data-i18n="copy_btn">복사</button></div>
+      <div class="ci-row"><span class="ci-label">Phone</span><span class="ci-text">010-6375-4575</span><button class="ci-copy" data-copy="010-6375-4575" data-i18n="copy_btn">복사</button></div>
       <div class="ci-row"><span class="ci-label">Location</span><span class="ci-text" data-i18n="contact_location">서울특별시 강서구 (대한민국)</span><span></span></div>
     </div>
   </div>
@@ -1068,7 +1079,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 </div>
 </section>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
-<footer data-i18n="footer">© 2026 이진용 (LEE JIN-YONG) · Level Designer · Unreal Open World · ALL RIGHTS RESERVED</footer>
+<footer data-i18n="footer">© 2026 이진용 · Level Designer</footer>
 
 <script>
 /* ==================== TEXT (ko / en / ja / zh) ====================
@@ -1076,28 +1087,28 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 const I18N = {
   ko:{
     page_title:"이진용 | Level Designer · Unreal Open World",
-    nav_exp:"EXPERIENCE",
-    nav_proj:"WORK",
-    nav_phil:"PHILOSOPHY",
-    nav_contact:"CONTACT",
+    nav_exp:"경력",
+    nav_proj:"프로젝트",
+    nav_phil:"철학",
+    nav_contact:"연락처",
     hero_sub:"언리얼 엔진 5로 심리스 오픈월드 지형, Data Layer 동적 레벨, 4인 코옵 레이드 동선을 설계해 왔습니다. 지금은 넷마블네오 신규 프로젝트 <strong>다크프리스트(DP)</strong>에서 Claude Code·MCP로 만든 AI 레벨 제작 파이프라인을 써서 사냥터와 던전을 설계합니다.",
     exp_title:"주요 경력",
-    exp1_year:"2025.06 — 2026.10",
+    exp1_year:"2025.06 ~ 2026.10",
     exp1_company:"NETMARBLE NEO",
     exp1_game:"왕좌의 게임: 킹스로드",
     exp1_role:"Level Designer",
     exp1_desc:"UE5 Data Layer 기반 동적 내러티브 레벨 연출, 4인 코옵 레이드 설계, 환경 파괴 기반 다이나믹 아레나 구현 주도.",
-    exp2_year:"2024.04 — 2025.06",
+    exp2_year:"2024.04 ~ 2025.06",
     exp2_company:"BLACKSTORM",
     exp2_game:"RE:MEMENTO (리메멘토)",
     exp2_role:"Level Designer",
     exp2_desc:"오픈월드 배치 정책 수립, AI BT 설계, 인스턴스 던전 선형 레벨 설계, 인게임 리소스·몬스터 조합 관리 전담.",
-    exp3_year:"2023.06 — 2024.04",
+    exp3_year:"2023.06 ~ 2024.04",
     exp3_company:"Naddic Games",
     exp3_game:"CLOSERS PC Live",
     exp3_role:"Combat Designer",
     exp3_desc:"라이브 서비스 스테이지 유지보수, Lua 스크립트 기반 보스·일반 몬스터 디자인 및 인게임 적용.",
-    exp4_year:"2022.03 — 2023.06",
+    exp4_year:"2022.03 ~ 2023.06",
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT (클로저스 RT)",
     exp4_role:"Level Designer",
@@ -1112,12 +1123,12 @@ const I18N = {
     proj2_s3:"내러티브 인스턴스 던전",
     proj3_s1:"부산 선형 맵 설계",
     proj3_s2:"기믹 조합 전략 스테이지",
-    mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
-    mod1_title:"왕좌의 게임: 킹스로드 — 레벨 디자인 워크플로우",
-    mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
-    mod2_title:"RE:MEMENTO (리메멘토) — 레벨 디자인 워크플로우",
-    mod3_eye:"PROJECT 03 · NADDIC GAMES · UE4 STAGE RPG",
-    mod3_title:"CLOSERS RT: 뉴 오더 — 레벨 디자인 워크플로우",
+    mod1_eye:"Project 01 · Netmarble Neo · UE5 open world ARPG",
+    mod1_title:"왕좌의 게임: 킹스로드 · 레벨 디자인 워크플로우",
+    mod2_eye:"Project 02 · Blackstorm · UE5 open world RPG",
+    mod2_title:"RE:MEMENTO (리메멘토) · 레벨 디자인 워크플로우",
+    mod3_eye:"Project 03 · Naddic Games · UE4 stage RPG",
+    mod3_title:"CLOSERS RT: 뉴 오더 · 레벨 디자인 워크플로우",
     k_t1_s1_t:"원작 생태계 고증 및 시나리오 동선 기획 (Total: 3.5개월 공정)",
     k_t1_s1_d:"신규 업데이트 지역 할당 시, 원작 소설과 드라마의 시각적 레퍼런스를 분석하고 현실의 지형 데이터를 대조하여 설득력 있는 생태계를 기획합니다. 이후 카스타미어 등 지역 특색에 맞춰 시나리오 파트의 요구사항을 반영한 시선 유도 및 퀘스트 동선을 설계합니다.",
     k_t1_s2_t:"랜드스케이프 구축 및 오픈월드 콘텐츠 목업(Mock-up)",
@@ -1164,7 +1175,7 @@ const I18N = {
     phil_title:"레벨 디자인 철학",
     contact_title:"연락처",
     contact_location:"서울특별시 강서구 (대한민국)",
-    tech_stack_title:"TOOLS &amp; SKILLS",
+    tech_stack_title:"주요 툴",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1177,7 +1188,7 @@ const I18N = {
     tb_svn:"SVN",
     tb_openworld:"오픈월드 디자인",
     tb_leveldesign:"레벨 디자인",
-    footer:"© 2026 이진용 (LEE JIN-YONG) · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
+    footer:"© 2026 이진용 · Level Designer",
     tag_ow_policy:"오픈월드 정책",
     tag_instance:"인스턴스 던전",
     tag_gimmick:"기믹 설계",
@@ -1236,11 +1247,11 @@ const I18N = {
     phil3_desc:"BT 로직과 조건별 Data Layer 전환 같은 시스템적 설계 위에, Claude Code·MCP를 연동한 AI 제작 파이프라인을 더해 기획 문서부터 더미 레벨 목업까지의 과정을 빠르게 반복합니다. 이 방식으로 대형 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완성했고, 팀 전체가 함께 쓰는 AI 레벨 디자인 프로세스를 만들어 가고 있습니다.",
     contact_tagline:"새로운 세계를<br>함께 설계할<br><span>기회를 기다립니다.</span>",
     to_top:"맨 위로",
-    exp0_year:"2026.10 — 재직 중",
+    exp0_year:"2026.10 ~ 재직 중",
     exp0_game:"다크프리스트 (DP)",
     exp0_role:"콘텐츠 기획 / AI 기반 레벨 디자인",
     exp0_desc:"UE5 신규 MMORPG의 필드 사냥터·던전 등 핵심 콘텐츠 및 레벨 기획. Claude Code·MCP 연동 AI 제작 파이프라인으로 사냥터 2종·던전 3종·내러티브 레벨 1종을 1개월 만에 완료.",
-    hc_dp_year:"2026.10 — 현재",
+    hc_dp_year:"2026.10 ~ 현재",
     hc_dp_desc:"언리얼 엔진 5 기반으로 개발 중인 신규 MMORPG입니다. 필드 사냥터, 던전 등 핵심 콘텐츠와 레벨 기획을 맡아 Claude Code·MCP 기반 AI 제작 파이프라인을 실무에 적용하고 있습니다.",
     hc_dp_w1:"<strong>AI 워크플로우 기반 사냥터·던전 제작:</strong> Claude Code·MCP 연동 AI 워크플로우로 500×500 규모 대형 사냥터 2종과 200×200 규모 던전 3종의 동선·전투 공간 기획 및 레벨 구축을 진행. 사냥터는 2주 만에 기획 컨펌과 아트 발주 문서 전달까지 마쳤고, 내러티브 레벨을 포함한 전 과정을 1개월 만에 완료.",
     tag_ai_pipeline:"AI 레벨 파이프라인",
@@ -1281,32 +1292,33 @@ const I18N = {
     sp_cb_3:"분석 → 영역 설정 → 더미 레벨 → 폴리싱",
     sp_cs_1:"5의 배수 스테이지에 특수 기믹",
     sp_cs_2:"차원 균열 · 억제기 · 차원 압력",
-    sp_cs_3:"Auto / Manual 동선 분리"
+    sp_cs_3:"Auto / Manual 동선 분리",
+    copy_btn:"복사"
   },
   en:{
     page_title:"Lee Jin-yong | Level Designer · Unreal Open World",
-    nav_exp:"EXPERIENCE",
-    nav_proj:"WORK",
-    nav_phil:"PHILOSOPHY",
-    nav_contact:"CONTACT",
+    nav_exp:"Experience",
+    nav_proj:"Work",
+    nav_phil:"Philosophy",
+    nav_contact:"Contact",
     hero_sub:"I design seamless open-world terrain in Unreal Engine 5, dynamic levels with Data Layers, and routes for 4-player co-op raids. I'm currently designing hunting grounds and dungeons for Netmarble Neo's new project <strong>Dark Priest (DP)</strong> with an AI level pipeline built on Claude Code and MCP.",
     exp_title:"Professional Experience",
-    exp1_year:"2025.06 — 2026.10",
+    exp1_year:"2025.06 ~ 2026.10",
     exp1_company:"NETMARBLE NEO",
     exp1_game:"Game of Thrones: King's Road",
     exp1_role:"Level Designer",
     exp1_desc:"Led dynamic narrative level design using UE5 Data Layer, 4-player co-op raid design, and Dynamic Arena via environmental destruction.",
-    exp2_year:"2024.04 — 2025.06",
+    exp2_year:"2024.04 ~ 2025.06",
     exp2_company:"BLACKSTORM",
     exp2_game:"RE:MEMENTO",
     exp2_role:"Level Designer",
     exp2_desc:"Established open world placement policy, AI BT design, linear instance dungeon design, and in-game resource/monster combination management.",
-    exp3_year:"2023.06 — 2024.04",
+    exp3_year:"2023.06 ~ 2024.04",
     exp3_company:"Naddic Games",
     exp3_game:"CLOSERS PC Live",
     exp3_role:"Combat Designer",
     exp3_desc:"Live service stage maintenance, boss and monster design via Lua scripting, and in-game implementation.",
-    exp4_year:"2022.03 — 2023.06",
+    exp4_year:"2022.03 ~ 2023.06",
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT",
     exp4_role:"Level Designer",
@@ -1321,24 +1333,24 @@ const I18N = {
     proj2_s3:"Narrative Instance Dungeon",
     proj3_s1:"Busan Linear Map Design",
     proj3_s2:"Gimmick-combo Strategy Stages",
-    mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
-    mod1_title:"Game of Thrones: King's Road — Level Design Workflow",
-    mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
-    mod2_title:"RE:MEMENTO — Level Design Workflow",
-    mod3_eye:"PROJECT 03 · NADDIC GAMES · UE4 STAGE RPG",
-    mod3_title:"CLOSERS RT — Level Design Workflow",
+    mod1_eye:"Project 01 · Netmarble Neo · UE5 open world ARPG",
+    mod1_title:"Game of Thrones: King's Road · Level Design Workflow",
+    mod2_eye:"Project 02 · Blackstorm · UE5 open world RPG",
+    mod2_title:"RE:MEMENTO · Level Design Workflow",
+    mod3_eye:"Project 03 · Naddic Games · UE4 stage RPG",
+    mod3_title:"CLOSERS RT · Level Design Workflow",
     k_t1_s1_t:"Original Ecosystem Research & Scenario Routing (3.5 Months)",
     k_t1_s1_d:"Upon assigning a new update region, I analyze visual references from the original novels and drama, cross-referencing real-world topographical data to design a convincing ecosystem. I then plan visual guidance and quest routes that reflect the narrative team's requirements.",
     k_t1_s2_t:"Landscape Construction & Open World Content Mock-up",
     k_t1_s2_d:"Based on the planned routes, I sculpt the landscape in the engine and build structural mock-ups. I organically place essential open-world contents like Weirwood memories, outposts, and fierce animal spawn points.",
     k_t1_s3_t:"Cross-department Collaboration & Visual Polishing",
-    k_t1_s3_d:"Using the level design mock-up, I constantly communicate and exchange feedback with the Art and Narrative departments to maximize visual quality while maintaining functional level flow and combat spaces. This region went live with the 'Golden Tooth Update' (Nov 25).",
+    k_t1_s3_d:"Using the level design mock-up, I keep reviewing and exchanging feedback with Art and other teams while refining the environment, keeping level flow and combat space intact while raising visual quality. This region went live with the 'Golden Tooth Update' (Nov 25).",
     k_t2_s1_t:"Scenario Analysis & Dynamic Environment (Data Layer) Planning",
     k_t2_s1_d:"Instead of sub-level switching, I planned a dynamic level that changes in real-time using UE5's Data Layer. By analyzing the 'Battle of Castle Black' scenario, I designed an immersive experience where the user is swept into a massive event.",
     k_t2_s2_t:"Original Research-based Mockup & Time Flow Staging",
     k_t2_s2_d:"I staged the environment mock-ups by carefully comparing actual broadcast scenes. I vividly directed the devastated state of Castle Black, with walls collapsing and fires breaking out as the quest progresses.",
     k_t2_s3_t:"Quest Route Construction & Visual Guidance",
-    k_t2_s3_d:"I built intuitive quest routes to ensure users don't get lost in the ever-changing environment. By using landmarks and lighting for precise visual guidance, I perfected the details to deliver the intended emotional arc.",
+    k_t2_s3_d:"I built clear quest routes so players do not get lost while the environment keeps changing, and used landmarks and lighting to guide the eye toward the intended emotional beats.",
     k_t2_s4_t:"In-game Validation & Outcome",
     k_t2_s4_d:"Implemented quest-stage environment changes such as collapsing walls and spreading fires purely through Data Layer switching, with no sub-level loading, and validated fun and flow through repeated playtests and art reviews. The internal design review described it as \"drawing out dramatic tension and immersion remarkably well.\"",
     k_t3_s1_t:"Region Setting & Raid Scenario Planning",
@@ -1359,7 +1371,7 @@ const I18N = {
     m_t3_s1_t:"Linear Routing & Level Structure for Narrative Immersion",
     m_t3_s1_d:"Though it looks like a vast exploration zone, the instance dungeon is designed sequentially (A-B-C-D) according to the scenario flow. I optimized the routes so users fully immerse in the story without getting lost.",
     m_t3_s2_t:"Story-driven In-game Environment Implementation",
-    m_t3_s2_d:"I reflected the core background theme—'A hidden temple inside an ice cave'—into the level design. The in-game environment naturally lets players experience the narrative on the linear path.",
+    m_t3_s2_d:"I reflected the core background theme · 'A hidden temple inside an ice cave' · into the level design. The in-game environment naturally lets players experience the narrative on the linear path.",
     c_t1_s1_t:"Scenario & Background Setting Analysis",
     c_t1_s1_d:"I analyzed the scenario based on the 'Destroyed Busan' setting and outlined essential elements for the level design, considering the monsters' attack patterns.",
     c_t1_s2_t:"Real-world Landmark Area Setup & Planning",
@@ -1373,7 +1385,7 @@ const I18N = {
     phil_title:"Design Philosophy",
     contact_title:"Contact",
     contact_location:"Gangseo-gu, Seoul (South Korea)",
-    tech_stack_title:"TOOLS &amp; SKILLS",
+    tech_stack_title:"Tools",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1386,7 +1398,7 @@ const I18N = {
     tb_svn:"SVN",
     tb_openworld:"Open World Design",
     tb_leveldesign:"Level Design",
-    footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
+    footer:"© 2026 Lee Jinyong · Level Designer",
     tag_ow_policy:"Open World Policy",
     tag_instance:"Instance Dungeon",
     tag_gimmick:"Gimmick Design",
@@ -1445,11 +1457,11 @@ const I18N = {
     phil3_desc:"On top of systematic design such as BT logic and condition-based Data Layer switching, I add an AI production pipeline built on Claude Code and MCP to iterate quickly from design documents to dummy-level mock-ups. With this approach I completed 2 hunting grounds, 3 dungeons and 1 narrative level in one month, and I'm building an AI-driven level design process the whole team can use.",
     contact_tagline:"Looking for the chance<br>to design new worlds<br><span>together.</span>",
     to_top:"Back to top",
-    exp0_year:"2026.10 — Present",
+    exp0_year:"2026.10 ~ Present",
     exp0_game:"Dark Priest (DP)",
     exp0_role:"Content Design / AI-driven Level Design",
     exp0_desc:"Content and level design for field hunting grounds and dungeons in a new UE5 MMORPG. Built 2 hunting grounds, 3 dungeons and 1 narrative level in one month with an AI production pipeline using Claude Code and MCP.",
-    hc_dp_year:"2026.10 — Present",
+    hc_dp_year:"2026.10 ~ Present",
     hc_dp_desc:"A new MMORPG in development on Unreal Engine 5. I design core content and levels such as field hunting grounds and dungeons, applying an AI production pipeline built on Claude Code and MCP in day-to-day work.",
     hc_dp_w1:"<strong>Hunting Grounds & Dungeons with an AI Workflow:</strong> Using an AI workflow built on Claude Code and MCP, designed routes and combat spaces and built levels for two 500×500 hunting grounds and three 200×200 dungeons. The hunting grounds went from design sign-off to art request documents in two weeks, and the whole process, including the narrative level, was completed in one month.",
     tag_ai_pipeline:"AI Level Pipeline",
@@ -1490,32 +1502,33 @@ const I18N = {
     sp_cb_3:"Analysis → Area setup → Dummy level → Polish",
     sp_cs_1:"Special gimmicks on every 5th stage",
     sp_cs_2:"Dimensional rift · Suppressor · Dimensional pressure",
-    sp_cs_3:"Separate Auto / Manual routes"
+    sp_cs_3:"Separate Auto / Manual routes",
+    copy_btn:"Copy"
   },
   ja:{
     page_title:"イ・ジニョン | Level Designer · Unreal Open World",
-    nav_exp:"EXPERIENCE",
-    nav_proj:"WORK",
-    nav_phil:"PHILOSOPHY",
-    nav_contact:"CONTACT",
+    nav_exp:"経歴",
+    nav_proj:"プロジェクト",
+    nav_phil:"哲学",
+    nav_contact:"連絡先",
     hero_sub:"Unreal Engine 5でのシームレスなオープンワールド地形設計、Data Layerによる動的レベル演出、4人Co-opレイドの動線企画を手がけてきました。現在はネットマーブルネオの新規プロジェクト<strong>ダークプリースト(DP)</strong>で、Claude Code・MCPベースのAIレベル制作パイプラインを用いて狩場やダンジョンを設計しています。",
     exp_title:"主な経歴",
-    exp1_year:"2025.06 — 2026.10",
+    exp1_year:"2025.06 ~ 2026.10",
     exp1_company:"NETMARBLE NEO",
     exp1_game:"ゲーム・オブ・スローンズ: King's Road",
     exp1_role:"Level Designer",
     exp1_desc:"UE5データレイヤーを活用したナラティブ演出、4人Co-opレイド設計、ダイナミックアリーナ構築を主導。",
-    exp2_year:"2024.04 — 2025.06",
+    exp2_year:"2024.04 ~ 2025.06",
     exp2_company:"BLACKSTORM",
     exp2_game:"RE:MEMENTO（リメメント）",
     exp2_role:"Level Designer",
     exp2_desc:"OW配置方針策定、AI BT設計、インスタンスダンジョン設計、リソース管理全般を担当。",
-    exp3_year:"2023.06 — 2024.04",
+    exp3_year:"2023.06 ~ 2024.04",
     exp3_company:"Naddic Games",
     exp3_game:"CLOSERS PC Live",
     exp3_role:"Combat Designer",
     exp3_desc:"ライブサービスステージ保守、Luaスクリプトによるボス・モンスターデザイン。",
-    exp4_year:"2022.03 — 2023.06",
+    exp4_year:"2022.03 ~ 2023.06",
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT（クロージャーズRT）",
     exp4_role:"Level Designer",
@@ -1530,12 +1543,12 @@ const I18N = {
     proj2_s3:"ナラティブ・インスタンスダンジョン",
     proj3_s1:"釜山リニアマップ設計",
     proj3_s2:"ギミック組み合わせ戦略ステージ",
-    mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
-    mod1_title:"GoT: King's Road — レベルデザインワークフロー",
-    mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
-    mod2_title:"RE:MEMENTO — レベルデザインワークフロー",
-    mod3_eye:"PROJECT 03 · NADDIC GAMES · UE4 STAGE RPG",
-    mod3_title:"CLOSERS RT — レベルデザインワークフロー",
+    mod1_eye:"Project 01 · Netmarble Neo · UE5 open world ARPG",
+    mod1_title:"GoT: King's Road · レベルデザインワークフロー",
+    mod2_eye:"Project 02 · Blackstorm · UE5 open world RPG",
+    mod2_title:"RE:MEMENTO · レベルデザインワークフロー",
+    mod3_eye:"Project 03 · Naddic Games · UE4 stage RPG",
+    mod3_title:"CLOSERS RT · レベルデザインワークフロー",
     k_t1_s1_t:"原作エコシステムの考証とシナリオ動線企画（計3.5ヶ月）",
     k_t1_s1_d:"アップデート地域の割り当て時、原作の小説やドラマの視覚的リファレンスを分析し、現実の地形データと照らし合わせて説得力のあるエコシステムを企画します。その後、シナリオの要求を反映した視線誘導とクエスト動線を設計します。",
     k_t1_s2_t:"ランドスケープ構築およびOWコンテンツモックアップ",
@@ -1582,7 +1595,7 @@ const I18N = {
     phil_title:"レベルデザイン哲学",
     contact_title:"連絡先",
     contact_location:"ソウル特別市 江西区 (韓国)",
-    tech_stack_title:"TOOLS &amp; SKILLS",
+    tech_stack_title:"主なツール",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1595,7 +1608,7 @@ const I18N = {
     tb_svn:"SVN",
     tb_openworld:"オープンワールドデザイン",
     tb_leveldesign:"レベルデザイン",
-    footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
+    footer:"© 2026 イ・ジニョン · Level Designer",
     tag_ow_policy:"OW配置ポリシー",
     tag_instance:"インスタンスダンジョン",
     tag_gimmick:"ギミック設計",
@@ -1654,11 +1667,11 @@ const I18N = {
     phil3_desc:"BTロジックや条件に応じたData Layer切り替えなどのシステム的な設計に、Claude Code・MCPを連携したAI制作パイプラインを加え、企画書からダミーレベルのモックアップまでを素早く反復します。この方法で大型狩場2種・ダンジョン3種・ナラティブレベル1種を1ヶ月で完成させ、チーム全体で使えるAIレベルデザインプロセスを構築しています。",
     contact_tagline:"新しい世界を<br>共に設計する<br><span>機会をお待ちしています。</span>",
     to_top:"トップへ",
-    exp0_year:"2026.10 — 在職中",
+    exp0_year:"2026.10 ~ 在職中",
     exp0_game:"ダークプリースト (DP)",
     exp0_role:"コンテンツ企画 / AIベースのレベルデザイン",
     exp0_desc:"UE5新規MMORPGのフィールド狩場・ダンジョンなど主要コンテンツとレベル企画を担当。Claude Code・MCP連携のAI制作パイプラインで狩場2種・ダンジョン3種・ナラティブレベル1種を1ヶ月で完成。",
-    hc_dp_year:"2026.10 — 現在",
+    hc_dp_year:"2026.10 ~ 現在",
     hc_dp_desc:"Unreal Engine 5で開発中の新規MMORPGです。フィールド狩場やダンジョンなど主要コンテンツとレベル企画を担当し、Claude Code・MCPベースのAI制作パイプラインを実務に適用しています。",
     hc_dp_w1:"<strong>AIワークフローによる狩場・ダンジョン制作:</strong> Claude Code・MCP連携のAIワークフローで、500×500規模の大型狩場2種と200×200規模のダンジョン3種の動線・戦闘空間の企画とレベル構築を実施。狩場は2週間で企画承認からアート発注資料の提出まで完了し、ナラティブレベルを含む全工程を1ヶ月で完了。",
     tag_ai_pipeline:"AIレベルパイプライン",
@@ -1699,32 +1712,33 @@ const I18N = {
     sp_cb_3:"分析 → エリア設定 → ダミーレベル → ポリッシュ",
     sp_cs_1:"5の倍数ステージに特殊ギミック",
     sp_cs_2:"次元の裂け目 · 抑制器 · 次元圧力",
-    sp_cs_3:"Auto / Manual 動線の分離"
+    sp_cs_3:"Auto / Manual 動線の分離",
+    copy_btn:"コピー"
   },
   zh:{
     page_title:"李珍勇 | Level Designer · Unreal Open World",
-    nav_exp:"EXPERIENCE",
-    nav_proj:"WORK",
-    nav_phil:"PHILOSOPHY",
-    nav_contact:"CONTACT",
+    nav_exp:"经历",
+    nav_proj:"项目",
+    nav_phil:"理念",
+    nav_contact:"联系方式",
     hero_sub:"一直负责基于虚幻引擎5的无缝开放世界地形设计、Data Layer动态关卡演出以及4人协作突袭动线策划。目前在Netmarble Neo新项目<strong>Dark Priest (DP)</strong>中，运用基于Claude Code·MCP的AI关卡制作流程设计狩猎场与地下城。",
     exp_title:"主要经历",
-    exp1_year:"2025.06 — 2026.10",
+    exp1_year:"2025.06 ~ 2026.10",
     exp1_company:"NETMARBLE NEO",
     exp1_game:"权力的游戏：王者之路",
     exp1_role:"Level Designer",
     exp1_desc:"主导UE5数据层动态叙事关卡演出、4人协作突袭设计及动态竞技场构建。",
-    exp2_year:"2024.04 — 2025.06",
+    exp2_year:"2024.04 ~ 2025.06",
     exp2_company:"BLACKSTORM",
     exp2_game:"RE:MEMENTO（回忆录）",
     exp2_role:"Level Designer",
     exp2_desc:"开放世界布局策略制定、AI BT设计、线性副本关卡设计及资源管理全面负责。",
-    exp3_year:"2023.06 — 2024.04",
+    exp3_year:"2023.06 ~ 2024.04",
     exp3_company:"Naddic Games",
     exp3_game:"CLOSERS PC 线上服务",
     exp3_role:"Combat Designer",
     exp3_desc:"线上服务关卡维护，基于Lua脚本的Boss和普通怪物设计及游戏内实装。",
-    exp4_year:"2022.03 — 2023.06",
+    exp4_year:"2022.03 ~ 2023.06",
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT",
     exp4_role:"Level Designer",
@@ -1739,12 +1753,12 @@ const I18N = {
     proj2_s3:"叙事副本",
     proj3_s1:"釜山线性地图设计",
     proj3_s2:"机关组合战略关卡",
-    mod1_eye:"PROJECT 01 · NETMARBLE NEO · UE5 OPEN WORLD ARPG",
-    mod1_title:"权力的游戏：王者之路 — 关卡设计工作流",
-    mod2_eye:"PROJECT 02 · BLACKSTORM · UE5 OPEN WORLD RPG",
-    mod2_title:"RE:MEMENTO — 关卡设计工作流",
-    mod3_eye:"PROJECT 03 · NADDIC GAMES · UE4 STAGE RPG",
-    mod3_title:"CLOSERS RT — 关卡设计工作流",
+    mod1_eye:"Project 01 · Netmarble Neo · UE5 open world ARPG",
+    mod1_title:"权力的游戏：王者之路 · 关卡设计工作流",
+    mod2_eye:"Project 02 · Blackstorm · UE5 open world RPG",
+    mod2_title:"RE:MEMENTO · 关卡设计工作流",
+    mod3_eye:"Project 03 · Naddic Games · UE4 stage RPG",
+    mod3_title:"CLOSERS RT · 关卡设计工作流",
     k_t1_s1_t:"原著生态考证与剧情动线规划（共3.5个月）",
     k_t1_s1_d:"分配新更新区域时，分析原著小说和电视剧的视觉参考，对照现实地形数据，设计具有说服力的生态系统。然后根据区域特色规划动线。",
     k_t1_s2_t:"地貌构建与开放世界内容白盒(Mock-up)",
@@ -1791,7 +1805,7 @@ const I18N = {
     phil_title:"关卡设计理念",
     contact_title:"联系方式",
     contact_location:"首尔特别市 江西区 (韩国)",
-    tech_stack_title:"TOOLS &amp; SKILLS",
+    tech_stack_title:"主要工具",
     tb_ue5:"Unreal Engine 5",
     tb_ue4:"Unreal Engine 4",
     tb_datalayer:"Data Layer",
@@ -1804,7 +1818,7 @@ const I18N = {
     tb_svn:"SVN",
     tb_openworld:"开放世界设计",
     tb_leveldesign:"关卡设计",
-    footer:"© 2026 LEE JIN-YONG · Level Designer · Unreal Open World · ALL RIGHTS RESERVED",
+    footer:"© 2026 李珍勇 · Level Designer",
     tag_ow_policy:"开放世界布置策略",
     tag_instance:"副本",
     tag_gimmick:"机关设计",
@@ -1857,17 +1871,17 @@ const I18N = {
     phil1_desc:"正如在化为废墟的卡斯特梅感受到惨烈袭击的痕迹、在崩塌的赫伦堡预感到巨龙的毁灭之力，我追求由环境本身传递世界观的“环境叙事(Environmental Storytelling)”。",
     phil2_num:"设计不可预测的体验",
     phil2_title:"用不可预测的事件带来最佳体验",
-    phil2_desc:"赫伦堡突袭中地面崩塌带来全新的环境与氛围，在破碎遗迹中触发机关便能发现地图上没有的地下遗迹——我追求能诞生不可预测体验的灵活关卡。",
+    phil2_desc:"赫伦堡突袭中地面崩塌带来全新的环境与氛围，在破碎遗迹中触发机关便能发现地图上没有的地下遗迹 ·  · 我追求能诞生不可预测体验的灵活关卡。",
     phil3_num:"基于数据·逻辑·AI的设计",
     phil3_title:"用AI与数据提升设计的速度与深度",
     phil3_desc:"在BT逻辑、按条件切换Data Layer等系统化设计之上，加入联动Claude Code·MCP的AI制作流程，从策划文档到Dummy关卡原型快速迭代。以此方式在1个月内完成大型狩猎场2个、地下城3个、叙事关卡1个，并正在打造全团队可共用的AI关卡设计流程。",
     contact_tagline:"期待与您<br>共同设计<br><span>新的世界。</span>",
     to_top:"返回顶部",
-    exp0_year:"2026.10 — 在职",
+    exp0_year:"2026.10 ~ 在职",
     exp0_game:"Dark Priest (DP)",
     exp0_role:"内容策划 / 基于AI的关卡设计",
     exp0_desc:"负责UE5新款MMORPG的野外狩猎场、地下城等核心内容与关卡策划。通过Claude Code·MCP联动的AI制作流程，1个月内完成狩猎场2个、地下城3个、叙事关卡1个。",
-    hc_dp_year:"2026.10 — 至今",
+    hc_dp_year:"2026.10 ~ 至今",
     hc_dp_desc:"基于虚幻引擎5开发中的新款MMORPG。负责野外狩猎场、地下城等核心内容与关卡策划，并在实际工作中应用基于Claude Code·MCP的AI制作流程。",
     hc_dp_w1:"<strong>基于AI工作流的狩猎场·地下城制作:</strong> 通过Claude Code·MCP联动的AI工作流，完成2个500×500规模大型狩猎场和3个200×200规模地下城的动线、战斗空间策划及关卡搭建。狩猎场在2周内完成策划确认并交付美术需求文档，包括叙事关卡在内的全部流程1个月内完成。",
     tag_ai_pipeline:"AI关卡制作流程",
@@ -1908,7 +1922,8 @@ const I18N = {
     sp_cb_3:"分析 → 区域设定 → Dummy关卡 → 打磨",
     sp_cs_1:"每逢5的倍数关卡加入特殊机关",
     sp_cs_2:"次元裂缝 · 抑制器 · 次元压力",
-    sp_cs_3:"Auto / Manual 动线分离"
+    sp_cs_3:"Auto / Manual 动线分离",
+    copy_btn:"复制"
   }
 };
 
@@ -2114,7 +2129,7 @@ function legacyCopy(text){
 }
 document.querySelectorAll('.ci-copy[data-copy]').forEach(btn => btn.addEventListener('click', () => {
   const text = btn.dataset.copy;
-  const done = () => showToast(t('toast_copied') + ' — ' + text);
+  const done = () => showToast(t('toast_copied') + ': ' + text);
   const fallback = () => { if(legacyCopy(text)) done(); };
   if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
   else fallback();
