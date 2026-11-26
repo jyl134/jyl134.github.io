@@ -112,7 +112,7 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .hero-meta dt{font-family:var(--font-mono);font-size:.62rem;letter-spacing:.03em;color:var(--ink-muted);margin-bottom:6px;white-space:nowrap;}
 .hero-meta dd{font-family:var(--font-en);font-weight:600;font-size:1.2rem;letter-spacing:-.01em;white-space:nowrap;}
 
-/* Showcase: before/after slider + gameplay videos */
+/* Showcase: gameplay videos */
 .showcase-tabs{display:flex;width:max-content;max-width:100%;overflow-x:auto;border:1px solid var(--border-hairline);border-bottom:0;border-radius:var(--radius-md) var(--radius-md) 0 0;}
 .sc-tab{display:inline-flex;align-items:center;gap:8px;background:var(--bg-surface);border:0;border-right:1px solid var(--border-hairline);color:var(--ink-secondary);
   font-family:var(--font-mono);font-size:.68rem;letter-spacing:.06em;padding:10px 16px;cursor:pointer;white-space:nowrap;transition:color .15s,background .15s;}
@@ -122,18 +122,6 @@ nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:200;backgrou
 .sc-tab .fa{font-size:.6rem;}
 .showcase-frame{position:relative;border:1px solid var(--border-hairline);border-radius:0 var(--radius-md) var(--radius-md) var(--radius-md);overflow:hidden;background:#000;}
 .showcase-frame .yt-facade{border-radius:0;}
-.ba{position:relative;aspect-ratio:21/9;--pos:50%;user-select:none;-webkit-user-select:none;touch-action:pan-y;}
-.ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;pointer-events:none;}
-.ba-before{position:absolute;inset:0;clip-path:inset(0 calc(100% - var(--pos)) 0 0);}
-.ba-handle{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;margin-left:-1px;background:var(--ink-primary);pointer-events:none;}
-.ba-handle span{position:absolute;top:50%;left:50%;width:38px;height:38px;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;
-  background:rgba(20,19,18,.88);border:1px solid var(--ink-primary);border-radius:var(--radius-sm);color:var(--ink-primary);font-size:.8rem;}
-.ba-label{position:absolute;bottom:14px;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.08em;color:var(--ink-primary);
-  background:rgba(20,19,18,.88);border:1px solid var(--border-strong);border-radius:3px;padding:5px 9px;pointer-events:none;}
-.ba-label.left{left:14px;}
-.ba-label.right{right:14px;}
-.ba-range{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:ew-resize;-webkit-appearance:none;appearance:none;}
-.ba-range:focus-visible ~ .ba-handle span{outline:2px solid var(--accent);outline-offset:2px;}
 .showcase-cap{padding:12px 2px 0;font-size:.82rem;color:var(--ink-secondary);}
 
 .quick-jump{display:grid;grid-template-columns:repeat(3,1fr);margin-top:28px;border:1px solid var(--border-hairline);border-radius:var(--radius-md);overflow:hidden;}
@@ -357,10 +345,6 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
   .hero-meta{grid-template-columns:1fr 1fr;width:100%;}
   .hero-meta > div:nth-child(2){border-right:0;}
   .hero-meta > div:nth-child(-n+2){border-bottom:1px solid var(--border-hairline);}
-  .ba{aspect-ratio:4/3;}
-  .ba-label{font-size:.56rem;padding:3px 6px;bottom:10px;}
-  .ba-label.left{left:10px;}
-  .ba-label.right{right:10px;}
   .quick-jump{grid-template-columns:1fr;}
   .quick-jump button{border-right:0;border-bottom:1px solid var(--border-hairline);}
   .quick-jump button:last-child{border-bottom:0;}
@@ -423,22 +407,13 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
 
   <div class="showcase">
     <div class="showcase-tabs" role="tablist">
-      <button class="sc-tab active" data-view="compare" data-cap="sc_compare">MOCKUP → IN-GAME</button>
-      <button class="sc-tab" data-view="video" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt"><i class="fa fa-play"></i>GOLDEN TOOTH ROUTE</button>
+      <button class="sc-tab active" data-view="video" data-yt="9Pt5qVRoYHk" data-thumb="./골든투스동선_썸네일.webp" data-cap="reel_gt"><i class="fa fa-play"></i>GOLDEN TOOTH ROUTE</button>
       <button class="sc-tab" data-view="video" data-yt="YCWRx8Iqezo" data-thumb="./하렌홀동선_썸네일.webp" data-cap="reel_hh"><i class="fa fa-play"></i>HARRENHAL RAID</button>
     </div>
     <div class="showcase-frame" id="showcaseFrame">
-      <div class="ba" id="baSlider">
-        <img src="./카스타미어지상_인게임.webp" alt="Castamere final in-game" />
-        <div class="ba-before"><img src="./카스타미어지상_목업.webp" alt="Castamere UE5 graybox mockup" /></div>
-        <span class="ba-label left">GRAYBOX / UE5 MOCKUP</span>
-        <span class="ba-label right">FINAL IN-GAME / UE5 LIT</span>
-        <input type="range" class="ba-range" id="baRange" min="0" max="100" value="50" step="0.1" aria-label="Compare mockup and final in-game" />
-        <div class="ba-handle"><span><i class="fa fa-arrows-alt-h"></i></span></div>
-      </div>
-      <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video" hidden><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
+      <div class="yt-facade" id="heroReel" data-yt="9Pt5qVRoYHk" role="button" tabindex="0" aria-label="Play video"><img src="./골든투스동선_썸네일.webp" alt="" /><span class="yt-play"><i class="fa fa-play"></i></span></div>
     </div>
-    <div class="showcase-cap" id="showcaseCap" data-i18n="sc_compare">카스타미어 · 왕좌의 게임: 킹스로드 — 좌우로 드래그해 UE5 목업과 최종 인게임을 비교해 보세요.</div>
+    <div class="showcase-cap" id="showcaseCap" data-i18n="reel_gt">골든투스 &amp; 카스타미어 · 오픈월드 퀘스트 동선 (3:20)</div>
   </div>
 
   <div class="quick-jump">
@@ -1278,7 +1253,6 @@ const I18N = {
     k_vid_gt:"플레이 영상 · 골든투스 &amp; 카스타미어 퀘스트 동선",
     k_vid_hh:"플레이 영상 · 하렌홀 4인 코옵 레이드 동선",
     yt_open:"YouTube에서 보기",
-    sc_compare:"카스타미어 · 왕좌의 게임: 킹스로드 — 좌우로 드래그해 UE5 목업과 최종 인게임을 비교해 보세요.",
     toast_copied:"복사되었습니다",
     sp_ko_1:"골든투스 · 카스타미어",
     sp_ko_2:"3.5개월",
@@ -1488,7 +1462,6 @@ const I18N = {
     k_vid_gt:"Gameplay · Golden Tooth &amp; Castamere Quest Route",
     k_vid_hh:"Gameplay · Harrenhal 4-Player Co-op Raid Route",
     yt_open:"Watch on YouTube",
-    sc_compare:"Castamere · Game of Thrones: Kingsroad — drag to compare the UE5 mockup with the final in-game shot.",
     toast_copied:"Copied",
     sp_ko_1:"Golden Tooth · Castamere",
     sp_ko_2:"3.5 months",
@@ -1698,7 +1671,6 @@ const I18N = {
     k_vid_gt:"プレイ映像 · ゴールデン・トゥース &amp; キャスタミアのクエスト動線",
     k_vid_hh:"プレイ映像 · ハレンの巨城 4人Co-opレイド動線",
     yt_open:"YouTubeで見る",
-    sc_compare:"キャスタミア · ゲーム・オブ・スローンズ: King's Road — 左右にドラッグしてUE5モックアップと最終インゲームを比較できます。",
     toast_copied:"コピーしました",
     sp_ko_1:"ゴールデン・トゥース · キャスタミア",
     sp_ko_2:"3.5ヶ月",
@@ -1908,7 +1880,6 @@ const I18N = {
     k_vid_gt:"实机视频 · 金牙城 &amp; 卡斯特梅任务动线",
     k_vid_hh:"实机视频 · 赫伦堡4人协作突袭动线",
     yt_open:"在YouTube观看",
-    sc_compare:"卡斯特梅 · 权力的游戏：王者之路 — 左右拖动即可比较UE5白盒与最终游戏画面。",
     toast_copied:"已复制",
     sp_ko_1:"金牙城 · 卡斯特梅",
     sp_ko_2:"3.5个月",
@@ -2013,14 +1984,8 @@ document.querySelectorAll('.yt-facade').forEach(el => {
 })();
 
 /* ==================== HERO SHOWCASE ==================== */
-// Before/after slider: a transparent range input covers the image, so mouse drag, touch and keyboard all work natively.
+// Tabs switch the hero video between the two route videos.
 (function(){
-  const ba = document.getElementById('baSlider');
-  const range = document.getElementById('baRange');
-  const set = () => ba.style.setProperty('--pos', range.value + '%');
-  range.addEventListener('input', set);
-  set();
-
   const frame = document.getElementById('showcaseFrame');
   const reel = document.getElementById('heroReel');
   const cap = document.getElementById('showcaseCap');
@@ -2028,13 +1993,8 @@ document.querySelectorAll('.yt-facade').forEach(el => {
     if(tab.classList.contains('active')) return;
     document.querySelectorAll('.sc-tab').forEach(x => x.classList.toggle('active', x === tab));
     stopVideos(frame);
-    const isVideo = tab.dataset.view === 'video';
-    ba.hidden = isVideo;
-    reel.hidden = !isVideo;
-    if(isVideo){
-      reel.dataset.yt = tab.dataset.yt;
-      reel.querySelector('img').src = tab.dataset.thumb;
-    }
+    reel.dataset.yt = tab.dataset.yt;
+    reel.querySelector('img').src = tab.dataset.thumb;
     cap.dataset.i18n = tab.dataset.cap;
     cap.innerHTML = t(tab.dataset.cap);
   }));
