@@ -11,6 +11,7 @@
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
 <!-- 아이콘 (Font Awesome 5) / 폰트 (Pretendard, JetBrains Mono: 숫자 전용) -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
@@ -412,7 +413,7 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
     <dl class="hero-meta">
       <div><dt>Experience</dt><dd>4.5+ years</dd></div>
       <div><dt>Engine</dt><dd>UE5 · UE4</dd></div>
-      <div><dt>Shipped stages</dt><dd>150+</dd></div>
+      <div><dt>Shipped stages</dt><dd>149</dd></div>
       <div><dt>AI level pipeline</dt><dd>6 levels / 1 month</dd></div>
     </dl>
   </div>
@@ -505,8 +506,8 @@ footer{border-top:1px solid var(--border-hairline);padding:24px var(--gutter);te
             <div class="exp-meta"><div class="company-logo-box"><img src="./나딕게임즈.png" alt="Naddic Games" /></div><div class="exp-year" data-i18n="exp4_year">2022.03 ~ 2023.06</div><div class="exp-company" data-i18n="exp4_company">Naddic Games</div></div>
             <div class="exp-main"><div class="exp-game-title" data-i18n="exp4_game">CLOSERS RT (클로저스 RT)</div>
               <span class="exp-role-badge" data-i18n="exp4_role">Level Designer</span>
-              <div class="exp-desc" data-i18n="exp4_desc">75개+ 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.</div>
-              <div class="exp-tags"><span class="exp-tag">Zone Layout ×75+</span><span class="exp-tag">Top-down Blueprint</span>
+              <div class="exp-desc" data-i18n="exp4_desc">신규 75·리뉴얼 50·던전 24, 총 149개 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.</div>
+              <div class="exp-tags"><span class="exp-tag">Stages ×149</span><span class="exp-tag">Top-down Blueprint</span>
                 <span class="exp-tag" data-i18n="tag_qa">QA 전담</span><span class="exp-tag" data-i18n="tag_raid_policy">레이드 정책</span></div>
             </div>
           </div>
@@ -1112,7 +1113,7 @@ const I18N = {
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT (클로저스 RT)",
     exp4_role:"Level Designer",
-    exp4_desc:"75개+ 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.",
+    exp4_desc:"신규 75·리뉴얼 50·던전 24, 총 149개 스테이지 설계, Top-down Blueprint 기반 동선 선제 검증, QA 리스크 전담, 갈라진심연 레이드 정책 수립.",
     btn_collapse:"타임라인으로 돌아가기",
     dd_title:"대표 프로젝트",
     proj1_s1:"심리스 오픈월드 필드",
@@ -1322,7 +1323,7 @@ const I18N = {
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT",
     exp4_role:"Level Designer",
-    exp4_desc:"75+ stage design, pre-validation via Top-down Blueprint, dedicated QA handling, and Raid design policy establishment.",
+    exp4_desc:"Designed 149 stages in total (75 new, 50 renewals, 24 dungeons), pre-validated routes with Top-down Blueprints, owned QA risk, and set the raid policy.",
     btn_collapse:"Back to Timeline",
     dd_title:"Selected Work",
     proj1_s1:"Seamless Open World Field",
@@ -1532,7 +1533,7 @@ const I18N = {
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT（クロージャーズRT）",
     exp4_role:"Level Designer",
-    exp4_desc:"75以上のステージ設計、Top-downブループリントによる動線事前検証、QA担当。",
+    exp4_desc:"新規75・リニューアル50・ダンジョン24、計149ステージを設計。Top-downブループリントによる動線の事前検証、QA担当、レイドポリシー策定。",
     btn_collapse:"タイムラインに戻る",
     dd_title:"代表プロジェクト",
     proj1_s1:"シームレスOWフィールド",
@@ -1742,7 +1743,7 @@ const I18N = {
     exp4_company:"Naddic Games",
     exp4_game:"CLOSERS RT",
     exp4_role:"Level Designer",
-    exp4_desc:"75+关卡/区域布局设计，Top-down蓝图预验证流程，专职QA处理，突袭策略制定。",
+    exp4_desc:"设计新关卡75个、改版50个、地下城24个，共149个关卡；通过Top-down蓝图预先验证动线，负责QA风险，制定突袭策略。",
     btn_collapse:"返回时间线",
     dd_title:"代表项目",
     proj1_s1:"无缝开放世界野外",
@@ -1946,8 +1947,23 @@ function setLang(lang){
   });
   if(dict.page_title) document.title = dict.page_title;
   document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active-lang', b.dataset.lang === lang));
+  try { localStorage.setItem('lang', lang); } catch(e) {}
 }
 document.querySelectorAll('.lang-switch button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+// Start language: the visitor's last choice, else the browser language (ko/en/ja/zh), else Korean.
+(function(){
+  let saved = null;
+  try { saved = localStorage.getItem('lang'); } catch(e) {}
+  let lang = I18N[saved] ? saved : null;
+  if(!lang){
+    for(const l of (navigator.languages || [navigator.language || 'ko'])){
+      const base = String(l).toLowerCase().split('-')[0];
+      if(I18N[base]){ lang = base; break; }
+    }
+  }
+  if(lang && lang !== 'ko') setLang(lang);
+  else document.documentElement.lang = 'ko';
+})();
 
 /* ==================== NAV ACTIVE LINK ==================== */
 const sections = document.querySelectorAll('section[id]');
