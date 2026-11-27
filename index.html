@@ -7,7 +7,10 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-FYG4GS2KTB');
+  // Local previews (localhost / 127.0.0.1 / file) are not counted.
+  if(!/^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname)) gtag('config', 'G-FYG4GS2KTB');
+  // Custom interaction events (video plays, project modals, copies, language)
+  function track(name, params){ try { gtag('event', name, params || {}); } catch(e) {} }
 </script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -1949,7 +1952,10 @@ function setLang(lang){
   document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active-lang', b.dataset.lang === lang));
   try { localStorage.setItem('lang', lang); } catch(e) {}
 }
-document.querySelectorAll('.lang-switch button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+document.querySelectorAll('.lang-switch button').forEach(b => b.addEventListener('click', () => {
+  if(b.dataset.lang !== currentLang) track('lang_change', {language: b.dataset.lang});
+  setLang(b.dataset.lang);
+}));
 // Start language: the visitor's last choice, else the browser language (ko/en/ja/zh), else Korean.
 (function(){
   let saved = null;
@@ -1989,6 +1995,10 @@ function playVideo(el){
   el.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + el.dataset.yt +
     '?autoplay=1&rel=0&playsinline=1" title="YouTube video player" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>';
   el.classList.add('playing');
+  // where the video sits: hero, a project modal, or an experience panel
+  const modal = el.closest('.modal-dimmer'), panel = el.closest('.hc-panel');
+  const where = modal ? modal.id.replace('modal-', '') : panel ? panel.id : 'hero';
+  track('video_play', {video_id: el.dataset.yt, video_location: where});
 }
 function stopVideos(root){
   (root || document).querySelectorAll('.yt-facade.playing').forEach(el => {
@@ -2028,6 +2038,7 @@ document.querySelectorAll('.yt-facade').forEach(el => {
     reel.querySelector('img').src = tab.dataset.thumb;
     cap.dataset.i18n = tab.dataset.cap;
     cap.innerHTML = t(tab.dataset.cap);
+    track('hero_tab', {video_id: tab.dataset.yt});
   }));
 })();
 
@@ -2044,7 +2055,11 @@ const Lightbox = (function(){
   function close(){ lb.classList.remove('open'); }
   document.getElementById('lightboxClose').addEventListener('click', close);
   lb.addEventListener('click', e => { if(e.target === lb) close(); });
-  document.querySelectorAll('.wf-img-wrap img').forEach(im => im.addEventListener('click', () => open(im.currentSrc || im.src, im.alt)));
+  document.querySelectorAll('.wf-img-wrap img').forEach(im => im.addEventListener('click', () => {
+    open(im.currentSrc || im.src, im.alt);
+    const m = im.closest('.modal-dimmer');
+    track('image_zoom', {project: m ? m.id.replace('modal-', '') : '', image: decodeURIComponent((im.currentSrc || im.src).split('/').pop()).slice(0, 90)});
+  }));
   return { close, isOpen: () => lb.classList.contains('open') };
 })();
 
@@ -2061,6 +2076,7 @@ const Lightbox = (function(){
     items.forEach((it, i) => it.classList.toggle('active', i === idx));
   }
   function expand(idx){
+    if(panels[idx]) track('experience_open', {panel: panels[idx].id});
     expDynamic.classList.add('shifted');
     showPanel(idx);
     if(window.innerWidth <= 768){
@@ -2089,11 +2105,15 @@ function openModal(id){
   if(!m) return;
   m.classList.add('open');
   document.body.style.overflow = 'hidden';
+  m._openedAt = Date.now();
+  track('project_open', {project: id});
 }
 function closeModal(id){
   const m = document.getElementById('modal-' + id);
   if(!m) return;
   m.classList.remove('open');
+  // how long the project modal stayed open
+  if(m._openedAt){ track('project_close', {project: id, seconds_open: Math.round((Date.now() - m._openedAt) / 1000)}); m._openedAt = 0; }
   stopVideos(m);
   document.body.style.overflow = '';
 }
@@ -2111,7 +2131,10 @@ document.querySelectorAll('[data-modal]').forEach(el => {
 });
 document.querySelectorAll('.modal-tab[data-panel]').forEach(tab => {
   const modalId = tab.closest('.modal-tabs').id.replace('tabs-', '');
-  tab.addEventListener('click', () => switchModalTab(modalId, tab.dataset.panel, tab));
+  tab.addEventListener('click', () => {
+    if(!tab.classList.contains('active')) track('project_tab', {project: modalId, tab: tab.dataset.panel});
+    switchModalTab(modalId, tab.dataset.panel, tab);
+  });
 });
 document.addEventListener('click', e => {
   const closeBtn = e.target.closest('.modal-close');
@@ -2145,6 +2168,7 @@ function legacyCopy(text){
 }
 document.querySelectorAll('.ci-copy[data-copy]').forEach(btn => btn.addEventListener('click', () => {
   const text = btn.dataset.copy;
+  track('contact_copy', {contact_type: text.includes('@') ? 'email' : 'phone'});
   const done = () => showToast(t('toast_copied') + ': ' + text);
   const fallback = () => { if(legacyCopy(text)) done(); };
   if(navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(text).then(done, fallback);
